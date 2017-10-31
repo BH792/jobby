@@ -14,6 +14,9 @@ module.exports = {
       description: {
         type: Sequelize.TEXT
       },
+      status: {
+        type: Sequelize.STRING
+      },
       order: {
         type: Sequelize.INTEGER
       },

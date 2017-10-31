@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import thunk from 'redux-thunk';
-import ConnectedApp from './containers/ConnectedApp';
+import JobContainer from './containers/JobContainer';
 // import App from './components/App';
 import rootReducer from './reducers'
 import { Provider } from 'react-redux';
@@ -14,5 +14,5 @@ const store = createStore(rootReducer, composeEnhancers(
   applyMiddleware(thunk)
 ));
 
-ReactDOM.render(<Provider store={store}><ConnectedApp /></Provider>, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}><JobContainer /></Provider>, document.getElementById('root'));
 registerServiceWorker();

@@ -1,0 +1,29 @@
+.JobCard {
+  width: 90%;
+  border: solid thin grey;
+  border-radius: 3px;
+  margin: 5%;
+}
+
+.JobCardHeader {
+  background-color: grey;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.JobCardHeader * {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+}
+
+.JobCardHeader h4 {
+  font-size: 12pt;
+}
+
+.JobCardHeader p {
+  font-size: 10pt;
+}
