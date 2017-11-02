@@ -1,0 +1,22 @@
+.SIDEBAR {
+  background-color: #D3D3D3;
+  grid-area: side;
+}
+
+.SIDEBAR a {
+  text-decoration: none;
+}
+
+.SIDEBAR-OPTION {
+  height: 100px;
+  text-align: center;
+  border: solid thin black;
+}
+
+.SIDEBAR-OPTION-SELECTED {
+  color: white;
+}
+
+.SIDEBAR-OPTION-SELECTED.SIDEBAR-OPTION {
+  background-color: black;
+}

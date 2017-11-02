@@ -3,17 +3,19 @@ import { DragSource } from 'react-dnd';
 import DragTypes from '../constants/DragTypes';
 import '../styles/JobCard.css';
 
-const JobCard = ({ job, connectDragSource }) => {
+const JobCard = ({ job, connectDragSource, isDragging }) => {
   const color = (num) => {
     let colors = ['#001f3f','#0074D9','#3D9970', '#2ECC40','#FF851B','#FF4136','#85144b','#B10DC9','#DDDDDD','#39CCCC']
     return colors[num]
   }
 
+  const opacity = isDragging ? 0 : 1
+
   return connectDragSource(
-    <div className='JobCard'>
+    <div className='JobCard' style={{opacity}}>
       <div className='JobCardHeader' style={{backgroundColor: color(job.id%10)}}>
         <h4>{job.title}</h4>
-        {/* <p>{job.company}</p> */}
+        <p>{job.company}</p>
       </div>
     </div>
   )
@@ -30,7 +32,8 @@ const dragSource = {
 
 function dragCollect(connect, monitor) {
   return {
-    connectDragSource: connect.dragSource()
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
   }
 }
 

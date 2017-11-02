@@ -6,12 +6,13 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING,
     order: DataTypes.INTEGER,
     companyId: DataTypes.INTEGER
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
   });
+
+  job.associate = (models) => {
+    job.belongsTo(models.company, {
+      foreignKey: 'companyId'
+    });
+  }
+  
   return job;
 };

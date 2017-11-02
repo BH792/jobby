@@ -1,5 +1,6 @@
 .JobBoard {
+  grid-area: content;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-areas: "watching applied interviewed offer";
+  grid-template-areas: 'watching applied interviewed offer';
 }

@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import thunk from 'redux-thunk';
-import JobContainer from './containers/JobContainer';
-// import App from './components/App';
+import App from './components/App';
+import PublicHomepage from './components/PublicHomepage';
 import rootReducer from './reducers'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 
@@ -14,5 +15,10 @@ const store = createStore(rootReducer, composeEnhancers(
   applyMiddleware(thunk)
 ));
 
-ReactDOM.render(<Provider store={store}><JobContainer /></Provider>, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>, document.getElementById('root'));
 registerServiceWorker();

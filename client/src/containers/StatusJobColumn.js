@@ -1,24 +1,20 @@
 import JobColumn from '../components/JobColumn';
 import { changeJobStatus } from '../actions/JobActions';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 function mapStateToProps(state, ownProps) {
   const filteredJobs = []
   state.jobs.allIds.forEach(jobId => {
     if (state.jobs.byId[jobId].status === ownProps.status) {
-      filteredJobs.push(state.jobs.byId[jobId])
+      filteredJobs.push({
+        ...state.jobs.byId[jobId],
+        company: state.companies.byId[state.jobs.byId[jobId].companyId].name
+      })
     }
   })
   return {
-    jobs: filteredJobs
+    jobs: filteredJobs,
   };
 };
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    changeJobStatus
-  }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(JobColumn);
+export default connect(mapStateToProps, { changeJobStatus })(JobColumn);

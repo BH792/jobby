@@ -1,0 +1,18 @@
+.APP {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 11fr;
+  grid-template-rows: 56px 1fr;
+  grid-template-areas:
+    'logo nav'
+    'main main';
+}
+
+.APP-LOGO {
+  grid-area: logo;
+}
+
+.APP-NAV {
+  grid-area: nav;
+}

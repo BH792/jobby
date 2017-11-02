@@ -1,6 +1,10 @@
 import { normalize, schema } from 'normalizr';
 
-const jobSchema = new schema.Entity('jobs')
+const companySchema = new schema.Entity('company')
+const jobSchema = new schema.Entity('jobs', {
+  company: companySchema
+})
+
 const jobListSchema = [ jobSchema ]
 
 export default (data) => {

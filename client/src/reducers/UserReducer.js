@@ -1,0 +1,18 @@
+export default (
+  state = {
+    id: null,
+    email: null,
+    fullname: null
+  },
+  action
+) => {
+  switch (action.type) {
+    case 'LOGIN_USER':
+      return {
+        ...state,
+        ...action.payload.user
+      }
+    default:
+      return state
+  }
+}

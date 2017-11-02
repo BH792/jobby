@@ -7,6 +7,7 @@ export default (
 ) => {
   switch (action.type) {
     case 'FETCH_JOBS':
+      console.log(action.payload);
       return {
         ...state,
         byId: action.payload.entities.jobs,

@@ -1,0 +1,18 @@
+.Login {
+  background-color: white;
+}
+
+.LoginForm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 300px;
+}
+
+.LoginForm input {
+  font-size: 14pt;
+  margin: 0px 25px;
+  width: 250px;
+  height: 35px;
+}

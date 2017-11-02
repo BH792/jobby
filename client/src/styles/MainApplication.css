@@ -1,0 +1,10 @@
+.MainApplication {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 1fr 11fr;
+  grid-template-areas: 'side content';
+}
+
+.MainApplicationSide {
+  grid-area: side;
+}
