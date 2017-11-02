@@ -57,9 +57,11 @@ router.post('/signup', function (req, res) {
           if (created) {
             jwt.sign({ userId: user.id }, process.env.JWT_SECRET, function (err, jwtToken) {
               res.json({
+                type: 'SUCCESS',
                 user: {
                   fullname: user.fullname,
-                  email: user.email
+                  email: user.email,
+                  id: user.id
                 },
                 token: jwtToken
               })

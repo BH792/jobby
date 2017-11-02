@@ -7,9 +7,9 @@ import { connect } from 'react-redux'
 import '../styles/MainApplication.css'
 
 const MainApplication = ({ userId, match }) => {
-  // if (!userId) {
-  //   return <Redirect to='/' />
-  // }
+  if (!userId) {
+    return <Redirect to='/' />
+  }
 
   return (
     <div className='MainApplication'>

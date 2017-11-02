@@ -1,6 +1,10 @@
 const baseURL = '';
 
 export default class JobbyBackendAdapter {
+  static signup(userInfo) {
+    return JobbyBackendAdapter.post('/users/signup', userInfo)
+  }
+
   static login(userInfo) {
     return JobbyBackendAdapter.post('/users/login', userInfo)
   }

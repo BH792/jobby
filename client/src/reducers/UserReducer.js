@@ -12,6 +12,13 @@ export default (
         ...state,
         ...action.payload.user
       }
+    case 'LOGOUT_USER':
+      return {
+        ...state,
+        id: null,
+        email: null,
+        fullname: null
+      }
     default:
       return state
   }

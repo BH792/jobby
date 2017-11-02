@@ -4,7 +4,6 @@ import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import thunk from 'redux-thunk';
 import App from './components/App';
-import PublicHomepage from './components/PublicHomepage';
 import rootReducer from './reducers'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux';

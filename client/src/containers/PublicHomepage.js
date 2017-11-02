@@ -1,6 +1,6 @@
 import React from 'react'
 import ConnectedLogin from '../containers/ConnectedLogin'
-import LoginRedirector from '../containers/hocs/LoginRedirector'
+import ConnectedSignup from '../containers/ConnectedSignup'
 import { Link, Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import '../styles/PublicHomepage.css'
@@ -18,6 +18,7 @@ const PublicHomepage = ({userId}) => {
 
   return (
     <div className='PublicHomepage'>
+      <Route exact path='/signup' component={ConnectedSignup} />
       <Route exact path='/login' component={ConnectedLogin} />
       <Route exact path='/' component={Body} />
     </div>
