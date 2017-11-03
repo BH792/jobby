@@ -2,7 +2,7 @@
   background-color: white;
 }
 
-.LoginForm {
+.Form {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -10,9 +10,15 @@
   width: 300px;
 }
 
-.LoginForm input {
+.Form input {
   font-size: 14pt;
-  margin: 0px 25px;
+  margin: 15px 25px;
   width: 250px;
   height: 35px;
+}
+
+.Form input[type="submit"] {
+  width: 250px;
+  height: 35px;
+  background-color: lightblue;
 }

@@ -1,7 +1,8 @@
-import React from 'react'
-import ConnectedLogin from '../containers/ConnectedLogin'
-import ConnectedSignup from '../containers/ConnectedSignup'
-import { Link, Route, Redirect, withRouter } from 'react-router-dom'
+import React, { Component } from 'react'
+import Signup from '../components/Signup'
+import Login from '../components/Login'
+import { submitLogin, submitSignup, loginFromLocalStorage } from '../actions/UserActions'
+import { Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import '../styles/PublicHomepage.css'
 
@@ -11,18 +12,32 @@ const Body = () => {
   )
 }
 
-const PublicHomepage = ({userId}) => {
-  if (userId) {
-    return <Redirect to='/home' />
+class PublicHomepage extends Component {
+  componentDidMount() {
+    try {
+      if (localStorage.getItem('token')) {
+        this.props.loginFromLocalStorage()
+      }
+    } catch (e) {
+
+    }
   }
 
-  return (
-    <div className='PublicHomepage'>
-      <Route exact path='/signup' component={ConnectedSignup} />
-      <Route exact path='/login' component={ConnectedLogin} />
-      <Route exact path='/' component={Body} />
-    </div>
-  )
+  render() {
+    const { userId, submitLogin, submitSignup } = this.props
+
+    if (userId) {
+      return <Redirect to='/home' />
+    }
+
+    return (
+      <div className='PublicHomepage'>
+        <Route exact path='/signup' render={() => <Signup submitSignup={submitSignup} />} />
+        <Route exact path='/login' render={() => <Login submitLogin={submitLogin} />} />
+        <Route exact path='/' component={Body} />
+      </div>
+    )
+  }
 }
 
 function mapStateToProps(state) {
@@ -31,4 +46,10 @@ function mapStateToProps(state) {
   }
 }
 
-export default withRouter(connect(mapStateToProps, {})(PublicHomepage))
+const mapDispatchToProps = {
+  submitLogin,
+  submitSignup,
+  loginFromLocalStorage
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PublicHomepage))

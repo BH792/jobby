@@ -6,12 +6,33 @@ export default (
   action
 ) => {
   switch (action.type) {
+    case 'LOGOUT_USER':
+      return {
+        byId: {},
+        allIds: []
+      }
     case 'FETCH_JOBS':
-      console.log(action.payload);
       return {
         ...state,
-        byId: action.payload.entities.jobs,
+        byId: action.payload.entities.jobs || {},
         allIds: action.payload.result
+      }
+    case 'NEW_JOB':
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.payload.job.id]: action.payload.job,
+        },
+        allIds: [ ...state.allIds, action.payload.job.id]
+      }
+    case 'UPDATE_JOB':
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.payload.job.id]: action.payload.job
+        }
       }
     case 'CHANGE_JOB_STATUS':
       return {

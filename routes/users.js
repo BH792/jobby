@@ -1,11 +1,31 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
+const verifyJWT = require('../middleware/JWTAuthentication')
 
 const router = express.Router();
 const { user: User } = require('../models');
 
 const saltRounds = 10;
+
+router.get('/login/reauthenticate', verifyJWT, function (req, res, next) {
+  User.findOne({
+    where: {
+      id: req.userId
+    }
+  })
+    .then(user => {
+      res.json({
+        type: 'SUCCESS',
+        user: {
+          fullname: user.fullname,
+          email: user.email,
+          id: user.id
+        },
+        token: req.header('token').slice(7)
+      })
+    })
+})
 
 router.post('/login', function (req, res) {
   const { email, password } = req.body;

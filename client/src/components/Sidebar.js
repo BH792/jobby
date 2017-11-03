@@ -11,7 +11,7 @@ const Sidebar = ({match}) => {
         activeClassName='SIDEBAR-OPTION-SELECTED'
       >
         <div className='SIDEBAR-OPTION'>
-          Home
+          Dashboard
         </div>
       </NavLink>
       <NavLink

@@ -28,3 +28,37 @@ export function swapJobOrder(curOrder, newOrder) {
     newOrder
   }
 }
+
+export function newJob(jobInfo) {
+  return dispatch => {
+    JobbyBackendAdapter.newJob(jobInfo).then(json => {
+      if (json.company) {
+        dispatch({
+          type: 'NEW_COMPANY',
+          payload: json
+        })
+      }
+      dispatch({
+        type: 'NEW_JOB',
+        payload: json
+      })
+    })
+  }
+}
+
+export function updateJob(jobInfo) {
+  return dispatch => {
+    JobbyBackendAdapter.updateJob(jobInfo).then(json => {
+      if (json.company) {
+        dispatch({
+          type: 'NEW_COMPANY',
+          payload: json
+        })
+      }
+      dispatch({
+        type: 'UPDATE_JOB',
+        payload: json
+      })
+    })
+  }
+}

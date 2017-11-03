@@ -14,7 +14,6 @@ export default (
       }
     case 'LOGOUT_USER':
       return {
-        ...state,
         id: null,
         email: null,
         fullname: null

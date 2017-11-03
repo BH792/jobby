@@ -1,7 +1,8 @@
 import React from 'react';
-import JobContainer from '../containers/JobContainer';
+import ConnectedJobBoard from '../containers/ConnectedJobBoard';
+import JobContent from '../containers/JobContent';
+import CompanyContent from '../containers/CompanyContent';
 import Sidebar from '../components/Sidebar';
-import ConnectedLogin from '../containers/ConnectedLogin';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import '../styles/MainApplication.css'
@@ -15,10 +16,10 @@ const MainApplication = ({ userId, match }) => {
     <div className='MainApplication'>
       <Sidebar className='MainApplicationSide'/>
       <Switch>
-        <Route path={`${match.url}/jobs`} component={JobContainer} />
+        <Route path={`${match.url}/jobs`} component={JobContent} />
         <Route path={`${match.url}/contacts`} render={() => <div>contacts</div>} />
-        <Route path={`${match.url}/companies`} render={() => <div>companies</div>} />
-        <Route path={`${match.url}`} component={() => <div>home</div>} />
+        <Route path={`${match.url}/companies`} component={CompanyContent} />
+        <Route path={`${match.url}`} component={ConnectedJobBoard} />
       </Switch>
     </div>
   )

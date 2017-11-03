@@ -12,7 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     job.belongsTo(models.company, {
       foreignKey: 'companyId'
     });
+
+    job.belongsTo(models.user, {
+      foreignKey: 'userId'
+    });
   }
-  
+
   return job;
 };

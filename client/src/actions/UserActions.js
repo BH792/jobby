@@ -40,3 +40,21 @@ export function logoutUser() {
     type: 'LOGOUT_USER'
   }
 }
+
+export function loginFromLocalStorage() {
+  return (dispatch) => {
+    JobbyBackendAdapter.loginFromToken()
+      .then(json => {
+        if (json.type === 'SUCCESS') {
+          dispatch({
+            type: 'LOGIN_USER',
+            payload: {
+              user: json.user,
+            }
+          })
+        } else {
+          dispatch(logoutUser())
+        }
+      })
+  }
+}

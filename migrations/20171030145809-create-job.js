@@ -20,7 +20,12 @@ module.exports = {
       order: {
         type: Sequelize.INTEGER
       },
+      userId: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
       companyId: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       createdAt: {

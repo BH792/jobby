@@ -5,5 +5,11 @@ module.exports = (sequelize, DataTypes) => {
     passwordHash: DataTypes.STRING
   });
 
+  user.associate = (models) => {
+    user.hasMany(models.job, {
+      foreignKey: 'userId'
+    });
+  }
+
   return user;
 };
