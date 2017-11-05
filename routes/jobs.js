@@ -25,7 +25,7 @@ router.post('/:id', function (req, res, next) {
           job.update({ ...updatedJobInfo })
           .then(updatedJob => {
             res.json({
-              type: 'SUCCESS',
+              status: 'SUCCESS',
               job: updatedJob
             })
           })
@@ -40,7 +40,7 @@ router.post('/:id', function (req, res, next) {
               })
                 .then(updatedJob => {
                   res.json({
-                    type: 'SUCCESS',
+                    status: 'SUCCESS',
                     job: updatedJob,
                     company
                   })
@@ -48,7 +48,7 @@ router.post('/:id', function (req, res, next) {
             })
         }
       } else {
-        res.json({type: 'ERROR', msg: 'no job found'})
+        res.json({status: 'ERROR', msg: 'no job found'})
       }
     })
 })
@@ -80,7 +80,7 @@ router.post('/', function (req, res, next) {
     Job.create({ ...newJob })
     .then(job => {
       res.json({
-        type: 'SUCCESS',
+        status: 'SUCCESS',
         job
       })
     })
@@ -95,7 +95,7 @@ router.post('/', function (req, res, next) {
         })
           .then(job => {
             res.json({
-              type: 'SUCCESS',
+              status: 'SUCCESS',
               job,
               company
             })

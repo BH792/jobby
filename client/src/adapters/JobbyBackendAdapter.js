@@ -29,6 +29,14 @@ export default class JobbyBackendAdapter {
     return JobbyBackendAdapter.post(`/companies/${companyInfo.id}`, companyInfo)
   }
 
+  static newContact(contactInfo) {
+    return JobbyBackendAdapter.post('/contacts', contactInfo)
+  }
+
+  static updateContact(contactInfo) {
+    return JobbyBackendAdapter.post(`/contacts/${contactInfo.id}`, contactInfo)
+  }
+
   static get(route) {
     const authHeader = getJWTToken()
     return fetch(baseURL + route, {
@@ -39,7 +47,7 @@ export default class JobbyBackendAdapter {
       if (res.ok) {
         return res.json()
       } else {
-        return { type: 'ERROR' }
+        return { status: 'ERROR' }
       }
     })
   }
@@ -58,7 +66,7 @@ export default class JobbyBackendAdapter {
       if (res.ok) {
         return res.json()
       } else {
-        return { type: 'ERROR' }
+        return { status: 'ERROR' }
       }
     })
   }
@@ -76,7 +84,7 @@ function getJWTToken() {
   }
 
   if (token) {
-    return { token: `bearer ${token}`}
+    return { Authorization: `bearer ${token}`}
   } else {
     return {}
   }

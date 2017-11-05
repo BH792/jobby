@@ -2,16 +2,16 @@ const jwt = require('jsonwebtoken')
 
 function verifyJWT(req, res, next) {
   let token
-
-  if (req.header('token')) {
-    token = req.header('token').slice(7)
+  
+  if (req.header('Authorization')) {
+    token = req.header('Authorization').slice(7)
   }
 
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
       if (err) {
         res.json({
-          type: 'ERROR',
+          status: 'ERROR',
           msg: 'Not Authorized'
         })
       } else {
@@ -21,7 +21,7 @@ function verifyJWT(req, res, next) {
     })
   } else {
     res.json({
-      type: 'ERROR',
+      status: 'ERROR',
       msg: 'Not Authorized'
     })
   }

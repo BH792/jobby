@@ -21,12 +21,12 @@ router.post('/:id', function (req, res, next) {
         company.update({ ...updatedCompanyInfo })
         .then(updatedCompany => {
           res.json({
-            type: 'SUCCESS',
+            status: 'SUCCESS',
             company: updatedCompany
           })
         })
       } else {
-        res.json({type: 'ERROR', msg: 'no company found'})
+        res.json({status: 'ERROR', msg: 'no company found'})
       }
     })
 })
@@ -40,7 +40,7 @@ router.post('/', function (req, res, next) {
   Company.create({ ...newCompany })
     .then(company => {
       res.json({
-        type: 'SUCCESS',
+        status: 'SUCCESS',
         company
       })
     })

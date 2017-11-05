@@ -4,7 +4,7 @@ export function submitLogin(userInfo) {
   return (dispatch) => {
     JobbyBackendAdapter.login(userInfo)
       .then(json => {
-        if (json.type === 'SUCCESS') {
+        if (json.status === 'SUCCESS') {
           localStorage.setItem('token', json.token)
           dispatch({
             type: 'LOGIN_USER',
@@ -21,7 +21,7 @@ export function submitSignup(userInfo) {
   return (dispatch) => {
     JobbyBackendAdapter.signup(userInfo)
       .then(json => {
-        if (json.type === 'SUCCESS') {
+        if (json.status === 'SUCCESS') {
           localStorage.setItem('token', json.token)
           dispatch({
             type: 'LOGIN_USER',
@@ -45,7 +45,7 @@ export function loginFromLocalStorage() {
   return (dispatch) => {
     JobbyBackendAdapter.loginFromToken()
       .then(json => {
-        if (json.type === 'SUCCESS') {
+        if (json.status === 'SUCCESS') {
           dispatch({
             type: 'LOGIN_USER',
             payload: {

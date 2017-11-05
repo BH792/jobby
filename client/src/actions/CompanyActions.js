@@ -1,7 +1,6 @@
 import JobbyBackendAdapter from '../adapters/JobbyBackendAdapter'
 
 export function newCompany(companyInfo) {
-  console.log(companyInfo);
   return dispatch => {
     JobbyBackendAdapter.newCompany(companyInfo).then(json => {
       dispatch({

@@ -6,9 +6,9 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   user.associate = (models) => {
-    user.hasMany(models.job, {
-      foreignKey: 'userId'
-    });
+    user.hasMany(models.job);
+    user.hasMany(models.contact);
+    user.hasMany(models.touch);
   }
 
   return user;

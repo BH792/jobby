@@ -6,7 +6,7 @@ const Sidebar = ({match}) => {
   return (
     <div className='SIDEBAR'>
       <NavLink
-        to='/home'
+        to={`${match.url}`}
         exact
         activeClassName='SIDEBAR-OPTION-SELECTED'
       >
@@ -15,7 +15,7 @@ const Sidebar = ({match}) => {
         </div>
       </NavLink>
       <NavLink
-        to='/home/jobs'
+        to={`${match.url}/jobs`}
         activeClassName='SIDEBAR-OPTION-SELECTED'
       >
         <div className='SIDEBAR-OPTION'>
@@ -23,7 +23,7 @@ const Sidebar = ({match}) => {
         </div>
       </NavLink>
       <NavLink
-        to='/home/contacts'
+        to={`${match.url}/contacts`}
         activeClassName='SIDEBAR-OPTION-SELECTED'
       >
         <div className='SIDEBAR-OPTION'>
@@ -31,7 +31,7 @@ const Sidebar = ({match}) => {
         </div>
       </NavLink>
       <NavLink
-        to='/home/companies'
+        to={`${match.url}/companies`}
         activeClassName='SIDEBAR-OPTION-SELECTED'
       >
         <div className='SIDEBAR-OPTION'>

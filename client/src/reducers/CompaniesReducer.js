@@ -36,7 +36,8 @@ export default (
         byId: {
           ...state.byId,
           [action.payload.company.id]: action.payload.company,
-        }
+        },
+        allIds: [ ...state.allIds, action.payload.company.id]
       }
     default:
       return state

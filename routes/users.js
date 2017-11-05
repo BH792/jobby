@@ -16,13 +16,13 @@ router.get('/login/reauthenticate', verifyJWT, function (req, res, next) {
   })
     .then(user => {
       res.json({
-        type: 'SUCCESS',
+        status: 'SUCCESS',
         user: {
           fullname: user.fullname,
           email: user.email,
           id: user.id
         },
-        token: req.header('token').slice(7)
+        token: req.header('Authorization').slice(7)
       })
     })
 })
@@ -41,7 +41,7 @@ router.post('/login', function (req, res) {
             if (result) {
               jwt.sign({ userId: user.id }, process.env.JWT_SECRET, function (err, jwtToken) {
                 res.json({
-                  type: 'SUCCESS',
+                  status: 'SUCCESS',
                   user: {
                     fullname: user.fullname,
                     email: user.email,
@@ -51,11 +51,11 @@ router.post('/login', function (req, res) {
                 })
               })
             } else {
-              res.json({type: 'ERROR', msg: 'Wrong password or username'})
+              res.json({status: 'ERROR', msg: 'Wrong password or username'})
             }
           })
       } else {
-        res.json({type: 'ERROR', msg: 'No account found please signup'})
+        res.json({status: 'ERROR', msg: 'No account found please signup'})
       }
     })
 })
@@ -77,7 +77,7 @@ router.post('/signup', function (req, res) {
           if (created) {
             jwt.sign({ userId: user.id }, process.env.JWT_SECRET, function (err, jwtToken) {
               res.json({
-                type: 'SUCCESS',
+                status: 'SUCCESS',
                 user: {
                   fullname: user.fullname,
                   email: user.email,
@@ -87,7 +87,7 @@ router.post('/signup', function (req, res) {
               })
             })
           } else {
-            res.json({type: 'ERROR', msg: 'sorry already signed up'})
+            res.json({status: 'ERROR', msg: 'sorry already signed up'})
           }
         })
     })
