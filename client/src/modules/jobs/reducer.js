@@ -13,12 +13,6 @@ export default (
         byId: {},
         allIds: []
       }
-    case 'FETCH_BOARD':
-      return {
-        ...state,
-        byId: action.payload.entities.jobs || {},
-        allIds: action.payload.result
-      }
     case t.MERGE:
       let newById = {
         ...state.byId,

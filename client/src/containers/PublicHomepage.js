@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import Signup from '../components/Signup'
-import Login from '../components/Login'
-import { submitLogin, submitSignup, loginFromLocalStorage } from '../actions/UserActions'
+import users from '../modules/users'
 import { Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import '../styles/PublicHomepage.css'
+
+const { submitLogin, submitSignup, loginFromLocalStorage } = users.actions
+const { Signup, Login } = users.components
 
 const Body = () => {
   return (
