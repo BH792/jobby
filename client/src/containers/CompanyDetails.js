@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-const CompanyDetails = ({name, website}) => {
+const CompanyDetails = ({name, website, match }) => {
   return (
     <div>
       <div>
         <h2>{name}</h2>
         <a href={website} target='_blank'>Website</a>
         <p>Add a description</p>
+        <Link to={`${match.url}/edit`}>Edit</Link>
       </div>
     </div>
   )

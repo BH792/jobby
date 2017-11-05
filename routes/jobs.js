@@ -26,7 +26,7 @@ router.post('/:id', function (req, res, next) {
           .then(updatedJob => {
             res.json({
               type: 'SUCCESS',
-              job
+              job: updatedJob
             })
           })
         } else {
@@ -41,7 +41,7 @@ router.post('/:id', function (req, res, next) {
                 .then(updatedJob => {
                   res.json({
                     type: 'SUCCESS',
-                    job,
+                    job: updatedJob,
                     company
                   })
                 })

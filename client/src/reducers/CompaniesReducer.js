@@ -30,6 +30,14 @@ export default (
         },
         allIds: [ ...state.allIds, action.payload.company.id]
       }
+    case 'UPDATE_COMPANY':
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.payload.company.id]: action.payload.company,
+        }
+      }
     default:
       return state
   }

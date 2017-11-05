@@ -21,6 +21,14 @@ export default class JobbyBackendAdapter {
     return JobbyBackendAdapter.post(`/jobs/${jobInfo.id}`, jobInfo)
   }
 
+  static newCompany(companyInfo) {
+    return JobbyBackendAdapter.post('/companies', companyInfo)
+  }
+
+  static updateCompany(companyInfo) {
+    return JobbyBackendAdapter.post(`/companies/${companyInfo.id}`, companyInfo)
+  }
+
   static get(route) {
     const authHeader = getJWTToken()
     return fetch(baseURL + route, {
