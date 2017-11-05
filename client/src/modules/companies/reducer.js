@@ -23,6 +23,16 @@ export default (
         byId: newById,
         allIds: Object.keys(newById)
       }
+    case t.MERGE:
+      newById = {
+        ...state.byId,
+        ...action.payload || {}
+      }
+      return {
+        ...state,
+        byId: newById,
+        allIds: Object.keys(newById)
+      }
     case t.FETCH:
       return {
         byId: action.payload.entities.companies || {},

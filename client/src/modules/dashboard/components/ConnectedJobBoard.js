@@ -1,6 +1,6 @@
-import JobBoard from '../components/JobBoard';
+import JobBoard from './JobBoard';
 import { connect } from 'react-redux';
-import { fetchBoard } from '../actions/DashBoardActions'
+import { fetchBoard } from '../actions'
 
 const mapDispatchToProps = {
   fetchBoard

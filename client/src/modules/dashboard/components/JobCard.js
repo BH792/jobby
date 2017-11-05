@@ -1,7 +1,7 @@
 import React from 'react';
 import { DragSource } from 'react-dnd';
-import DragTypes from '../constants/DragTypes';
-import '../styles/JobCard.css';
+import DragTypes from '../DragTypes';
+import '../../../styles/JobCard.css';
 
 const JobCard = ({ job, connectDragSource, isDragging }) => {
   const color = (num) => {

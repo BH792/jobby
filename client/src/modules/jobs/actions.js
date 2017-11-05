@@ -51,3 +51,10 @@ export function updateJob(jobInfo) {
     payload: jobInfo
   }
 }
+
+export function mergeJobs(jobs) {
+  return {
+    type: t.MERGE,
+    payload: jobs
+  }
+}

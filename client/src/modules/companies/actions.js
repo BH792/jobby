@@ -46,3 +46,10 @@ export function updateCompany(companyInfo) {
     payload: companyInfo
   }
 }
+
+export function mergeCompanies(companiesById) {
+  return {
+    type: t.MERGE,
+    payload: companiesById
+  }
+}

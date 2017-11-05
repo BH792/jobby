@@ -1,14 +1,14 @@
-import JobbyBackendAdapter from '../adapters/JobbyBackendAdapter'
-import JobsNormalizer from '../normalizers/JobsNormalizer'
+import DashboardAPI from '../../adapters/dashboardJobbyAPI';
+import DashboardNormalizer from '../../normalizers/DashboardNormalizer';
+import jobs from '../jobs'
+import companies from '../companies'
 
 export function fetchBoard() {
   return dispatch => {
-    JobbyBackendAdapter.get('/dashboard').then(json => {
-      let payload = JobsNormalizer(json)
-      dispatch({
-        type: 'FETCH_BOARD',
-        payload
-      })
+    DashboardAPI.fetchDashboard().then(json => {
+      let payload = DashboardNormalizer(json)
+      dispatch(companies.actions.mergeCompanies(payload.entities.companies))
+      dispatch(jobs.actions.mergeJobs(payload.entities.jobs))
     })
   }
 }
@@ -26,39 +26,5 @@ export function swapJobOrder(curOrder, newOrder) {
     type: 'SWAP_JOB_ORDER',
     curOrder,
     newOrder
-  }
-}
-
-export function newJob(jobInfo) {
-  return dispatch => {
-    JobbyBackendAdapter.newJob(jobInfo).then(json => {
-      if (json.company) {
-        dispatch({
-          type: 'NEW_COMPANY',
-          payload: json
-        })
-      }
-      dispatch({
-        type: 'NEW_JOB',
-        payload: json
-      })
-    })
-  }
-}
-
-export function updateJob(jobInfo) {
-  return dispatch => {
-    JobbyBackendAdapter.updateJob(jobInfo).then(json => {
-      if (json.company) {
-        dispatch({
-          type: 'NEW_COMPANY',
-          payload: json
-        })
-      }
-      dispatch({
-        type: 'UPDATE_JOB',
-        payload: json
-      })
-    })
   }
 }

@@ -1,5 +1,5 @@
-import JobColumn from '../components/JobColumn';
-import { changeJobStatus } from '../actions/DashBoardActions';
+import JobColumn from './JobColumn';
+import { changeJobStatus } from '../actions';
 import { connect } from 'react-redux';
 
 function mapStateToProps(state, ownProps) {
