@@ -31,7 +31,8 @@ router.post('/:id', function (req, res, next) {
           })
         } else {
           Company.create({
-            name: req.body.companyName
+            name: req.body.companyName,
+            userId: req.userId
           })
             .then(company => {
               job.update({
@@ -86,7 +87,8 @@ router.post('/', function (req, res, next) {
     })
   } else {
     Company.create({
-      name: req.body.companyName
+      name: req.body.companyName,
+      userId: req.userId
     })
       .then(company => {
         Job.create({

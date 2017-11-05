@@ -13,7 +13,8 @@ router.post('/:id', function (req, res, next) {
 
   Company.findOne({
     where: {
-      id: req.params.id
+      id: req.params.id,
+      userId: req.userId
     }
   })
     .then(company => {
@@ -31,10 +32,25 @@ router.post('/:id', function (req, res, next) {
     })
 })
 
+router.get('/', function (req, res, next) {
+  Company.findAll({
+    where: {
+      userId: req.userId
+    }
+  })
+    .then(companies => {
+      res.json({
+        status: 'SUCCESS',
+        companies
+      })
+    })
+})
+
 router.post('/', function (req, res, next) {
   let newCompany = {
     name: req.body.name || null,
-    website: req.body.website || null
+    website: req.body.website || null,
+    userId: req.userId
   }
 
   Company.create({ ...newCompany })

@@ -1,12 +1,12 @@
 import JobbyBackendAdapter from '../adapters/JobbyBackendAdapter'
 import JobsNormalizer from '../normalizers/JobsNormalizer'
 
-export function fetchJobs() {
+export function fetchBoard() {
   return dispatch => {
-    JobbyBackendAdapter.get('/jobs').then(json => {
+    JobbyBackendAdapter.get('/dashboard').then(json => {
       let payload = JobsNormalizer(json)
       dispatch({
-        type: 'FETCH_JOBS',
+        type: 'FETCH_BOARD',
         payload
       })
     })

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { newContact, updateContact } from '../actions/ContactActions'
-import '../styles/Login.css'
+import { newContactAPI, updateContactAPI } from '../actions'
+// import '../styles/Login.css'
 
 class ContactForm extends Component {
   state = {
@@ -67,15 +67,15 @@ function mapStateToProps(state, ownProps) {
 }
 
 const mapDispatchToProps = {
-  newContact,
-  updateContact
+  newContactAPI,
+  updateContactAPI
 }
 
 function mergeProps(stateProps, dispatchProps, ownProps) {
   return {
     ...ownProps,
     ...stateProps,
-    submitContact: stateProps.contact.id ? dispatchProps.updateContact : dispatchProps.newContact
+    submitContact: stateProps.contact.id ? dispatchProps.updateContactAPI : dispatchProps.newContactAPI
   }
 }
 

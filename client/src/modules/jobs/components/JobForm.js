@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { newJob, updateJob } from '../actions/JobActions'
-import '../styles/Login.css'
+import { newJobAPI, updateJobAPI } from '../actions'
+// import '../styles/Login.css'
 
 class JobForm extends Component {
   state = {
@@ -27,7 +27,6 @@ class JobForm extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { title, description, status, companyName } = this.state
     return (
       <div>
@@ -106,15 +105,15 @@ function mapStateToProps(state, ownProps) {
 }
 
 const mapDispatchToProps = {
-  newJob,
-  updateJob
+  newJobAPI,
+  updateJobAPI
 }
 
 function mergeProps(stateProps, dispatchProps, ownProps) {
   return {
     ...ownProps,
     ...stateProps,
-    submitJob: stateProps.job.id ? dispatchProps.updateJob : dispatchProps.newJob
+    submitJob: stateProps.job.id ? dispatchProps.updateJobAPI : dispatchProps.newJobAPI
   }
 }
 

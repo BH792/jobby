@@ -9,6 +9,6 @@ const ContactItem = (props) => {
       </div>
     </div>
   )
-}
+};
 
-export default ContactItem
+export default ContactItem;

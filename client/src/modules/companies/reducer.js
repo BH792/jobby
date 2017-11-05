@@ -1,3 +1,5 @@
+import * as t from './actionTypes';
+
 export default (
   state = {
     byId: {},
@@ -11,7 +13,7 @@ export default (
         byId: {},
         allIds: []
       }
-    case 'FETCH_JOBS':
+    case 'FETCH_BOARD':
       let newById = {
         ...state.byId,
         ...action.payload.entities.company || {}
@@ -21,7 +23,12 @@ export default (
         byId: newById,
         allIds: Object.keys(newById)
       }
-    case 'NEW_COMPANY':
+    case t.FETCH:
+      return {
+        byId: action.payload.entities.companies || {},
+        allIds: action.payload.result
+      }
+    case t.NEW:
       return {
         ...state,
         byId: {
@@ -30,14 +37,13 @@ export default (
         },
         allIds: [ ...state.allIds, action.payload.company.id]
       }
-    case 'UPDATE_COMPANY':
+    case t.UPDATE:
       return {
         ...state,
         byId: {
           ...state.byId,
           [action.payload.company.id]: action.payload.company,
-        },
-        allIds: [ ...state.allIds, action.payload.company.id]
+        }
       }
     default:
       return state

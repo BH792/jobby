@@ -21,22 +21,6 @@ export default class JobbyBackendAdapter {
     return JobbyBackendAdapter.post(`/jobs/${jobInfo.id}`, jobInfo)
   }
 
-  static newCompany(companyInfo) {
-    return JobbyBackendAdapter.post('/companies', companyInfo)
-  }
-
-  static updateCompany(companyInfo) {
-    return JobbyBackendAdapter.post(`/companies/${companyInfo.id}`, companyInfo)
-  }
-
-  static newContact(contactInfo) {
-    return JobbyBackendAdapter.post('/contacts', contactInfo)
-  }
-
-  static updateContact(contactInfo) {
-    return JobbyBackendAdapter.post(`/contacts/${contactInfo.id}`, contactInfo)
-  }
-
   static get(route) {
     const authHeader = getJWTToken()
     return fetch(baseURL + route, {

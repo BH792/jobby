@@ -1,3 +1,5 @@
+import * as t from './actionTypes'
+
 export default (
   state = {
     byId: {},
@@ -17,7 +19,12 @@ export default (
         byId: action.payload.entities.jobs || {},
         allIds: action.payload.result
       }
-    case 'NEW_JOB':
+      case t.FETCH:
+        return {
+          byId: action.payload.entities.contacts || {},
+          allIds: action.payload.result
+        }
+    case t.NEW:
       return {
         ...state,
         byId: {
@@ -26,7 +33,7 @@ export default (
         },
         allIds: [ ...state.allIds, action.payload.job.id]
       }
-    case 'UPDATE_JOB':
+    case t.UPDATE:
       return {
         ...state,
         byId: {

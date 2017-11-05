@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/JobItem.css'
 
 const JobItem = ({title, company, description}) => {
   if (description && description.length > 100) {
