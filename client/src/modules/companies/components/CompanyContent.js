@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { Route, Link, Switch } from 'react-router-dom'
 import { fetchCompanies } from '../actions';
 
+import { LoginRedirect } from '../../../containers/hocs/LoginRedirector';
 
 class CompanyContent extends Component {
   componentDidMount() {
@@ -53,4 +54,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { fetchCompanies })(CompanyContent)
+export default LoginRedirect(connect(mapStateToProps, { fetchCompanies })(CompanyContent))

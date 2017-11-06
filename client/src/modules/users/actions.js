@@ -44,6 +44,7 @@ export function logoutUser() {
 
 export function loginFromLocalStorage() {
   return (dispatch) => {
+    dispatch(loading())
     UserAPI.loginFromToken()
       .then(json => {
         if (json.status === 'SUCCESS') {
@@ -57,5 +58,11 @@ export function loginFromLocalStorage() {
           dispatch(logoutUser())
         }
       })
+  }
+}
+
+function loading() {
+  return {
+    type: t.LOADING
   }
 }

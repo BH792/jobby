@@ -2,28 +2,26 @@ import * as t from './actionTypes'
 
 export default (
   state = {
+    loading: false,
     byId: {},
     allIds: []
   },
   action
 ) => {
   switch (action.type) {
-    case 'LOGOUT_USER':
-      return {
-        byId: {},
-        allIds: []
-      }
     case t.MERGE:
       let newById = {
         ...state.byId,
         ...action.payload
       }
       return {
+        ...state,
         byId: newById,
         allIds: Object.keys(newById)
       }
     case t.FETCH:
       return {
+        ...state,
         byId: action.payload.entities.contacts || {},
         allIds: action.payload.result
       }

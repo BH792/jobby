@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import { Route, Link, Switch } from 'react-router-dom';
 import { fetchContacts } from '../actions';
 
+import { LoginRedirect } from '../../../containers/hocs/LoginRedirector';
+
 class ContactContent extends Component {
   componentDidMount() {
     this.props.fetchContacts()
@@ -36,4 +38,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { fetchContacts })(ContactContent)
+export default LoginRedirect(connect(mapStateToProps, { fetchContacts })(ContactContent))

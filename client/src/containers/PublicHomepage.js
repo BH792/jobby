@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
+import LoadingIcon from '../components/LoadingIcon'
 import users from '../modules/users'
 import { Route, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import '../styles/PublicHomepage.css'
+
+import { RedirectBack } from './hocs/LoginRedirector';
 
 const { submitLogin, submitSignup, loginFromLocalStorage } = users.actions
 const { Signup, Login } = users.components
 
 const Body = () => {
   return (
-    <div className='PublicHomepageBody'>BODY</div>
+    <div className='PublicHomepageBody PublicHomepageBodyImage'>
+    </div>
   )
 }
 
@@ -25,10 +29,18 @@ class PublicHomepage extends Component {
   }
 
   render() {
-    const { userId, submitLogin, submitSignup } = this.props
+    const { userId, userLoading, submitLogin, submitSignup } = this.props
 
     if (userId) {
       return <Redirect to='/home' />
+    }
+
+    if (userLoading) {
+      return (
+        <div className='PublicHomepageBody' style={{textAlign: 'center'}}>
+          <LoadingIcon dimensions={{height: 250, width: 250}}/>
+        </div>
+      )
     }
 
     return (
@@ -43,7 +55,8 @@ class PublicHomepage extends Component {
 
 function mapStateToProps(state) {
   return {
-    userId: state.user.id
+    userId: state.user.id,
+    userLoading: state.user.loading
   }
 }
 
@@ -53,4 +66,5 @@ const mapDispatchToProps = {
   loginFromLocalStorage
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PublicHomepage))
+const connectedPublicHomepage = withRouter(connect(mapStateToProps, mapDispatchToProps)(PublicHomepage))
+export default RedirectBack(connectedPublicHomepage)

@@ -6,7 +6,9 @@ import '../../../styles/JobBoard.css';
 
 class JobBoard extends Component {
   componentDidMount() {
-    this.props.fetchBoard()
+    if (!this.props.isDataCached) {
+      this.props.fetchBoard()
+    }
   }
 
   render() {

@@ -2,24 +2,22 @@ import * as t from './actionTypes';
 
 export default (
   state = {
+    loading: false,
     byId: {},
     allIds: []
   },
   action
 ) => {
   switch (action.type) {
-    case 'LOGOUT_USER':
-      return {
-        byId: {},
-        allIds: []
-      }
     case t.FETCH:
       return {
+        ...state,
         byId: action.payload.entities.contacts || {},
         allIds: action.payload.result
       }
     case t.NEW:
       return {
+        ...state,
         byId: {
           ...state.byId,
           [action.payload.contact.id]: action.payload.contact,

@@ -1,43 +1,42 @@
-import React, { Component } from 'react';
-import { Redirect, withRouter } from 'react-router-dom';
-import { connectAdvanced, connect } from 'react-redux'
+import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux'
 
-export default function LoginRedirector(MyComponent, path, props) {
-  function factorySelector(dispatch) {
-    return (nextState, nextOwnProps) => {
-      return {
-        userId: nextState.user.id
+const RedirectorBuilder = (
+  baseRedirectPath,
+  shouldRedirect,
+  shouldRedirectBack = null
+) => {
+  return function (WrappedComponent) {
+    const AuthWrapper = (props) => {
+      const { user, match, location } = props
+      // TODO: change match.url to location.pathname
+      let redirect = shouldRedirect(user)
+      let redirectPath = `${baseRedirectPath}?redirect=${encodeURIComponent(match.url)}`
+
+      if (shouldRedirectBack) {
+        redirect = shouldRedirect(user) && shouldRedirectBack(user)
+        if (location.search) {
+          redirectPath = decodeURIComponent(location.search.split('redirect=')[1])
+        } else {
+          redirectPath = baseRedirectPath
+        }
       }
-    }
-  }
 
-  function mapStateToProps(state) {
-    return { userId: state.user.id }
-  }
-
-  class UnconnectedRedirect extends Component {
-    render() {
-      if (!this.props.userId) {
-        return <Redirect to={path} />
+      if (redirect) {
+        return <Redirect to={redirectPath} />
       } else {
-        return <MyComponent {...props} />
+        return <WrappedComponent {...props}/>
       }
     }
+
+    function mapStateToProps(state) {
+      return { user: state.user }
+    }
+
+    return connect(mapStateToProps)(AuthWrapper)
   }
-  return withRouter(connect(mapStateToProps)(UnconnectedRedirect))
-};
+}
 
-// const Redirector = (MyComponent, path, check, props) => {
-//   if (check(this.props.state)) {
-//     return () => <Redirect to={path} />
-//   } else {
-//     console.log();
-//     return () => <MyComponent {...props} />
-//   }
-// };
-
-// function mapStateToProps(state) {
-//   return { state }
-// }
-
-// export default withRouter(connect(mapStateToProps, {})(Redirector));
+export const LoginRedirect = RedirectorBuilder('/login', user => !user.id)
+export const RedirectBack = RedirectorBuilder('/home', user => !!user.id, user => !user.loading)

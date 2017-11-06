@@ -2,29 +2,15 @@ import * as t from './actionTypes';
 
 export default (
   state = {
+    loading: false,
     byId: {},
     allIds: []
   },
   action
 ) => {
   switch (action.type) {
-    case 'LOGOUT_USER':
-      return {
-        byId: {},
-        allIds: []
-      }
-    case 'FETCH_BOARD':
-      let newById = {
-        ...state.byId,
-        ...action.payload.entities.company || {}
-      }
-      return {
-        ...state,
-        byId: newById,
-        allIds: Object.keys(newById)
-      }
     case t.MERGE:
-      newById = {
+      let newById = {
         ...state.byId,
         ...action.payload || {}
       }
@@ -35,6 +21,7 @@ export default (
       }
     case t.FETCH:
       return {
+        ...state,
         byId: action.payload.entities.companies || {},
         allIds: action.payload.result
       }

@@ -7,6 +7,8 @@ import { Route, Link, Switch } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { fetchJobs } from '../actions'
 
+import { LoginRedirect } from '../../../containers/hocs/LoginRedirector';
+
 class JobContent extends Component {
   componentDidMount() {
     this.props.fetchJobs()
@@ -42,4 +44,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { fetchJobs })(JobContent)
+export default LoginRedirect(connect(mapStateToProps, { fetchJobs })(JobContent))
