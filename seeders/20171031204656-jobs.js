@@ -1,199 +1,29 @@
-'use strict';
+const tech = ['React', 'Redux', 'Python', 'Java', 'NodeJS', 'Ruby', 'Dev/Ops', 'Rails', 'Security', 'NoSQL', 'Cloud', 'Firewall']
+const role = ['Developer', 'Engineer', 'Jr Developer', 'Sr Engineer', 'Lead Engineer', 'Lead Developer']
+const title = ['HR Manager', 'CEO', 'CTO', 'Senior Engineer', 'Lead Developer', 'Product Manager']
+const status = ['watching', 'applied', 'interviewed', 'offered']
+function rand(max) {
+  return Math.floor(Math.random() * max)
+}
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('jobs', [
-      {
-        title: 'React/Redux Developer',
-        order: 11,
-        status: 'interviewed',
+    let jobs = []
+
+    for (var i = 0; i < 500; i++) {
+      jobs.push({
+        title: tech[rand(12)] + ' ' + role[rand(6)],
+        order: null,
+        status: status[rand(4)],
         userId: 1,
-        companyId: 1,
+        companyId: rand(250) + 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         createdAt: new Date(),
         updatedAt: new Date()
-      },
-      {
-        title: 'Javascript Developer',
-        order: 12,
-        status: 'interviewed',
-        userId: 1,
-        companyId: 3,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        title: 'Dev/Ops Lead',
-        order: 13,
-        status: 'interviewed',
-        userId: 1,
-        companyId: 6,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        title: 'Cloud Engineer',
-        order: 14,
-        status: 'offered',
-        userId: 1,
-        companyId: 1,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        title: 'Senior Product Manager',
-        order: 15,
-        status: 'offered',
-        userId: 1,
-        companyId: 6,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        title: 'Project Manager',
-        order: 16,
-        status: 'offered',
-        userId: 1,
-        companyId: 6,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        title: 'Firewall Administrator',
-        order: 17,
-        status: 'offered',
-        userId: 1,
-        companyId: 1,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        title: 'Consultant',
-        order: 18,
-        status: 'offered',
-        userId: 1,
-        companyId: 5,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        title: 'Senior VP of Technology',
-        order: 0,
-        status: 'watching',
-        userId: 1,
-        companyId: 5,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        title: 'Lead UI Developer',
-        order: 10,
-        status: 'interviewed',
-        userId: 1,
-        companyId: 4,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        title: 'Senior React/Redux Developer',
-        order: 1,
-        status: 'watching',
-        userId: 1,
-        companyId: 5,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        title: 'Data Scientist',
-        order: 2,
-        status: 'watching',
-        userId: 1,
-        companyId: 4,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        title: 'Flask Engineer',
-        order: 3,
-        status: 'watching',
-        userId: 1,
-        companyId: 1,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        title: 'Node Developer',
-        order: 4,
-        status: 'applied',
-        userId: 1,
-        companyId: 2,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        title: 'Ruby on Rails Developer',
-        order: 5,
-        status: 'applied',
-        userId: 1,
-        companyId: 3,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        title: 'Security Consultant',
-        order: 6,
-        status: 'applied',
-        userId: 1,
-        companyId: 3,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        title: 'NoSQL Database Administrator',
-        order: 7,
-        status: 'applied',
-        userId: 1,
-        companyId: 2,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        title: 'UX Designer',
-        order: 8,
-        status: 'applied',
-        userId: 1,
-        companyId: 2,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        title: 'Java Developer',
-        order: 9,
-        status: 'applied',
-        userId: 1,
-        companyId: 3,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-    ]);
+      })
+    }
+
+    return queryInterface.bulkInsert('jobs', jobs);
   },
 
   down: (queryInterface, Sequelize) => {

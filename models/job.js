@@ -16,6 +16,8 @@ module.exports = (sequelize, DataTypes) => {
     job.belongsTo(models.user, {
       foreignKey: 'userId'
     });
+
+    job.hasMany(models.touch)
   }
 
   return job;

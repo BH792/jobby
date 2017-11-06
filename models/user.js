@@ -9,7 +9,6 @@ module.exports = (sequelize, DataTypes) => {
     user.hasMany(models.job);
     user.hasMany(models.contact);
     user.hasMany(models.company);
-    user.hasMany(models.touch);
   }
 
   return user;

@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var touch = sequelize.define('touch', {
-    userId: DataTypes.INTEGER,
+    jobId: DataTypes.INTEGER,
     contactId: DataTypes.INTEGER,
     date: DataTypes.DATE,
     type: DataTypes.STRING,
@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   touch.associate = (models) => {
-    touch.belongsTo(models.user, {
-      foreignKey: 'userId'
+    touch.belongsTo(models.job, {
+      foreignKey: 'jobId'
     })
 
     touch.belongsTo(models.contact, {

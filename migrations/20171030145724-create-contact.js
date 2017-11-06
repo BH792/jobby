@@ -11,7 +11,20 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
+      companyId: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
       fullname: {
+        type: Sequelize.STRING
+      },
+      cellNumber: {
+        type: Sequelize.STRING
+      },
+      officeNumber: {
+        type: Sequelize.STRING
+      },
+      email: {
         type: Sequelize.STRING
       },
       title: {
