@@ -2,7 +2,7 @@ import CompanyAPI from '../../adapters/companyJobbyAPI';
 import CompaniesNormalizer from '../../normalizers/CompaniesNormalizer';
 import * as t from './actionTypes'
 
-export function fetchCompanies() {
+export function fetchCompaniesAPI() {
   return dispatch => {
     CompanyAPI.fetchCompanies()
       .then(json => {
@@ -14,6 +14,13 @@ export function fetchCompanies() {
           })
         }
       })
+  }
+}
+
+export function fetchCompanies(companies) {
+  return {
+    type: t.FETCH,
+    payload: companies
   }
 }
 

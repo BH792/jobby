@@ -1,3 +1,5 @@
+const constants = require('./SeedConstants')
+
 const types = ['email', 'phone', 'in-person', 'videochat']
 
 function rand(max) {
@@ -7,10 +9,10 @@ function rand(max) {
 module.exports = {
   up: (queryInterface, Sequelize) => {
     let touches = []
-    for (var i = 0; i < 1000; i++) {
+    for (var i = 0; i < constants.TOUCHES; i++) {
       touches.push({
-        jobId: rand(10) > 0 ? rand(500) + 1 : null,
-        contactId: rand(400) + 1,
+        jobId: rand(10) > 0 ? rand(constants.JOBS) + 1 : null,
+        contactId: rand(constants.CONTACTS) + 1,
         date: new Date(),
         type: types[rand(4)],
         subject: 'Job Possibility',

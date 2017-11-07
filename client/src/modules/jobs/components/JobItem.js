@@ -1,9 +1,11 @@
 import React from 'react';
 
-const JobItem = ({title, company, description}) => {
+const JobItem = (props) => {
+  let { title, company, description } = props
   if (description && description.length > 100) {
     description = description.slice(0, 97) + '...'
   }
+
   return (
     <div className='JobItem'>
       <div className='JobItemHeader'>

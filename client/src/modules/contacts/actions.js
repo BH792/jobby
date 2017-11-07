@@ -2,7 +2,7 @@ import ContactAPI from '../../adapters/contactJobbyAPI';
 import ContactsNormalizer from '../../normalizers/ContactsNormalizer';
 import * as t from './actionTypes';
 
-export function fetchContacts() {
+export function fetchContactsAPI() {
   return dispatch => {
     ContactAPI.fetchContacts().then(json => {
       if (json.status === 'SUCCESS') {
@@ -13,6 +13,13 @@ export function fetchContacts() {
         })
       }
     })
+  }
+}
+
+export function fetchContacts(contacts) {
+  return {
+    type: t.FETCH,
+    payload: contacts
   }
 }
 

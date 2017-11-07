@@ -3,7 +3,7 @@ import * as t from './actionTypes'
 import companies from '../companies'
 
 
-export function fetchJobs() {
+export function fetchJobsAPI() {
   return dispatch => {
     JobAPI.fetchJobs().then(json => {
       if (json.status === 'SUCCESS') {
@@ -13,6 +13,13 @@ export function fetchJobs() {
         })
       }
     })
+  }
+}
+
+export function fetchJobs(jobs) {
+  return {
+    type: t.FETCH,
+    payload: jobs
   }
 }
 

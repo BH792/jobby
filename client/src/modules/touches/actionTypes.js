@@ -1,0 +1,5 @@
+export const FETCH = 'touches/FETCH'
+export const MERGE = 'touches/MERGE'
+export const NEW = 'touches/NEW'
+export const UPDATE = 'touches/UPDATE'
+export const LOADING = 'touches/LOADING'

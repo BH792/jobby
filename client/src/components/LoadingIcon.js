@@ -2,7 +2,6 @@ import React from 'react';
 
 const Icon = ({ dimensions }) => {
   const { height, width } = dimensions
-  console.log(height, width);
   return (
     <svg
       className='LoadingIcon'

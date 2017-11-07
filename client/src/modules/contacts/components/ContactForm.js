@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { newContactAPI, updateContactAPI } from '../actions'
-// import '../styles/Login.css'
 
 class ContactForm extends Component {
   state = {
@@ -27,25 +26,24 @@ class ContactForm extends Component {
     const { fullname, title } = this.state
     return (
       <div>
-        <form onSubmit={this.handleSubmit} className='Form'>
+        <form onSubmit={this.handleSubmit} className='form'>
           <input
             type='text'
             name='fullname'
             value={fullname}
             onChange={this.handleChange}
             placeholder='Name'
+            className='form input wide'
           />
-          <br/>
           <input
             type='text'
             name='title'
             value={title}
             onChange={this.handleChange}
             placeholder='Title'
+            className='form input wide'
           />
-          <br/>
-
-          <input type='submit' />
+          <button className='form submit normal'>Submit</button>
         </form>
       </div>
     )

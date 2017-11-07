@@ -5,14 +5,14 @@ import ContactDetails from './ContactDetails';
 import ContactForm from './ContactForm';
 import { connect } from 'react-redux';
 import { Route, Link, Switch } from 'react-router-dom';
-import { fetchContacts } from '../actions';
+import { fetchContactsAPI } from '../actions';
 
 import { LoginRedirect } from '../../../containers/hocs/LoginRedirector';
 
 class ContactContent extends Component {
-  componentDidMount() {
-    this.props.fetchContacts()
-  }
+  // componentDidMount() {
+  //   this.props.fetchContactsAPI()
+  // }
 
   render() {
     const { contacts, match } = this.props
@@ -33,9 +33,15 @@ class ContactContent extends Component {
 }
 
 function mapStateToProps(state) {
+  const contacts = state.contacts.allIds.map(contactId => {
+    return {
+      ...state.contacts.byId[contactId],
+      company: state.companies.byId[state.contacts.byId[contactId].companyId].name
+    }
+  })
   return {
-    contacts: state.contacts.allIds.map(id => state.contacts.byId[id])
+    contacts
   }
 }
 
-export default LoginRedirect(connect(mapStateToProps, { fetchContacts })(ContactContent))
+export default LoginRedirect(connect(mapStateToProps, { fetchContactsAPI })(ContactContent))

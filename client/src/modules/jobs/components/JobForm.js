@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { newJobAPI, updateJobAPI } from '../actions'
-// import '../styles/Login.css'
 
 class JobForm extends Component {
   state = {
@@ -30,15 +29,15 @@ class JobForm extends Component {
     const { title, description, status, companyName } = this.state
     return (
       <div>
-        <form onSubmit={this.handleSubmit} className='Form'>
+        <form onSubmit={this.handleSubmit} className='form'>
           <input
             type='text'
             name='title'
             value={title}
             onChange={this.handleChange}
             placeholder='Title'
+            className='form input wide'
           />
-          <br/>
           <textarea
             rows='10'
             cols='50'
@@ -46,24 +45,25 @@ class JobForm extends Component {
             value={description}
             onChange={this.handleChange}
             placeholder='Description'
+            className='form textarea wide'
           />
-          <br/>
           <select
             name='status'
             value={status}
             onChange={this.handleChange}
+            className='form select wide'
           >
             <option value='watching'>Watching</option>
             <option value='applied'>Applied</option>
             <option value='interviewed'>Interviewed</option>
             <option value='offered'>Offered</option>
           </select>
-          <br/>
           <input
             list='companies'
             name='companyName'
             value={companyName}
             onChange={this.handleChange}
+            className='form input wide'
           />
           <datalist id='companies'>
             {Object.keys(this.props.companyNames).map(company => {
@@ -75,8 +75,7 @@ class JobForm extends Component {
               )
             })}
           </datalist>
-          <br/>
-          <input type='submit' />
+          <button className='form submit normal'>Submit</button>
         </form>
       </div>
     )

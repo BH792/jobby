@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { newCompanyAPI, updateCompanyAPI } from '../actions'
-// import '../styles/Login.css'
 
 class CompanyForm extends Component {
   state = {
@@ -27,25 +26,24 @@ class CompanyForm extends Component {
     const { name, website } = this.state
     return (
       <div>
-        <form onSubmit={this.handleSubmit} className='Form'>
+        <form onSubmit={this.handleSubmit} className='form'>
           <input
             type='text'
             name='name'
             value={name}
             onChange={this.handleChange}
             placeholder='Name'
+            className='form input wide'
           />
-          <br/>
           <input
             type='text'
             name='website'
             value={website}
             onChange={this.handleChange}
             placeholder='Website'
+            className='form input wide'
           />
-          <br/>
-
-          <input type='submit' />
+          <button className='form submit normal'>Submit</button>
         </form>
       </div>
     )

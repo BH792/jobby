@@ -22,8 +22,8 @@ export default (
     case t.FETCH:
       return {
         ...state,
-        byId: action.payload.entities.contacts || {},
-        allIds: action.payload.result
+        byId: action.payload || {},
+        allIds: Object.keys(action.payload || {})
       }
     case t.NEW:
       return {

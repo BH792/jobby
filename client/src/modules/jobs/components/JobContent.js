@@ -5,14 +5,14 @@ import JobDetails from './JobDetails'
 import JobForm from './JobForm'
 import { Route, Link, Switch } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { fetchJobs } from '../actions'
+import { fetchJobsAPI } from '../actions'
 
 import { LoginRedirect } from '../../../containers/hocs/LoginRedirector';
 
 class JobContent extends Component {
-  componentDidMount() {
-    this.props.fetchJobs()
-  }
+  // componentDidMount() {
+  //   this.props.fetchJobsAPI()
+  // }
 
   render() {
     const { jobs, match } = this.props
@@ -44,4 +44,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default LoginRedirect(connect(mapStateToProps, { fetchJobs })(JobContent))
+export default LoginRedirect(connect(mapStateToProps, { fetchJobsAPI })(JobContent))

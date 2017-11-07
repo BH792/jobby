@@ -6,6 +6,7 @@ const ContactItem = (props) => {
       <div className='ContactItemHeader'>
         <h4>{props.fullname}</h4>
         <p>{props.title}</p>
+        <p>{props.company}</p>
       </div>
     </div>
   )

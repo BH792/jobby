@@ -2,6 +2,6 @@ import JobbyAPI from './JobbyBackendAdapter';
 
 export default class {
   static fetchDashboard() {
-    return JobbyAPI.get('/dashboard')
+    return JobbyAPI.get('/dashboard/test')
   }
 }
