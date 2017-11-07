@@ -60,3 +60,17 @@ export function mergeCompanies(companiesById) {
     payload: companiesById
   }
 }
+
+export function removeJob(jobIdAndCompanyId) {
+  return {
+    type: t.REMOVE_JOB,
+    payload: jobIdAndCompanyId
+  }
+}
+
+export function addJob(jobIdAndCompanyId) {
+  return {
+    type: t.ADD_JOB,
+    payload: jobIdAndCompanyId
+  }
+}

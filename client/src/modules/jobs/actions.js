@@ -25,20 +25,32 @@ export function fetchJobs(jobs) {
 
 export function newJobAPI(jobInfo) {
   return dispatch => {
+    dispatch(loadingJob())
     JobAPI.newJob(jobInfo).then(json => {
       if (json.company) {
+        json.company.jobs = [json.job.id]
         dispatch(companies.actions.newCompany(json))
       }
-      dispatch(dispatch(newJob(json)))
+      dispatch(newJob(json))
     })
   }
 }
 
-export function updateJobAPI(jobInfo) {
+export function updateJobAPI(jobInfo, oldCompanyId) {
   return dispatch => {
     JobAPI.updateJob(jobInfo).then(json => {
       if (json.company) {
         dispatch(companies.actions.newCompany(json))
+      }
+      if (json.job.companyId !== oldCompanyId) {
+        dispatch(companies.actions.removeJob({
+          jobId: json.job.id,
+          companyId: oldCompanyId
+        }))
+        dispatch(companies.actions.addJob({
+          jobId: json.job.id,
+          companyId: json.job.companyId
+        }))
       }
       dispatch(updateJob(json))
     })
@@ -63,5 +75,11 @@ export function mergeJobs(jobsById) {
   return {
     type: t.MERGE,
     payload: jobsById
+  }
+}
+
+export function loadingJob() {
+  return {
+    type: t.LOADING
   }
 }

@@ -1,4 +1,5 @@
 import * as t from './actionTypes';
+import companyReducer from './companyReducer';
 
 export default (
   state = {
@@ -30,7 +31,7 @@ export default (
         ...state,
         byId: {
           ...state.byId,
-          [action.payload.company.id]: action.payload.company,
+          [action.payload.company.id]: companyReducer(undefined, action),
         },
         allIds: [ ...state.allIds, action.payload.company.id]
       }
@@ -40,6 +41,22 @@ export default (
         byId: {
           ...state.byId,
           [action.payload.company.id]: action.payload.company,
+        }
+      }
+    case t.REMOVE_JOB:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.payload.companyId]: companyReducer(state.byId[action.payload.companyId], action)
+        }
+      }
+    case t.ADD_JOB:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.payload.companyId]: companyReducer(state.byId[action.payload.companyId], action)
         }
       }
     default:

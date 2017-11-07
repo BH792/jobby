@@ -1,4 +1,5 @@
-import * as t from './actionTypes'
+import * as t from './actionTypes';
+import jobReducer from './jobReducer';
 
 export default (
   state = {
@@ -30,17 +31,24 @@ export default (
         ...state,
         byId: {
           ...state.byId,
-          [action.payload.job.id]: action.payload.job,
+          [action.payload.job.id]: jobReducer(undefined, action),
         },
-        allIds: [ ...state.allIds, action.payload.job.id]
+        allIds: [ ...state.allIds, action.payload.job.id],
+        loading: false
       }
     case t.UPDATE:
       return {
         ...state,
         byId: {
           ...state.byId,
-          [action.payload.job.id]: action.payload.job
-        }
+          [action.payload.job.id]: jobReducer(state.byId[action.payload.job.id], action)
+        },
+        loading: false
+      }
+    case t.LOADING:
+      return {
+        ...state,
+        loading: true
       }
     // case 'CHANGE_JOB_STATUS':
     //   return {

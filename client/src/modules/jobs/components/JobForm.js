@@ -4,6 +4,7 @@ import { newJobAPI, updateJobAPI } from '../actions'
 
 class JobForm extends Component {
   state = {
+    submitted: false,
     title: this.props.job.title || '',
     description: this.props.job.description || '',
     status: this.props.job.status || 'watching',
@@ -16,13 +17,21 @@ class JobForm extends Component {
     })
   }
 
+  submit = () => {
+    if (!this.state.submitted) {
+      this.props.submitJob({
+        ...this.state,
+        companyId: this.props.companyNames[this.state.companyName],
+        id: this.props.job.id
+      }, this.props.job.companyId)
+    }
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.submitJob({
-      ...this.state,
-      companyId: this.props.companyNames[this.state.companyName],
-      id: this.props.job.id
-    })
+    this.setState({
+      submitted: true
+    }, this.submit())
   }
 
   render() {
@@ -75,7 +84,12 @@ class JobForm extends Component {
               )
             })}
           </datalist>
-          <button className='form submit normal'>Submit</button>
+          <button
+            className={`form submit normal ${this.state.submitted ? 'disabled' : ''}`}
+            disabled={this.state.submitted}
+          >
+            Submit
+          </button>
         </form>
       </div>
     )

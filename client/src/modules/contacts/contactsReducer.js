@@ -1,4 +1,5 @@
 import * as t from './actionTypes';
+import contactReducer from './contactReducer';
 
 export default (
   state = {
@@ -20,7 +21,7 @@ export default (
         ...state,
         byId: {
           ...state.byId,
-          [action.payload.contact.id]: action.payload.contact,
+          [action.payload.contact.id]: contactReducer(undefined, action),
         },
         allIds: [ ...state.allIds, action.payload.contact.id]
       }

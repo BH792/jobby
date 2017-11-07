@@ -4,6 +4,7 @@ import { newContactAPI, updateContactAPI } from '../actions'
 
 class ContactForm extends Component {
   state = {
+    submitted: false,
     fullname: this.props.contact.fullname || '',
     title: this.props.contact.title || ''
   }
