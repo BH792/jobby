@@ -18,7 +18,7 @@ class CompanyContent extends Component {
     const { companies, match } = this.props
     let CompanyList = itemLister(CompanyItem, companies, match)
     return (
-      <div>
+      <div className='content container'>
         <Link to={`${match.url}/new`}>Add New Company</Link>
         <Link to={`${match.url}`}>See All Companies</Link>
         <Switch>

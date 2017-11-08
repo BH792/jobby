@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import itemLister from '../../shared/Lister';
+import ContentHeader from './ContentHeader'
 import JobItem from './JobItem'
 import JobDetails from './JobDetails'
 import JobForm from './JobForm'
-import { Route, Link, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { fetchJobsAPI } from '../actions'
 
@@ -15,12 +16,11 @@ class JobContent extends Component {
   // }
 
   render() {
-    const { jobs, match } = this.props
+    const { jobs, match, location } = this.props
     let JobList = itemLister(JobItem, jobs, match)
     return (
-      <div>
-        <Link to={`${match.url}/new`}>Add New Job</Link>
-        <Link to={`${match.url}`}>See All Jobs</Link>
+      <div className='content container'>
+        <ContentHeader match={match} location={location} type={'Job'}/>
         <Switch>
           <Route exact path={`${match.url}/new`} component={JobForm} />
           <Route exact path={`${match.url}/:id`} component={JobDetails} />

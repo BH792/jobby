@@ -27,9 +27,11 @@ const ContactDetails = ({
 };
 
 function mapStateToProps(state, ownProps) {
+  const contactId = ownProps.match.params.id
+  const companyId = state.contacts.byId[contactId].companyId
   return {
-    ...state.contacts.byId[ownProps.match.params.id],
-    company: state.companies.byId[ownProps.match.params.id].name
+    ...state.contacts.byId[contactId],
+    company: state.companies.byId[companyId].name
   }
 }
 

@@ -59,6 +59,22 @@ export default (
           [action.payload.companyId]: companyReducer(state.byId[action.payload.companyId], action)
         }
       }
+    case t.REMOVE_CONTACT:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.payload.companyId]: companyReducer(state.byId[action.payload.companyId], action)
+        }
+      }
+    case t.ADD_CONTACT:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.payload.companyId]: companyReducer(state.byId[action.payload.companyId], action)
+        }
+      }
     default:
       return state
   }

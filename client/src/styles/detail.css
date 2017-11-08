@@ -1,0 +1,45 @@
+.detail.main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.detail.item-info {
+  width: 60%;
+  margin-right: 5%;
+}
+
+.detail.header {
+  margin: 10px 10px 0px 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.detail.subheader {
+  margin: 10px 10px 0px 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.detail.freetext {
+  margin: 10px 10px 0px 10px;
+  white-space: pre-wrap;
+}
+
+.detail.interaction-container {
+  margin: 10px 0 0 10px;
+  width: 250px;
+  border: solid thin black;
+  border-radius: 3px;
+}
+
+.detail.interaction.type, .detail.interaction.contact, .detail.interaction.date, .detail.interaction.subject  {
+  margin: 10px 10px 10px 10px;
+}
+
+.detail.interaction.contact {
+  font-weight: bold;
+}
+
+.detail.interaction.type, .detail.interaction.date  {
+  display: inline;
+}

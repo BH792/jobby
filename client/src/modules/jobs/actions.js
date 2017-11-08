@@ -28,9 +28,12 @@ export function newJobAPI(jobInfo) {
     dispatch(loadingJob())
     JobAPI.newJob(jobInfo).then(json => {
       if (json.company) {
-        json.company.jobs = [json.job.id]
         dispatch(companies.actions.newCompany(json))
       }
+      dispatch(companies.actions.addJob({
+        jobId: json.job.id,
+        companyId: json.job.companyId
+      }))
       dispatch(newJob(json))
     })
   }

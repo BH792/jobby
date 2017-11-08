@@ -74,3 +74,17 @@ export function addJob(jobIdAndCompanyId) {
     payload: jobIdAndCompanyId
   }
 }
+
+export function removeContact(contactIdAndCompanyId) {
+  return {
+    type: t.REMOVE_CONTACT,
+    payload: contactIdAndCompanyId
+  }
+}
+
+export function addContact(contactIdAndCompanyId) {
+  return {
+    type: t.ADD_CONTACT,
+    payload: contactIdAndCompanyId
+  }
+}

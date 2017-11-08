@@ -26,10 +26,19 @@ export default (
         jobs: state.jobs.filter(id => id !== action.payload.jobId)
       }
     case t.ADD_JOB:
-      console.log(action.payload.jobId);
       return {
         ...state,
         jobs: [...state.jobs, action.payload.jobId]
+      }
+    case t.REMOVE_CONTACT:
+      return {
+        ...state,
+        contacts: state.contacts.filter(id => id !== action.payload.contactId)
+      }
+    case t.ADD_CONTACT:
+      return {
+        ...state,
+        contacts: [...state.contacts, action.payload.contactId]
       }
     default:
       return state;

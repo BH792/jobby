@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 const JobDetails = ({
   title,
@@ -11,25 +10,29 @@ const JobDetails = ({
   match
 }) => {
   const interactions = touches.map(touch => {
+    const date = new Date(touch.date)
     return (
-      <div>
-        <p>{touch.contact}</p>
-        <p>{touch.type}</p>
-        <p>{touch.date.toLocaleDateString}</p>
-        <p>{touch.subject}</p>
+      <div className='detail interaction-container' key={touch.id}>
+        <p className='detail interaction contact'>{touch.contact}</p>
+        <p className='detail interaction type'>{touch.type}</p>
+        <p className='detail interaction date'>{date.toDateString()}</p>
+        <p className='detail interaction subject'>{touch.subject}</p>
       </div>
     )
   })
 
   return (
-    <div>
-      <div>
-        <h2>{title}</h2>
-        <h3>{company}</h3>
-        <p>{description}</p>
-        <p>{status}</p>
-        {interactions}
-        <Link to={`${match.url}/edit`}>Edit</Link>
+    <div className='detail main'>
+      <div className='detail item-info'>
+        <p className='detail header'>{title}</p>
+        <p className='detail subheader'>{company}</p>
+        <p className='detail freetext'>{description}</p>
+        <p className='detail freetext'>{status}</p>
+      </div>
+      <div className='detail related-list'>
+        <div className='detail interaction-list-container'>
+          {interactions}
+        </div>
       </div>
     </div>
   )

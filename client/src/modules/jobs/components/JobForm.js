@@ -48,8 +48,6 @@ class JobForm extends Component {
             className='form input wide'
           />
           <textarea
-            rows='10'
-            cols='50'
             name='description'
             value={description}
             onChange={this.handleChange}

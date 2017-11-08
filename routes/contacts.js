@@ -1,14 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const verifyJWT = require('../middleware/JWTAuthentication')
-const { contact: Contact, user: User } = require('../models')
+const { contact: Contact, company: Company } = require('../models')
 
 router.use(verifyJWT)
 
 router.post('/:id', function (req, res, next) {
-  let updatedContactInfo = {
+  const updatedContactInfo = {
+    userId: req.userId,
+    companyId: req.body.companyId,
     fullname: req.body.fullname || null,
-    title: req.body.title || null
+    title: req.body.title || null,
+    cellNumber: req.body.cellNumber || null,
+    officeNumber: req.body.officeNumber || null,
+    email: req.body.email || null
   }
 
   Contact.findOne({
@@ -19,13 +24,33 @@ router.post('/:id', function (req, res, next) {
   })
     .then(contact => {
       if (contact) {
-        contact.update({ ...updatedContactInfo })
-        .then(updatedContact => {
-          res.json({
-            status: 'SUCCESS',
-            contact: updatedContact
+        if (updatedContactInfo.companyId) {
+          contact.update({ ...updatedContactInfo })
+          .then(updatedContact => {
+            res.json({
+              status: 'SUCCESS',
+              contact: updatedContact
+            })
           })
-        })
+        } else {
+          Company.create({
+            name: req.body.companyName,
+            userId: req.userId
+          })
+            .then(company => {
+              contact.update({
+                ...updatedContactInfo,
+                companyId: company.id
+              })
+                .then(updatedContact => {
+                  res.json({
+                    status: 'SUCCESS',
+                    contact: updatedContact,
+                    company
+                  })
+                })
+            })
+        }
       } else {
         res.json({status: 'ERROR', msg: 'no contact found'})
       }
@@ -48,18 +73,42 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
   const newContact = {
+    userId: req.userId,
+    companyId: req.body.companyId,
     fullname: req.body.fullname || null,
     title: req.body.title || null,
-    userId: req.userId
+    cellNumber: req.body.cellNumber || null,
+    officeNumber: req.body.officeNumber || null,
+    email: req.body.email || null
   }
 
-  Contact.create({ ...newContact })
-    .then(contact => {
-      res.json({
-        status: 'SUCCESS',
-        contact
+  if (newContact.companyId) {
+    Contact.create({ ...newContact })
+      .then(contact => {
+        res.json({
+          status: 'SUCCESS',
+          contact
+        })
       })
+  } else {
+    Company.create({
+      name: req.body.companyName,
+      userId: req.userId
     })
+      .then(company => {
+        Contact.create({
+          ...newContact,
+          companyId: company.id
+        })
+          .then(contact => {
+            res.json({
+              status: 'SUCCESS',
+              contact,
+              company
+            })
+          })
+      })
+  }
 })
 
 module.exports = router;

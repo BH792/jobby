@@ -18,7 +18,7 @@ class ContactContent extends Component {
     const { contacts, match } = this.props
     let ContactList = itemLister(ContactItem, contacts, match)
     return (
-      <div>
+      <div className='content container'>
         <Link to={`${match.url}/new`}>Add New Contact</Link>
         <Link to={`${match.url}`}>See All Contacts</Link>
         <Switch>
