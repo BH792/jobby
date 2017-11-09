@@ -40,6 +40,7 @@ export function newJobAPI(jobInfo) {
 
 export function updateJobAPI(jobInfo, oldCompanyId) {
   return dispatch => {
+    dispatch(loadingJob())
     JobAPI.updateJob(jobInfo).then(json => {
       if (json.company) {
         dispatch(companies.actions.newCompany(json))

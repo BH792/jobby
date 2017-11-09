@@ -24,12 +24,15 @@ const ContentHeader = ({ match, type }) => {
           />
         }} />
       </Switch>
-      <Route exact path={`${match.url}/:id`} render={(props) => {
-        return <ButtonLink
-          path={`${match.url}`}
-          text={'Back'}
-        />
-      }} />
+      <Switch>
+        <Route exact path={`${match.url}/new`} render={() => <div></div>} />
+        <Route exact path={`${match.url}/:id`} render={(props) => {
+          return <ButtonLink
+            path={`${match.url}`}
+            text={'Back'}
+          />
+        }} />
+      </Switch>
       <Route path={`${match.url}/:id/edit`} render={(props) => {
         return <ButtonLink
           path={`${match.url}/${props.match.params.id}`}

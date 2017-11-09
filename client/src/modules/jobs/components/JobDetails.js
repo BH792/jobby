@@ -1,6 +1,8 @@
 import React from 'react';
+import JobStatus from './JobStatus';
 import { connect } from 'react-redux';
-import JobStatus from './JobStatus'
+import { Touch } from '../../shared';
+import * as selector from '../selectors';
 
 const JobDetails = ({
   title,
@@ -10,17 +12,7 @@ const JobDetails = ({
   touches,
   match
 }) => {
-  const interactions = touches.map(touch => {
-    const date = new Date(touch.date)
-    return (
-      <div className='detail interaction-container' key={touch.id}>
-        <p className='detail interaction contact'>{touch.contact}</p>
-        <p className='detail interaction type'>{touch.type}</p>
-        <p className='detail interaction date'>{date.toDateString()}</p>
-        <p className='detail interaction subject'>{touch.subject}</p>
-      </div>
-    )
-  })
+  const interactions = touches.map(touch => <Touch touch={touch} key={touch.id}/>)
 
   return (
     <div className='detail main'>
@@ -28,10 +20,10 @@ const JobDetails = ({
         <p className='detail header'>{title}</p>
         <p className='detail subheader'>{company}</p>
         <JobStatus status={status} />
-        <p className='detail freetext'>{status}</p>
         <p className='detail freetext'>{description}</p>
       </div>
       <div className='detail related-list'>
+        <p className='detail subheader'>Touches:</p>
         <div className='detail interaction-list-container'>
           {interactions}
         </div>
@@ -42,16 +34,11 @@ const JobDetails = ({
 
 function mapStateToProps(state, ownProps) {
   const jobId = ownProps.match.params.id
-  const companyId = state.jobs.byId[jobId].companyId
+
   return {
-    ...state.jobs.byId[jobId],
-    company: state.companies.byId[companyId].name,
-    touches: state.jobs.byId[jobId].touches.map(touchId => {
-      return {
-        ...state.touches.byId[touchId],
-        contact: state.contacts.byId[state.touches.byId[touchId].contactId].fullname
-      }
-    })
+    ...selector.getJob(state, { jobId }),
+    company: selector.getJobCompanyName(state, { jobId }),
+    touches: selector.getJobTouches(state, { jobId })
   }
 }
 

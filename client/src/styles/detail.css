@@ -48,6 +48,7 @@
 .detail.interaction-container {
   margin: 10px 0 0 10px;
   width: 250px;
+  height: 94px;
   border: solid thin black;
   border-radius: 3px;
 }

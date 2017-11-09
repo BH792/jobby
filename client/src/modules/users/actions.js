@@ -1,5 +1,4 @@
 import UserAPI from '../../adapters/userJobbyAPI'
-import DashboardAPI from '../../adapters/dashboardJobbyAPI';
 import jobs from '../jobs'
 import companies from '../companies'
 import contacts from '../contacts'
@@ -52,7 +51,6 @@ export function loginFromLocalStorage() {
 
 function fetchAllData(dispatch) {
   UserAPI.fetchAllData().then(json => {
-    console.log(json);
     let payload = normalizeAllData(json)
     dispatch(companies.actions.fetchCompanies(payload.entities.companies))
     dispatch(jobs.actions.fetchJobs(payload.entities.jobs))

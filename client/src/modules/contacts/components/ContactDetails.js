@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 const ContactDetails = ({
   fullname,
@@ -9,18 +8,36 @@ const ContactDetails = ({
   match,
   cellNumber,
   officeNumber,
-  email
+  email,
+  touches
 }) => {
+  const interactions = touches.map(touch => {
+    const date = new Date(touch.date)
+    return (
+      <div className='detail interaction-container' key={touch.id}>
+        <p className='detail interaction contact'>{touch.job || 'None'}</p>
+        <p className='detail interaction type'>{touch.type}</p>
+        <p className='detail interaction date'>{date.toDateString()}</p>
+        <p className='detail interaction subject'>{touch.subject}</p>
+      </div>
+    )
+  })
+
   return (
-    <div>
-      <div>
-        <h2>{fullname}</h2>
-        <p>{title}</p>
-        <p>{company}</p>
+    <div className='detail main'>
+      <div className='detail item-info'>
+        <h2 className='detail header'>{fullname}</h2>
+        <p className='detail subheader'>{title}</p>
+        <p className='detail subheader'>{company}</p>
         <p>{cellNumber}</p>
         <p>{officeNumber}</p>
         <p>{email}</p>
-        <Link to={`${match.url}/edit`}>Edit</Link>
+      </div>
+      <div className='detail related-list'>
+        <p className='detail subheader'>Touches:</p>
+        <div className='detail interaction-list-container'>
+          {interactions}
+        </div>
       </div>
     </div>
   )
@@ -31,7 +48,17 @@ function mapStateToProps(state, ownProps) {
   const companyId = state.contacts.byId[contactId].companyId
   return {
     ...state.contacts.byId[contactId],
-    company: state.companies.byId[companyId].name
+    company: state.companies.byId[companyId].name,
+    touches: state.contacts.byId[contactId].touches.map(touchId => {
+      let job;
+      if (state.touches.byId[touchId].jobId) {
+        job = state.jobs.byId[state.touches.byId[touchId].jobId].fullname
+      }
+      return {
+        ...state.touches.byId[touchId],
+        job
+      }
+    })
   }
 }
 

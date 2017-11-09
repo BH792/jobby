@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { newJobAPI, updateJobAPI } from '../actions'
+import * as selector from '../selectors';
 
 class JobForm extends Component {
   state = {
@@ -35,7 +37,14 @@ class JobForm extends Component {
   }
 
   render() {
-    const { title, description, status, companyName } = this.state
+    const { title, description, status, companyName, submitted } = this.state
+    const { loading, lastId, match } = this.props
+
+    if (!loading && submitted) {
+      const path = `${match.path.split('/').slice(0, 3).join('/')}/${lastId || ''}`
+      return <Redirect to={path} />
+    }
+
     return (
       <div>
         <form onSubmit={this.handleSubmit} className='form'>
@@ -95,23 +104,20 @@ class JobForm extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const companyNames = {}
-  state.companies.allIds.forEach(id => {
-    companyNames[state.companies.byId[id].name] = state.companies.byId[id].id
-  })
-
   let job = {}
-  const id = ownProps.match.params.id
-  if (id && state.jobs.byId[id]) {
+  const jobId = ownProps.match.params.id
+  if (jobId && selector.getJob(state, { jobId })) {
     job = {
-      ...state.jobs.byId[id],
-      companyName: state.companies.byId[state.jobs.byId[id].companyId].name
+      ...selector.getJob(state, { jobId }),
+      companyName: selector.getJobCompanyName(state, { jobId }),
     }
   }
 
   return {
     job,
-    companyNames
+    companyNames: selector.getCompanyNames(state),
+    loading: selector.getLoading(state),
+    lastId: selector.getLastId(state)
   }
 }
 

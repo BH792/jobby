@@ -3,6 +3,7 @@ import jobReducer from './jobReducer';
 
 export default (
   state = {
+    lastId: null,
     loading: false,
     byId: {},
     allIds: []
@@ -10,16 +11,6 @@ export default (
   action
 ) => {
   switch (action.type) {
-    case t.MERGE:
-      let newById = {
-        ...state.byId,
-        ...action.payload
-      }
-      return {
-        ...state,
-        byId: newById,
-        allIds: Object.keys(newById)
-      }
     case t.FETCH:
       return {
         ...state,
@@ -34,7 +25,8 @@ export default (
           [action.payload.job.id]: jobReducer(undefined, action),
         },
         allIds: [ ...state.allIds, action.payload.job.id],
-        loading: false
+        loading: false,
+        lastId: action.payload.job.id
       }
     case t.UPDATE:
       return {
@@ -43,7 +35,8 @@ export default (
           ...state.byId,
           [action.payload.job.id]: jobReducer(state.byId[action.payload.job.id], action)
         },
-        loading: false
+        loading: false,
+        lastId: action.payload.job.id
       }
     case t.LOADING:
       return {
