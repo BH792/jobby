@@ -92,7 +92,7 @@ class JobForm extends Component {
             })}
           </datalist>
           <button
-            className={`form submit normal ${this.state.submitted ? 'disabled' : ''}`}
+            className={`button primary normal ${this.state.submitted ? 'disabled' : ''}`}
             disabled={this.state.submitted}
           >
             Submit

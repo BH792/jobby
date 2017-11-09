@@ -32,7 +32,7 @@ class App extends Component {
 
     return (
       <div className='APP'>
-        <div className='APP-LOGO' style={{backgroundColor: 'lightblue'}}>JOBBY</div>
+        <div className='APP-LOGO' style={{backgroundColor: '#EF8354'}}>JOBBY</div>
         <ConnectedNavBar className='APP-NAV'/>
         <Switch>
           <Route path='/home' component={MainApplication} />

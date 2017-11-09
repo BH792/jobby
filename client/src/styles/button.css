@@ -1,0 +1,54 @@
+.router-link {
+  text-decoration: none;
+}
+
+.button {
+  display: block;
+  margin: 10px 10px 0px 10px;
+  height: 42px;
+  padding: 5px;
+  font-size: 18px;
+  color: white;
+}
+
+.button.primary {
+  background-color: #EF8354;
+}
+
+.button.primary:hover {
+  background-color: #DA784D;
+}
+
+.button.secondary {
+  background-color: #BFC0C0;
+}
+
+.button.secondary:hover {
+  background-color: #C4C5C5;
+}
+
+.button.outline {
+  text-align: center;
+  padding: 5px;
+  margin: 9px 10px;
+  background-color: transparent;
+  border: solid 3px white;
+  border-radius: 5px;
+  height: auto;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button.disabled, .button.disabled:hover{
+  opacity: 0.5;
+}
+
+.button.normal {
+  width: 150px;
+}
+
+.button.narrow {
+  width: 100px;
+}
