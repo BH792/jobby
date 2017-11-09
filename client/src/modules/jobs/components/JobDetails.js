@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import JobStatus from './JobStatus'
 
 const JobDetails = ({
   title,
@@ -26,8 +27,9 @@ const JobDetails = ({
       <div className='detail item-info'>
         <p className='detail header'>{title}</p>
         <p className='detail subheader'>{company}</p>
-        <p className='detail freetext'>{description}</p>
+        <JobStatus status={status} />
         <p className='detail freetext'>{status}</p>
+        <p className='detail freetext'>{description}</p>
       </div>
       <div className='detail related-list'>
         <div className='detail interaction-list-container'>

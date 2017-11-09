@@ -25,6 +25,26 @@
   white-space: pre-wrap;
 }
 
+.detail.status.bubble {
+  display: flex;
+  flex: none;
+  align-items: center;
+  margin: 10px 10px 0px 10px;
+  border-radius: 25px;
+  width: fit-content;
+  vertical-align: middle;
+  padding: 5px 10px;
+  background-color: #885ead;
+}
+
+.detail.status.text {
+  margin-left: 5px;
+  display: inline;
+  text-align: left;
+  font-size: 18px;
+  color: white;
+}
+
 .detail.interaction-container {
   margin: 10px 0 0 10px;
   width: 250px;
