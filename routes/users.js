@@ -4,11 +4,45 @@ const jwt = require('jsonwebtoken')
 const verifyJWT = require('../middleware/JWTAuthentication')
 
 const router = express.Router();
-const { user: User } = require('../models');
+const {
+  user: User,
+  company: Company,
+  job: Job,
+  contact: Contact,
+  touch: Touch
+} = require('../models');
 
 const saltRounds = 10;
 
-router.get('/login/reauthenticate', verifyJWT, function (req, res, next) {
+function UserIncludeAll(userId) {
+  return User.findOne({
+    where: { id: userId },
+    include: [
+      {
+        model: Company,
+        include: [
+          {
+            model: Job,
+            include: [ Touch ]
+           },
+          {
+            model: Contact,
+            include: [ Touch ]
+          }
+        ]
+      }
+    ]
+  })
+}
+
+router.get('/alldata', verifyJWT, (req, res, next) => {
+  UserIncludeAll(req.userId)
+    .then(userData => {
+      res.json(userData)
+    })
+})
+
+router.get('/login/reauthenticate', verifyJWT, (req, res, next) => {
   User.findOne({
     where: {
       id: req.userId
@@ -27,7 +61,7 @@ router.get('/login/reauthenticate', verifyJWT, function (req, res, next) {
     })
 })
 
-router.post('/login', function (req, res) {
+router.post('/login', (req, res) => {
   const { email, password } = req.body;
   User.findOne({
     where: {
@@ -60,7 +94,7 @@ router.post('/login', function (req, res) {
     })
 })
 
-router.post('/signup', function (req, res) {
+router.post('/signup', (req, res) => {
   const { email, password, fullname } = req.body;
   bcrypt.hash(password, saltRounds)
     .then(passwordHash => {

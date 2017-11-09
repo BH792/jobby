@@ -4,23 +4,17 @@ import CompanyItem from './CompanyItem'
 import CompanyDetails from './CompanyDetails'
 import CompanyForm from './CompanyForm'
 import { connect } from 'react-redux';
-import { Route, Link, Switch } from 'react-router-dom'
-import { fetchCompaniesAPI } from '../actions';
-
+import { Route, Switch } from 'react-router-dom'
+import { ContentHeader } from '../../shared'
 import { LoginRedirect } from '../../../containers/hocs/LoginRedirector';
 
 class CompanyContent extends Component {
-  componentDidMount() {
-    // this.props.fetchCompaniesAPI()
-  }
-
   render() {
     const { companies, match } = this.props
     let CompanyList = itemLister(CompanyItem, companies, match)
     return (
       <div className='content container'>
-        <Link to={`${match.url}/new`}>Add New Company</Link>
-        <Link to={`${match.url}`}>See All Companies</Link>
+        <ContentHeader match={match} type={'Company'}/>
         <Switch>
           <Route exact path={`${match.url}/new`} component={CompanyForm} />
           <Route exact path={`${match.url}/:id`} component={CompanyDetails} />
@@ -38,4 +32,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default LoginRedirect(connect(mapStateToProps, { fetchCompaniesAPI })(CompanyContent))
+export default LoginRedirect(connect(mapStateToProps, {})(CompanyContent))

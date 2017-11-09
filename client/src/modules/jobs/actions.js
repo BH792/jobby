@@ -2,19 +2,18 @@ import JobAPI from '../../adapters/jobJobbyAPI'
 import * as t from './actionTypes'
 import companies from '../companies'
 
-
-export function fetchJobsAPI() {
-  return dispatch => {
-    JobAPI.fetchJobs().then(json => {
-      if (json.status === 'SUCCESS') {
-        dispatch({
-          type: t.FETCH,
-          payload: json
-        })
-      }
-    })
-  }
-}
+// export function fetchJobsAPI() {
+//   return dispatch => {
+//     JobAPI.fetchJobs().then(json => {
+//       if (json.status === 'SUCCESS') {
+//         dispatch({
+//           type: t.FETCH,
+//           payload: json
+//         })
+//       }
+//     })
+//   }
+// }
 
 export function fetchJobs(jobs) {
   return {

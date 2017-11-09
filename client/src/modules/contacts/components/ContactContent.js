@@ -4,23 +4,17 @@ import ContactItem from './ContactItem';
 import ContactDetails from './ContactDetails';
 import ContactForm from './ContactForm';
 import { connect } from 'react-redux';
-import { Route, Link, Switch } from 'react-router-dom';
-import { fetchContactsAPI } from '../actions';
-
+import { Route, Switch } from 'react-router-dom';
+import { ContentHeader } from '../../shared'
 import { LoginRedirect } from '../../../containers/hocs/LoginRedirector';
 
 class ContactContent extends Component {
-  // componentDidMount() {
-  //   this.props.fetchContactsAPI()
-  // }
-
   render() {
     const { contacts, match } = this.props
     let ContactList = itemLister(ContactItem, contacts, match)
     return (
       <div className='content container'>
-        <Link to={`${match.url}/new`}>Add New Contact</Link>
-        <Link to={`${match.url}`}>See All Contacts</Link>
+        <ContentHeader match={match} type={'Contact'}/>
         <Switch>
           <Route exact path={`${match.url}/new`} component={ContactForm} />
           <Route exact path={`${match.url}/:id`} component={ContactDetails} />
@@ -44,4 +38,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default LoginRedirect(connect(mapStateToProps, { fetchContactsAPI })(ContactContent))
+export default LoginRedirect(connect(mapStateToProps, {})(ContactContent))

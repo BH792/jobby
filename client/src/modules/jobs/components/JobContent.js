@@ -1,26 +1,20 @@
 import React, { Component } from 'react'
 import itemLister from '../../shared/Lister';
-import ContentHeader from './ContentHeader'
 import JobItem from './JobItem'
 import JobDetails from './JobDetails'
 import JobForm from './JobForm'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { fetchJobsAPI } from '../actions'
-
+import { ContentHeader } from '../../shared'
 import { LoginRedirect } from '../../../containers/hocs/LoginRedirector';
 
 class JobContent extends Component {
-  // componentDidMount() {
-  //   this.props.fetchJobsAPI()
-  // }
-
   render() {
-    const { jobs, match, location } = this.props
+    const { jobs, match } = this.props
     let JobList = itemLister(JobItem, jobs, match)
     return (
       <div className='content container'>
-        <ContentHeader match={match} location={location} type={'Job'}/>
+        <ContentHeader match={match} type={'Job'}/>
         <Switch>
           <Route exact path={`${match.url}/new`} component={JobForm} />
           <Route exact path={`${match.url}/:id`} component={JobDetails} />
@@ -44,4 +38,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default LoginRedirect(connect(mapStateToProps, { fetchJobsAPI })(JobContent))
+export default LoginRedirect(connect(mapStateToProps, {})(JobContent))

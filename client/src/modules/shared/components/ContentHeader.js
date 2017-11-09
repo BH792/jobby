@@ -1,13 +1,14 @@
 import React from 'react'
-import { Link, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
+import ButtonLink from './ButtonLink'
 
-const ContentHeader = ({ match, type, location }) => {
+const ContentHeader = ({ match, type }) => {
   return (
     <div style={{display: 'flex'}}>
       <Route exact path={match.url} render={() => {
         return <ButtonLink
           path={`${match.url}/new`}
-          text={`Add New ${type}`} />
+          text={`Add ${type}`} />
       }} />
       <Switch>
         <Route path={`${match.url}/new`} render={() => {
@@ -23,6 +24,12 @@ const ContentHeader = ({ match, type, location }) => {
           />
         }} />
       </Switch>
+      <Route exact path={`${match.url}/:id`} render={(props) => {
+        return <ButtonLink
+          path={`${match.url}`}
+          text={'Back'}
+        />
+      }} />
       <Route path={`${match.url}/:id/edit`} render={(props) => {
         return <ButtonLink
           path={`${match.url}/${props.match.params.id}`}
@@ -30,16 +37,6 @@ const ContentHeader = ({ match, type, location }) => {
         />
       }} />
     </div>
-  )
-}
-
-const ButtonLink = ({path, text}) => {
-  return (
-    <Link to={path}>
-      <button className='form submit normal'>
-        {text}
-      </button>
-    </Link>
   )
 }
 

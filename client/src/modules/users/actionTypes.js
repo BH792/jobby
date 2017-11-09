@@ -1,3 +1,5 @@
 export const LOGIN = 'users/LOGIN'
 export const LOGOUT = 'LOGOUT_USER'
 export const LOADING = 'users/LOADING'
+export const FINISH_LOADING = 'users/FINISH_LOADING'
+export const FETCHED_DATA = 'users/FETCHED_DATA'

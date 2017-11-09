@@ -12,4 +12,8 @@ export default class {
   static loginFromToken() {
     return JobbyAPI.get('/users/login/reauthenticate')
   }
+
+  static fetchAllData() {
+    return JobbyAPI.get('/users/alldata')
+  }
 }

@@ -5,7 +5,8 @@ export default (
     loading: false,
     id: null,
     email: null,
-    fullname: null
+    fullname: null,
+    fetchedData: false
   },
   action
 ) => {
@@ -13,13 +14,22 @@ export default (
     case t.LOGIN:
       return {
         ...state,
-        loading: false,
         ...action.payload.user
+      }
+    case t.FINISH_LOADING:
+      return {
+        ...state,
+        loading: false
       }
     case t.LOADING:
       return {
         ...state,
         loading: true
+      }
+    case t.FETCHED_DATA:
+      return {
+        ...state,
+        fetchedData: true
       }
     default:
       return state

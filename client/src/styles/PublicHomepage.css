@@ -11,7 +11,6 @@
 }
 
 .LoadingIcon {
-  border: solid thick black;
   -webkit-animation:spin 4s linear infinite;
   -moz-animation:spin 4s linear infinite;
   animation:spin 4s linear infinite;

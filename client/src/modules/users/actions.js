@@ -1,18 +1,21 @@
 import UserAPI from '../../adapters/userJobbyAPI'
+import DashboardAPI from '../../adapters/dashboardJobbyAPI';
+import jobs from '../jobs'
+import companies from '../companies'
+import contacts from '../contacts'
+import touches from '../touches'
 import * as t from './actionTypes'
+import { normalizeAllData } from '../../normalizers/DashboardNormalizer';
 
 export function submitLogin(userInfo) {
   return (dispatch) => {
+    dispatch(loading())
     UserAPI.login(userInfo)
       .then(json => {
         if (json.status === 'SUCCESS') {
           localStorage.setItem('token', json.token)
-          dispatch({
-            type: t.LOGIN,
-            payload: {
-              user: json.user,
-            }
-          })
+          dispatch(login(json.user))
+          fetchAllData(dispatch)
         }
       })
   }
@@ -20,25 +23,15 @@ export function submitLogin(userInfo) {
 
 export function submitSignup(userInfo) {
   return (dispatch) => {
+    dispatch(loading())
     UserAPI.signup(userInfo)
       .then(json => {
         if (json.status === 'SUCCESS') {
           localStorage.setItem('token', json.token)
-          dispatch({
-            type: t.LOGIN,
-            payload: {
-              user: json.user,
-            }
-          })
+          dispatch(login(json.user))
+          fetchAllData(dispatch)
         }
       })
-  }
-}
-
-export function logoutUser() {
-  return dispatch => {
-    localStorage.removeItem('token')
-    dispatch({ type: t.LOGOUT })
   }
 }
 
@@ -48,12 +41,8 @@ export function loginFromLocalStorage() {
     UserAPI.loginFromToken()
       .then(json => {
         if (json.status === 'SUCCESS') {
-          dispatch({
-            type: t.LOGIN,
-            payload: {
-              user: json.user,
-            }
-          })
+          dispatch(login(json.user))
+          fetchAllData(dispatch)
         } else {
           dispatch(logoutUser())
         }
@@ -61,8 +50,42 @@ export function loginFromLocalStorage() {
   }
 }
 
+function fetchAllData(dispatch) {
+  UserAPI.fetchAllData().then(json => {
+    console.log(json);
+    let payload = normalizeAllData(json)
+    dispatch(companies.actions.fetchCompanies(payload.entities.companies))
+    dispatch(jobs.actions.fetchJobs(payload.entities.jobs))
+    dispatch(touches.actions.fetchTouches(payload.entities.touches))
+    dispatch(contacts.actions.fetchContacts(payload.entities.contacts))
+    dispatch(finishLoading())
+  })
+}
+
+function login(user) {
+  return {
+    type: t.LOGIN,
+    payload: {
+      user: user,
+    }
+  }
+}
+
+export function logoutUser() {
+  localStorage.removeItem('token')
+  return {
+    type: t.LOGOUT
+  }
+}
+
 function loading() {
   return {
     type: t.LOADING
+  }
+}
+
+function finishLoading() {
+  return {
+    type: t.FINISH_LOADING
   }
 }
