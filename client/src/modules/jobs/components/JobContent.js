@@ -6,7 +6,9 @@ import JobForm from './JobForm'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { ContentHeader } from '../../shared'
-import { LoginRedirect } from '../../../containers/hocs/LoginRedirector';
+import * as selector from '../selectors';
+
+import touches from '../../touches'
 
 class JobContent extends Component {
   render() {
@@ -19,6 +21,7 @@ class JobContent extends Component {
           <Route exact path={`${match.url}/new`} component={JobForm} />
           <Route exact path={`${match.url}/:id`} component={JobDetails} />
           <Route path={`${match.url}/:id/edit`} component={JobForm} />
+          <Route path={`${match.url}/:id/touch`} component={touches.components.TouchForm} />
         </Switch>
         <Route exact path={`${match.url}`} component={JobList}/>
       </div>
@@ -27,15 +30,9 @@ class JobContent extends Component {
 }
 
 function mapStateToProps(state) {
-  const jobs = state.jobs.allIds.map(jobId => {
-    return {
-      ...state.jobs.byId[jobId],
-      company: state.companies.byId[state.jobs.byId[jobId].companyId].name
-    }
-  })
   return {
-    jobs
+    jobs: selector.getAllJobsWithCompany(state)
   }
 }
 
-export default LoginRedirect(connect(mapStateToProps, {})(JobContent))
+export default connect(mapStateToProps, {})(JobContent);

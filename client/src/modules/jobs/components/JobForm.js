@@ -10,7 +10,7 @@ class JobForm extends Component {
     title: this.props.job.title || '',
     description: this.props.job.description || '',
     status: this.props.job.status || 'watching',
-    companyName: this.props.job.companyName || ''
+    company: this.props.job.company || ''
   }
 
   handleChange = (e) => {
@@ -23,7 +23,7 @@ class JobForm extends Component {
     if (!this.state.submitted) {
       this.props.submitJob({
         ...this.state,
-        companyId: this.props.companyNames[this.state.companyName],
+        companyId: this.props.companyNames[this.state.company],
         id: this.props.job.id
       }, this.props.job.companyId)
     }
@@ -37,7 +37,7 @@ class JobForm extends Component {
   }
 
   render() {
-    const { title, description, status, companyName, submitted } = this.state
+    const { title, description, status, company, submitted } = this.state
     const { loading, lastId, match } = this.props
 
     if (!loading && submitted) {
@@ -76,8 +76,8 @@ class JobForm extends Component {
           </select>
           <input
             list='companies'
-            name='companyName'
-            value={companyName}
+            name='company'
+            value={company}
             onChange={this.handleChange}
             className='form input wide'
           />
@@ -104,17 +104,9 @@ class JobForm extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  let job = {}
   const jobId = ownProps.match.params.id
-  if (jobId && selector.getJob(state, { jobId })) {
-    job = {
-      ...selector.getJob(state, { jobId }),
-      companyName: selector.getJobCompanyName(state, { jobId }),
-    }
-  }
-
   return {
-    job,
+    job: selector.getJobWithCompany(state, { jobId }),
     companyNames: selector.getCompanyNames(state),
     loading: selector.getLoading(state),
     lastId: selector.getLastId(state)
@@ -133,6 +125,5 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
     submitJob: stateProps.job.id ? dispatchProps.updateJobAPI : dispatchProps.newJobAPI
   }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(JobForm);

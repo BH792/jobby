@@ -6,7 +6,6 @@ import CompanyForm from './CompanyForm'
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom'
 import { ContentHeader } from '../../shared'
-import { LoginRedirect } from '../../../containers/hocs/LoginRedirector';
 
 class CompanyContent extends Component {
   render() {
@@ -32,4 +31,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default LoginRedirect(connect(mapStateToProps, {})(CompanyContent))
+export default connect(mapStateToProps, {})(CompanyContent);

@@ -25,6 +25,16 @@
   white-space: pre-wrap;
 }
 
+.detail.number {
+  margin: 10px 10px 0px 10px;
+  font-size: 14px;
+}
+
+.detail.email {
+  margin: 10px 10px 0px 10px;
+  font-size: 14px;
+}
+
 .detail.status.bubble {
   display: flex;
   flex: none;

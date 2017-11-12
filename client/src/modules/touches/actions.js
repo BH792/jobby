@@ -6,3 +6,7 @@ export function fetchTouches(touches) {
     payload: touches
   }
 }
+
+
+export function newTouchAPI() {}
+export function updateTouchAPI() {}

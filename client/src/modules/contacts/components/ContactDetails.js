@@ -29,9 +29,9 @@ const ContactDetails = ({
         <h2 className='detail header'>{fullname}</h2>
         <p className='detail subheader'>{title}</p>
         <p className='detail subheader'>{company}</p>
-        <p>{cellNumber}</p>
-        <p>{officeNumber}</p>
-        <p>{email}</p>
+        <p className='detail number'>Cell:   {cellNumber}</p>
+        <p className='detail number'>Work:  {officeNumber}</p>
+        <p className='detail email'>Email: {email}</p>
       </div>
       <div className='detail related-list'>
         <p className='detail subheader'>Touches:</p>

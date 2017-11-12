@@ -8,6 +8,21 @@ export const getJob = (state, props) => {
   return state.jobs.byId[props.jobId]
 }
 
+export const getJobWithCompany = (state, props) => {
+  return {
+    ...getJob(state, props),
+    company: getJobCompanyName(state, props)
+  }
+}
+
+export const getAllJobsWithCompany = (state) => {
+  return state.jobs.allIds.map(id => {
+    return {
+      ...getJobWithCompany(state, { jobId: id })
+    }
+  })
+}
+
 export const getLastId = (state) => {
   return state.jobs.lastId
 }

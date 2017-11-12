@@ -6,6 +6,7 @@ import jobs from '../modules/jobs';
 import Sidebar from '../components/Sidebar';
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { LoginRedirect } from '../modules/shared'
 import '../styles/MainApplication.css'
 
 
@@ -29,4 +30,6 @@ function mapStateToProps(state) {
   }
 }
 
-export default withRouter(connect(mapStateToProps, {})(MainApplication))
+export default LoginRedirect(
+  withRouter(connect(mapStateToProps, {})(MainApplication))
+);

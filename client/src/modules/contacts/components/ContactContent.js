@@ -6,7 +6,6 @@ import ContactForm from './ContactForm';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ContentHeader } from '../../shared'
-import { LoginRedirect } from '../../../containers/hocs/LoginRedirector';
 
 class ContactContent extends Component {
   render() {
@@ -38,4 +37,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default LoginRedirect(connect(mapStateToProps, {})(ContactContent))
+export default connect(mapStateToProps, {})(ContactContent);

@@ -9,10 +9,10 @@ const RedirectorBuilder = (
 ) => {
   return function (WrappedComponent) {
     const AuthWrapper = (props) => {
-      const { user, match, location } = props
-      // TODO: change match.url to location.pathname
+      const { user, location } = props
+
       let redirect = shouldRedirect(user)
-      let redirectPath = `${baseRedirectPath}?redirect=${encodeURIComponent(match.url)}`
+      let redirectPath = `${baseRedirectPath}?redirect=${encodeURIComponent(location.pathname)}`
 
       if (shouldRedirectBack) {
         redirect = shouldRedirect(user) && shouldRedirectBack(user)

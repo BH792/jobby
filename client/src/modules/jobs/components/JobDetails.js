@@ -2,6 +2,7 @@ import React from 'react';
 import JobStatus from './JobStatus';
 import { connect } from 'react-redux';
 import { Touch } from '../../shared';
+import { Link } from 'react-router-dom'
 import * as selector from '../selectors';
 
 const JobDetails = ({
@@ -26,6 +27,19 @@ const JobDetails = ({
         <p className='detail subheader'>Touches:</p>
         <div className='detail interaction-list-container'>
           {interactions}
+          <Link to={`${match.url}/touch`}>
+            <div
+              className='detail interaction-container'
+              style={{
+                borderColor: 'orange',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+              >
+                Add Touch Point
+              </div>
+          </Link>
         </div>
       </div>
     </div>
@@ -36,8 +50,7 @@ function mapStateToProps(state, ownProps) {
   const jobId = ownProps.match.params.id
 
   return {
-    ...selector.getJob(state, { jobId }),
-    company: selector.getJobCompanyName(state, { jobId }),
+    ...selector.getJobWithCompany(state, { jobId }),
     touches: selector.getJobTouches(state, { jobId })
   }
 }
