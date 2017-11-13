@@ -1,11 +1,11 @@
-.form input {
+.form input.form {
   display: block;
   margin: 10px 10px 0px 10px;
   border: solid thin black;
   border-radius: 3px;
 }
 
-.form input:focus {
+.form input.form:focus {
   outline: none;
   box-shadow: 0 0 2px #885ead;
 }
@@ -21,6 +21,10 @@
   height: 30px;
   padding: 5px;
   font-size: 14px;
+}
+
+.form.input:disabled {
+  background-color: #E6E6E6;
 }
 
 .form.select {

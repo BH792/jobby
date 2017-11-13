@@ -33,6 +33,14 @@ export default (
           [action.payload.contact.id]: action.payload.contact,
         }
       }
+    case t.ADD_TOUCH:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.payload.contactId]: contactReducer(state.byId[action.payload.contactId], action),
+        }
+      }
     default:
       return state;
   }

@@ -48,55 +48,6 @@ router.post('/:id', async (req, res) => {
     res.json({status: 'ERROR', msg: 'Job not found'})
   }
 })
-// router.post('/:id', function (req, res, next) {
-//   let updatedJobInfo = {
-//     title: req.body.title || null,
-//     description: req.body.description || null,
-//     status: req.body.status || 'watching',
-//     companyId: req.body.companyId,
-//   }
-//
-//   Job.findOne({
-//     where: {
-//       id: req.params.id,
-//       userId: req.userId
-//     }
-//   })
-//     .then(job => {
-//       if (job) {
-//         if (updatedJobInfo.companyId) {
-//           job.update({ ...updatedJobInfo })
-//           .then(updatedJob => {
-//             res.json({
-//               status: 'SUCCESS',
-//               job: updatedJob
-//             })
-//           })
-//         } else {
-//           Company.create({
-//             name: req.body.company,
-//             userId: req.userId
-//           })
-//             .then(company => {
-//               job.update({
-//                 ...updatedJobInfo,
-//                 companyId: company.id
-//               })
-//                 .then(updatedJob => {
-//                   res.json({
-//                     status: 'SUCCESS',
-//                     job: updatedJob,
-//                     company
-//                   })
-//                 })
-//             })
-//         }
-//       } else {
-//         res.json({status: 'ERROR', msg: 'no job found'})
-//       }
-//     })
-// })
-
 
 router.post('/', async (req, res, next) => {
   let newJob = {

@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ContentHeader } from '../../shared'
 
+import touches from '../../touches'
+
 class ContactContent extends Component {
   render() {
     const { contacts, match } = this.props
@@ -18,6 +20,7 @@ class ContactContent extends Component {
           <Route exact path={`${match.url}/new`} component={ContactForm} />
           <Route exact path={`${match.url}/:id`} component={ContactDetails} />
           <Route path={`${match.url}/:id/edit`} component={ContactForm} />
+          <Route path={`${match.url}/:id/touch`} component={touches.components.TouchForm} />
         </Switch>
         <Route exact path={`${match.url}`} component={ContactList}/>
       </div>

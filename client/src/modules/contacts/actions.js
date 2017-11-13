@@ -73,3 +73,10 @@ export function updateContact(contactInfo) {
     payload: contactInfo
   }
 }
+
+export function addTouch(touchIdAndContactId) {
+  return {
+    type: t.ADD_TOUCH,
+    payload: touchIdAndContactId
+  }
+}

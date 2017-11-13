@@ -22,6 +22,11 @@ export default (
         ...state,
         ...action.payload.contact
       };
+    case t.ADD_TOUCH:
+      return {
+        ...state,
+        touches: [ ...state.touches, action.payload.touchId]
+      }
     default:
       return state;
   }

@@ -73,3 +73,10 @@ export function loadingJob() {
     type: t.LOADING
   }
 }
+
+export function addTouch(touchIdAndJobId) {
+  return {
+    type: t.ADD_TOUCH,
+    payload: touchIdAndJobId
+  }
+}

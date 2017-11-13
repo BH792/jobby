@@ -33,7 +33,7 @@ const ContentHeader = ({ match, type }) => {
           />
         }} />
       </Switch>
-      <Route path={`${match.url}/:id/edit`} render={(props) => {
+      <Route path={`${match.url}/:id/:something`} render={(props) => {
         return <ButtonLink
           path={`${match.url}/${props.match.params.id}`}
           text={'Back'}

@@ -43,6 +43,14 @@ export default (
         ...state,
         loading: true
       }
+    case t.ADD_TOUCH:
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.payload.jobId]: jobReducer(state.byId[action.payload.jobId], action),
+        }
+      }
     // case 'CHANGE_JOB_STATUS':
     //   return {
     //     ...state,

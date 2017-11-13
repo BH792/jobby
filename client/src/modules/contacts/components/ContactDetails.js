@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Touch } from '../../shared';
+import { Link } from 'react-router-dom'
 
 const ContactDetails = ({
   fullname,
@@ -11,17 +13,7 @@ const ContactDetails = ({
   email,
   touches
 }) => {
-  const interactions = touches.map(touch => {
-    const date = new Date(touch.date)
-    return (
-      <div className='detail interaction-container' key={touch.id}>
-        <p className='detail interaction contact'>{touch.job || 'None'}</p>
-        <p className='detail interaction type'>{touch.type}</p>
-        <p className='detail interaction date'>{date.toDateString()}</p>
-        <p className='detail interaction subject'>{touch.subject}</p>
-      </div>
-    )
-  })
+    const interactions = touches.map(touch => <Touch touch={touch} key={touch.id}/>)
 
   return (
     <div className='detail main'>
@@ -38,6 +30,19 @@ const ContactDetails = ({
         <div className='detail interaction-list-container'>
           {interactions}
         </div>
+        <Link to={`${match.url}/touch`}>
+          <div
+            className='detail interaction-container'
+            style={{
+              borderColor: 'orange',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+            >
+              Add Touch Point
+            </div>
+        </Link>
       </div>
     </div>
   )
