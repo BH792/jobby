@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "heroku-postbuild": "cd client && yarn --production=false && yarn run build",
     "start": "node ./bin/www",
     "start:dev": "DEBUG=slack-checkin-app:* nodemon --exec 'node -r dotenv/config' ./bin/www",
+    "db:migrate:seed": "sequelize db:migrate && sequelize db:seed:all",
     "db:reset": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
   },
   "dependencies": {

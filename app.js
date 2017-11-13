@@ -19,7 +19,7 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use('/', index);
 app.use('/jobs', jobs);
@@ -28,6 +28,10 @@ app.use('/companies', companies);
 app.use('/contacts', contacts);
 app.use('/dashboard', dashboard);
 app.use('/touches', touches);
+
+app.get("*", (req, res) => {
+  res.sendFile(__dirname + '/client/build/index.html')
+})
 
 
 // catch 404 and forward to error handler

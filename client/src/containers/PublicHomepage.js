@@ -4,7 +4,7 @@ import { Route, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import '../styles/PublicHomepage.css'
 
-import { RedirectBack } from './hocs/LoginRedirector';
+import { RedirectBack } from '../modules/shared';
 
 const { submitLogin, submitSignup } = users.actions
 const { Signup, Login } = users.components
