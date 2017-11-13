@@ -35,96 +35,59 @@ function UserIncludeAll(userId) {
   })
 }
 
-router.get('/alldata', verifyJWT, (req, res, next) => {
-  UserIncludeAll(req.userId)
-    .then(userData => {
-      res.json(userData)
-    })
+function createJWTResponse(jwtToken, user) {
+  return {
+    status: 'SUCCESS',
+    user: {
+      fullname: user.fullname,
+      email: user.email,
+      id: user.id
+    },
+    token: jwtToken
+  }
+}
+
+router.get('/alldata', verifyJWT, async (req, res, next) => {
+  const userData = await UserIncludeAll(req.userId)
+  res.json(userData)
 })
 
-router.get('/login/reauthenticate', verifyJWT, (req, res, next) => {
-  User.findOne({
-    where: {
-      id: req.userId
-    }
-  })
-    .then(user => {
-      res.json({
-        status: 'SUCCESS',
-        user: {
-          fullname: user.fullname,
-          email: user.email,
-          id: user.id
-        },
-        token: req.header('Authorization').slice(7)
-      })
-    })
+router.get('/login/reauthenticate', verifyJWT, async (req, res, next) => {
+  const user = await User.findOne({ where: { id: req.userId } })
+  res.json(createJWTResponse(req.header('Authorization').slice(7), user))
 })
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   const { email, password } = req.body;
-  User.findOne({
-    where: {
-      email
+
+  const user = await User.findOne({ where: { email } })
+
+  if (user) {
+    const result = bcrypt.compare(password, user.passwordHash)
+    if (result) {
+      jwt.sign({ userId: user.id }, process.env.JWT_SECRET, (err, jwtToken) => {
+        res.json(createJWTResponse(jwtToken, user))
+      })
+    } else {
+      res.json({status: 'ERROR', msg: 'Wrong password or username'})
     }
-  })
-    .then(user => {
-      if (user) {
-        bcrypt.compare(password, user.passwordHash)
-          .then(result => {
-            if (result) {
-              jwt.sign({ userId: user.id }, process.env.JWT_SECRET, function (err, jwtToken) {
-                res.json({
-                  status: 'SUCCESS',
-                  user: {
-                    fullname: user.fullname,
-                    email: user.email,
-                    id: user.id
-                  },
-                  token: jwtToken
-                })
-              })
-            } else {
-              res.json({status: 'ERROR', msg: 'Wrong password or username'})
-            }
-          })
-      } else {
-        res.json({status: 'ERROR', msg: 'No account found please signup'})
-      }
-    })
+  } else {
+    res.json({status: 'ERROR', msg: 'No account found please signup'})
+  }
 })
 
-router.post('/signup', (req, res) => {
+router.post('/signup', async (req, res) => {
   const { email, password, fullname } = req.body;
-  bcrypt.hash(password, saltRounds)
-    .then(passwordHash => {
-      User.findOrCreate({
-        where: {
-          email
-        },
-        defaults: {
-          fullname,
-          passwordHash
-        }
-      })
-        .spread((user, created) => {
-          if (created) {
-            jwt.sign({ userId: user.id }, process.env.JWT_SECRET, function (err, jwtToken) {
-              res.json({
-                status: 'SUCCESS',
-                user: {
-                  fullname: user.fullname,
-                  email: user.email,
-                  id: user.id
-                },
-                token: jwtToken
-              })
-            })
-          } else {
-            res.json({status: 'ERROR', msg: 'sorry already signed up'})
-          }
-        })
+  const user = await User.find({ where: { email } })
+  if (!user) {
+    const passwordHash = await bcrypt.hash(password, saltRounds)
+    const newUser = await User.create({ email, fullname, passwordHash })
+    jwt.sign({ userId: newUser.id }, process.env.JWT_SECRET, (err, jwtToken) => {
+      res.json(createJWTResponse(jwtToken, newUser))
     })
+  } else {
+    res.json({status: 'ERROR', msg: 'Sorry, email already taken'})
+  }
 })
 
 module.exports = router;

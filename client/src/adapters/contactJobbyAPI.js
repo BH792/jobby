@@ -1,10 +1,6 @@
 import JobbyAPI from './JobbyBackendAdapter';
 
 export default class {
-  static fetchContacts() {
-    return JobbyAPI.get('/contacts')
-  }
-
   static newContact(contactInfo) {
     return JobbyAPI.post('/contacts', contactInfo)
   }

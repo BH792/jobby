@@ -21,7 +21,6 @@ class ContactForm extends Component {
 
   submit = () => {
     if (!this.state.submitted) {
-      debugger
       this.props.submitContact({
         ...this.state,
         companyId: this.props.companyNames[this.state.companyName],

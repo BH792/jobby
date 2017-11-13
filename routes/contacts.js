@@ -5,7 +5,7 @@ const { contact: Contact, company: Company } = require('../models')
 
 router.use(verifyJWT)
 
-router.post('/:id', function (req, res, next) {
+router.post('/:id', async (req, res, next) => {
   const updatedContactInfo = {
     userId: req.userId,
     companyId: req.body.companyId,
@@ -16,46 +16,90 @@ router.post('/:id', function (req, res, next) {
     email: req.body.email || null
   }
 
-  Contact.findOne({
+  const contact = await Contact.findOne({
     where: {
       id: req.params.id,
       userId: req.userId
     }
   })
-    .then(contact => {
-      if (contact) {
-        if (updatedContactInfo.companyId) {
-          contact.update({ ...updatedContactInfo })
-          .then(updatedContact => {
-            res.json({
-              status: 'SUCCESS',
-              contact: updatedContact
-            })
-          })
-        } else {
-          Company.create({
-            name: req.body.companyName,
-            userId: req.userId
-          })
-            .then(company => {
-              contact.update({
-                ...updatedContactInfo,
-                companyId: company.id
-              })
-                .then(updatedContact => {
-                  res.json({
-                    status: 'SUCCESS',
-                    contact: updatedContact,
-                    company
-                  })
-                })
-            })
-        }
-      } else {
-        res.json({status: 'ERROR', msg: 'no contact found'})
-      }
-    })
+
+  if (contact) {
+    if (updatedContactInfo.companyId) {
+      const updatedContact = await contact.update({ ...updatedContactInfo })
+      res.json({
+        status: 'SUCCESS',
+        contact: updatedContact
+      })
+    } else {
+      const company = await Company.create({
+        name: req.body.companyName,
+        userId: req.userId
+      })
+      const updatedContact = await contact.update({
+        ...updatedContactInfo,
+        companyId: company.id
+      })
+      res.json({
+        status: 'SUCCESS',
+        contact: updatedContact,
+        company
+      })
+    }
+  } else {
+    res.json({status: 'ERROR', msg: 'no contact found'})
+  }
 })
+// router.post('/:id', function (req, res, next) {
+//   const updatedContactInfo = {
+//     userId: req.userId,
+//     companyId: req.body.companyId,
+//     fullname: req.body.fullname || null,
+//     title: req.body.title || null,
+//     cellNumber: req.body.cellNumber || null,
+//     officeNumber: req.body.officeNumber || null,
+//     email: req.body.email || null
+//   }
+//
+//   Contact.findOne({
+//     where: {
+//       id: req.params.id,
+//       userId: req.userId
+//     }
+//   })
+//     .then(contact => {
+//       if (contact) {
+//         if (updatedContactInfo.companyId) {
+//           contact.update({ ...updatedContactInfo })
+//           .then(updatedContact => {
+//             res.json({
+//               status: 'SUCCESS',
+//               contact: updatedContact
+//             })
+//           })
+//         } else {
+//           Company.create({
+//             name: req.body.companyName,
+//             userId: req.userId
+//           })
+//             .then(company => {
+//               contact.update({
+//                 ...updatedContactInfo,
+//                 companyId: company.id
+//               })
+//                 .then(updatedContact => {
+//                   res.json({
+//                     status: 'SUCCESS',
+//                     contact: updatedContact,
+//                     company
+//                   })
+//                 })
+//             })
+//         }
+//       } else {
+//         res.json({status: 'ERROR', msg: 'no contact found'})
+//       }
+//     })
+// })
 
 router.get('/', function (req, res, next) {
   Contact.findAll({
@@ -71,7 +115,7 @@ router.get('/', function (req, res, next) {
     })
 })
 
-router.post('/', function (req, res, next) {
+router.post('/', async (req, res, next) => {
   const newContact = {
     userId: req.userId,
     companyId: req.body.companyId,
@@ -83,31 +127,25 @@ router.post('/', function (req, res, next) {
   }
 
   if (newContact.companyId) {
-    Contact.create({ ...newContact })
-      .then(contact => {
-        res.json({
-          status: 'SUCCESS',
-          contact
-        })
-      })
+    const contact = await Contact.create({ ...newContact })
+    res.json({
+      status: 'SUCCESS',
+      contact
+    })
   } else {
-    Company.create({
+    const company = await Company.create({
       name: req.body.companyName,
       userId: req.userId
     })
-      .then(company => {
-        Contact.create({
-          ...newContact,
-          companyId: company.id
-        })
-          .then(contact => {
-            res.json({
-              status: 'SUCCESS',
-              contact,
-              company
-            })
-          })
-      })
+    const contact = await Contact.create({
+      ...newContact,
+      companyId: company.id
+    })
+    res.json({
+      status: 'SUCCESS',
+      contact,
+      company
+    })
   }
 })
 

@@ -28,7 +28,11 @@ export const getLastId = (state) => {
 }
 
 export const getJobCompanyName = (state, props) => {
-  return state.companies.byId[getJob(state, props).companyId].name
+  if (getJob(state, props)) {
+    return state.companies.byId[getJob(state, props).companyId].name
+  } else {
+    return null
+  }
 }
 
 export const getJobTouchIds = (state, props) => {
