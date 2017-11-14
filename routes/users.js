@@ -2,8 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const verifyJWT = require('../middleware/JWTAuthentication')
-
-const router = express.Router();
+const sequelize = require('sequelize')
 const {
   user: User,
   company: Company,
@@ -12,11 +11,14 @@ const {
   touch: Touch
 } = require('../models');
 
+const Op = sequelize.Op
+const router = express.Router();
+
 const saltRounds = 10;
 
 function UserIncludeAll(userId) {
   return User.findOne({
-    where: { id: userId },
+    where: { id: { [Op.eq]: userId } },
     include: [
       {
         model: Company,
@@ -60,7 +62,7 @@ router.get('/login/reauthenticate', verifyJWT, async (req, res, next) => {
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await User.findOne({ where: { email } })
+  const user = await User.findOne({ where: { email: { [Op.eq]: email } } })
 
   if (user) {
     const result = bcrypt.compare(password, user.passwordHash)
@@ -78,7 +80,7 @@ router.post('/login', async (req, res) => {
 
 router.post('/signup', async (req, res) => {
   const { email, password, fullname } = req.body;
-  const user = await User.find({ where: { email } })
+  const user = await User.find({ where: { email: { [Op.eq]: email } } })
   if (!user) {
     const passwordHash = await bcrypt.hash(password, saltRounds)
     const newUser = await User.create({ email, fullname, passwordHash })

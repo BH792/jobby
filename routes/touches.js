@@ -7,6 +7,8 @@ const {
   user: User,
   job: Job
 } = require('../models')
+const sequelize = require('sequelize')
+const Op = sequelize.Op
 
 router.use(verifyJWT)
 
@@ -19,7 +21,7 @@ router.get('/', async (req, res) => {
           model: User,
           attributes: [],
           where: {
-            id: req.userId
+            id: { [Op.eq]: req.userId }
           }
         }]
       }]
@@ -42,14 +44,14 @@ router.post('/', async (req, res) => {
     [userJob, userContact] = await Promise.all([
       Job.findOne({
         where: {
-          userId: req.userId,
-          id: newTouch.jobId
+          userId: { [Op.eq]: req.userId },
+          id: { [Op.eq]: newTouch.jobId }
         }
       }),
       Contact.findOne({
         where: {
-          userId: req.userId,
-          id: newTouch.contactId
+          userId: { [Op.eq]: req.userId },
+          id: { [Op.eq]: newTouch.contactId }
         }
       })
     ])
@@ -57,8 +59,8 @@ router.post('/', async (req, res) => {
     userJob = true;
     userContact = await Contact.findOne({
       where: {
-        userId: req.userId,
-        id: newTouch.contactId
+        userId: { [Op.eq]: req.userId },
+        id: { [Op.eq]: newTouch.contactId }
       }
     });
   }

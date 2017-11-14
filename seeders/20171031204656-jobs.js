@@ -24,15 +24,31 @@ function rand(max) {
   return Math.floor(Math.random() * max)
 }
 
+function* orderGen() {
+  var order = 0
+  while (true) {
+    yield order++
+  }
+}
+
+const orderMaker = {
+  watching: orderGen(),
+  applied: orderGen(),
+  interviewed: orderGen(),
+  offered: orderGen(),
+}
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     let jobs = []
 
     for (var i = 0; i < constants.JOBS; i++) {
+      const jobStatus = status[rand(4)]
+      const jobOrder = rand(2) > 0 ? orderMaker[jobStatus].next().value : null
       jobs.push({
         title: tech[rand(12)] + ' ' + role[rand(6)],
-        order: null,
-        status: status[rand(4)],
+        order: jobOrder,
+        status: jobStatus,
         userId: 1,
         companyId: rand(constants.COMPANIES) + 1,
         description,
