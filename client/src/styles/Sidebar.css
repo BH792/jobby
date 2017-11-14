@@ -1,22 +1,47 @@
-.SIDEBAR {
+.sidebar {
   background-color: #BFC0C0;
   grid-area: side;
+  fill: black;
 }
 
-.SIDEBAR a {
+.sidebar > a {
+  color: black;
+  height: 100px;
   text-decoration: none;
 }
 
-.SIDEBAR-OPTION {
+.sidebar.option {
   height: 100px;
   text-align: center;
-  border: solid thin black;
+  border-top: solid thin #BFC0C0;
+  border-bottom: solid thin #BFC0C0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.SIDEBAR-OPTION-SELECTED {
+.sidebar.option > div > p {
+  margin-top: 0;
+}
+
+.sidebar.selected {
   color: white;
 }
 
-.SIDEBAR-OPTION-SELECTED.SIDEBAR-OPTION {
-  background-color: black;
+.sidebar.selected svg {
+  fill: white !important;
+}
+
+.sidebar.selected .sidebar.option {
+  background-color: #393939;
+}
+
+@media only screen and (max-device-width : 960px) {
+  .sidebar.option {
+    height: 50px;
+  }
+
+  .sidebar.option > div > p {
+    display: none;
+  }
 }
