@@ -4,7 +4,7 @@ import companies from '../companies'
 import contacts from '../contacts'
 import touches from '../touches'
 import * as t from './actionTypes'
-import { normalizeAllData } from '../../normalizers/DashboardNormalizer';
+import normalizeAllData from '../../normalizers/AllDataNormalizer';
 
 export function submitLogin(userInfo) {
   return (dispatch) => {

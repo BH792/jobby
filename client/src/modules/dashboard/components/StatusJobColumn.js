@@ -1,19 +1,11 @@
 import JobColumn from './JobColumn';
 import { changeJobStatus } from '../actions';
 import { connect } from 'react-redux';
+import * as selector from '../selectors'
 
 function mapStateToProps(state, ownProps) {
-  const filteredJobs = []
-  state.jobs.allIds.forEach(jobId => {
-    if (state.jobs.byId[jobId].status === ownProps.status) {
-      filteredJobs.push({
-        ...state.jobs.byId[jobId],
-        company: state.companies.byId[state.jobs.byId[jobId].companyId].name
-      })
-    }
-  })
   return {
-    jobs: filteredJobs,
+    jobs: selector.mapJobsOfStatus(state, ownProps),
   };
 };
 

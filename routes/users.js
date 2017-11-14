@@ -25,7 +25,7 @@ function UserIncludeAll(userId) {
         include: [
           {
             model: Job,
-            include: [ Touch ]
+            include: [ Touch ],
            },
           {
             model: Contact,

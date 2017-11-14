@@ -19,8 +19,8 @@ const JobColumn = ({status, jobs, connectDropTarget}) => {
 
 const dropTarget = {
   drop(props, monitor, component) {
-    let jobId = monitor.getItem().id
-    props.changeJobStatus(jobId, props.status)
+    // let jobId = monitor.getItem().id
+    // props.changeJobStatus(jobId, props.status)
   }
 }
 

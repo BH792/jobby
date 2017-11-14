@@ -1,5 +1,6 @@
 import * as actions from './actions';
-import CompanyContent from './components/CompanyContent';
+import { CompanyContent } from './components';
+import { CompanyItem } from './components';
 import reducer from './companiesReducer';
 
-export default { actions, CompanyContent, reducer };
+export default { actions, CompanyContent, CompanyItem, reducer };

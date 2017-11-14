@@ -5,11 +5,11 @@ import { DragDropContext } from 'react-dnd';
 import '../../../styles/JobBoard.css';
 
 class JobBoard extends Component {
-  // componentDidMount() {
-  //   if (!this.props.isDataCached) {
-  //     this.props.fetchBoard()
-  //   }
-  // }
+  componentDidMount() {
+    if (!this.props.isDataCached) {
+      this.props.fetchBoardAPI()
+    }
+  }
 
   render() {
     return (

@@ -8,58 +8,21 @@ const {
   contact: Contact,
   touch: Touch
 } = require('../models');
+const sequelize = require('sequelize')
+const Op = sequelize.Op
 
 router.use(verifyJWT)
 
-function UserIncludeAll(userId) {
-  return User.findOne({
-    where: { id: userId },
-    include: [
-      {
-        model: Company,
-        include: [
-          {
-            model: Job,
-            include: [ Touch ]
-           },
-          {
-            model: Contact,
-            include: [ Touch ]
-          }
-        ]
-      }
-    ]
-  })
-}
-
-router.get('/test', (req, res, next) => {
-  UserIncludeAll(req.userId)
-    .then(userData => {
-      res.json(userData)
-    })
-})
-
 router.get('/', function (req, res, next) {
-  // Company.findAll({
-  //   where: {
-  //     userId: req.userId
-  //   },
-  //   include: [
-  //     {
-  //       model: Job
-  //     }
-  //   ]
-  // })
-  //   .then(results => {res.json(results)})
   Job.findAll({
     where: {
-      userId: req.userId
+      userId: { [Op.eq]: req.userId },
+      order: { [Op.ne]: null }
     },
-    // order: [['order', 'ASC']],
-    include: [
-      {
-        model: Company
-      }
+    attributes: ['id', 'status', 'order'],
+    order: [
+      ['status', 'ASC'],
+      ['order', 'ASC']
     ]
   }).then(results => {res.json(results)})
 });

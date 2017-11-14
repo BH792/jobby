@@ -4,8 +4,12 @@ import jobs from '../modules/jobs';
 import contacts from '../modules/contacts';
 import companies from '../modules/companies';
 import touches from '../modules/touches';
+import dashboard from '../modules/dashboard';
+import search from '../modules/search';
 
 const appReducer = combineReducers({
+  search: search.reducer,
+  dashboard: dashboard.reducer,
   user: users.reducer,
   jobs: jobs.reducer,
   companies: companies.reducer,

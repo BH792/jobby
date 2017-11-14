@@ -1,15 +1,15 @@
 import JobBoard from './JobBoard';
 import { connect } from 'react-redux';
-import { fetchBoard } from '../actions'
+import { fetchBoardAPI } from '../actions'
 
 function mapStateToProps(state) {
   return {
-    isDataCached: state.jobs.allIds.length > 0 && state.companies.allIds.length > 0
+    isDataCached: state.dashboard.board.watching.length > 0 || state.dashboard.board.applied.length > 0 || state.dashboard.board.interviewed.length > 0 || state.dashboard.board.offered.length > 0
   }
 }
 
 const mapDispatchToProps = {
-  fetchBoard
+  fetchBoardAPI
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(JobBoard);

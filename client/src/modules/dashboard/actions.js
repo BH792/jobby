@@ -1,7 +1,20 @@
 import DashboardAPI from '../../adapters/dashboardJobbyAPI';
+import normalizeDashboard from '../../normalizers/DashboardNormalizer'
+import * as t from './actionTypes'
 
-export function fetchBoard() {
+export function fetchBoardAPI() {
   return dispatch => {
+    DashboardAPI.fetchDashboard().then(json => {
+      const payload = normalizeDashboard(json)
+      dispatch(fetchBoard(payload))
+    })
+  }
+}
+
+export function fetchBoard(board) {
+  return {
+    type: t.FETCH,
+    payload: board
   }
 }
 
