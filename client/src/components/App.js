@@ -6,7 +6,7 @@ import LoadingIcon from '../components/LoadingIcon';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import users from '../modules/users';
-import '../styles/App.css';
+
 
 const { loginFromLocalStorage } = users.actions
 

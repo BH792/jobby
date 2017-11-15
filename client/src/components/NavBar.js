@@ -1,43 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/NavBar.css';
-
-// class Search extends React.Component {
-//   state = {
-//     search: '',
-//     focus: false
-//   }
-//
-//   handleChange = (e) => {
-//     this.setState({
-//       search: e.target.value
-//     })
-//   }
-//
-//   handleFocus = () => {
-//     this.setState({
-//       focus: true
-//     })
-//   }
-//
-//   render() {
-//     const { focus, search } = this.state
-//     return (
-//       <div>
-//         <input
-//           type='text'
-//           value={search}
-//           onFocus={this.handleFocus}
-//           onChange={this.handleChange}
-//           className={`form input ${focus ? 'wide' : 'normal'}`}
-//         />
-//         <div className='MainApplication' style={{zIndex: '5'}}>
-//           Results
-//         </div>
-//       </div>
-//     )
-//   }
-// }
 
 export default ({isLoggedIn, logoutUser}) => {
   if (isLoggedIn) {

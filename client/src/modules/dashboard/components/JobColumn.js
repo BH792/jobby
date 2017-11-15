@@ -2,7 +2,6 @@ import React from 'react';
 import { DropTarget } from 'react-dnd';
 import JobCard from './JobCard';
 import DragTypes from '../DragTypes';
-import '../../../styles/JobColumn.css'
 
 const JobColumn = ({status, jobs, connectDropTarget}) => {
   const capitalizedStatus = status.charAt(0).toUpperCase() + status.slice(1)

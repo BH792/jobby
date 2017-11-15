@@ -2,7 +2,6 @@ import React from 'react'
 import users from '../modules/users'
 import { Route, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import '../styles/PublicHomepage.css'
 
 import { RedirectBack } from '../modules/shared';
 

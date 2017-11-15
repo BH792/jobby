@@ -8,7 +8,21 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 
-import './styles'
+import './styles/App.css'
+import './styles/button.css'
+import './styles/content.css'
+import './styles/detail.css'
+import './styles/form.css'
+import './styles/index.css'
+import './styles/JobBoard.css'
+import './styles/JobCard.css'
+import './styles/JobColumn.css'
+import './styles/JobItem.css'
+import './styles/Lister.css'
+import './styles/MainApplication.css'
+import './styles/NavBar.css'
+import './styles/PublicHomepage.css'
+import './styles/Sidebar.css'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(

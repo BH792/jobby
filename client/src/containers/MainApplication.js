@@ -9,8 +9,6 @@ import Sidebar from '../components/Sidebar';
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { LoginRedirect } from '../modules/shared'
-import '../styles/MainApplication.css'
-
 
 const MainApplication = ({ userId, match }) => {
   return (

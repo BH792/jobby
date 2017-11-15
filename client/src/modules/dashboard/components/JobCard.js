@@ -1,7 +1,6 @@
 import React from 'react';
 import { DragSource, DropTarget } from 'react-dnd';
 import DragTypes from '../DragTypes';
-import '../../../styles/JobCard.css';
 
 const JobCard = ({
   job,
@@ -14,7 +13,7 @@ const JobCard = ({
     let colors = ['#001f3f','#0074D9','#3D9970', '#2ECC40','#FF851B','#FF4136','#85144b','#B10DC9','#DDDDDD','#39CCCC']
     return colors[num]
   }
-  
+
   let opacity = isDragging ? 0 : (isOver ? 0.5 : 1)
 
   return connectDropTarget(connectDragSource(
