@@ -4,6 +4,7 @@ import companies from '../modules/companies';
 import contacts from '../modules/contacts';
 import jobs from '../modules/jobs';
 import search from '../modules/search';
+import touches from '../modules/touches';
 import Sidebar from '../components/Sidebar';
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -20,6 +21,7 @@ const MainApplication = ({ userId, match }) => {
         <Route path={`${match.url}/contacts`} component={contacts.ContactContent} />
         <Route path={`${match.url}/companies`} component={companies.CompanyContent} />
         <Route path={`${match.url}/search`} component={search.SearchContent} />
+        <Route path={`${match.url}/touches`} component={touches.TouchContent} />
         <Route path={`${match.url}`} component={dashboard.DashboardContent} />
       </Switch>
     </div>

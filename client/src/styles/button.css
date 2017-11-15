@@ -1,10 +1,10 @@
 .router-link {
+  margin: 10px 10px 0px 10px;
   text-decoration: none;
 }
 
 .button {
   display: block;
-  margin: 10px 10px 0px 10px;
   height: 42px;
   padding: 5px;
   font-size: 18px;

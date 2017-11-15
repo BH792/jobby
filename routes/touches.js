@@ -12,21 +12,23 @@ const Op = sequelize.Op
 
 router.use(verifyJWT)
 
-router.get('/', async (req, res) => {
-  const touches = await Touch.findAll({
-    include: [{
-        model: Contact,
-        attributes: [],
-        include: [{
-          model: User,
-          attributes: [],
-          where: {
-            id: { [Op.eq]: req.userId }
-          }
-        }]
-      }]
+router.post('/:id', async (req, res) => {
+  const updatedTouchInfo = {
+    date: req.body.date,
+    type: req.body.type,
+    subject: req.body.subject,
+    notes: req.body.notes
+  }
+
+  const touch = await Touch.findOne({
+    where: { id: {[Op.eq]: req.body.id} }
   })
-  res.json(touches)
+
+  const updatedTouch = await touch.update(updatedTouchInfo)
+  res.json({
+    status: 'SUCCESS',
+    touch: updatedTouch
+  })
 })
 
 router.post('/', async (req, res) => {

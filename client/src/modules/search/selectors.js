@@ -11,7 +11,6 @@ export const mapJobResults = createSelector(
     const results = []
     jobs.allIds.forEach(id => {
       if (regexTerm.test(jobs.byId[id].title)) {
-        console.log('true');
         results.push(jobs.byId[id])
       }
     })

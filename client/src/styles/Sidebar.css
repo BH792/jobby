@@ -13,8 +13,7 @@
 .sidebar.option {
   height: 100px;
   text-align: center;
-  border-top: solid thin #BFC0C0;
-  border-bottom: solid thin #BFC0C0;
+  border-bottom: solid thin #535664;
   display: flex;
   align-items: center;
   justify-content: center;

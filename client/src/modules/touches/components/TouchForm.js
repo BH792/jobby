@@ -5,14 +5,32 @@ import { newTouchAPI, updateTouchAPI } from '../actions'
 import * as selector from '../selectors';
 
 class TouchForm extends Component {
-  state = {
-    submitted: false,
-    contact: this.props.defaultContact[0] || '',
-    job: this.props.defaultJob[0] || '',
-    date: this.props.touch.job || '',
-    subject: this.props.touch.subject || '',
-    notes: this.props.touch.notes || '',
-    type: this.props.touch.type || '',
+  constructor(props) {
+    super(props)
+
+    const {
+      touch,
+      defaultContact,
+      defaultJob,
+      contactNames,
+      jobNames
+    } = this.props
+
+    const dateTime = touch.date ? new Date(touch.date).toISOString().substr(0, 10) : null
+    const enableContact = !Object.keys(contactNames).length || touch.id
+    const enableJob = !Object.keys(jobNames).length || touch.id
+
+    this.state = {
+      submitted: false,
+      contact: defaultContact[0] ||touch.contact || '',
+      job: defaultJob[0] || touch.job || '',
+      date: dateTime || '',
+      subject: touch.subject || '',
+      notes: touch.notes || '',
+      type: touch.type || '',
+      enableContact,
+      enableJob
+    }
   }
 
   handleChange = (e) => {
@@ -23,11 +41,11 @@ class TouchForm extends Component {
 
   submit = () => {
     if (!this.state.submitted) {
-      console.log('submitting');
       this.props.submitTouch({
         ...this.state,
-        jobId: this.props.jobNames[this.state.job] || this.props.defaultJob[1],
-        contactId: this.props.contactNames[this.state.contact] || this.props.defaultContact[1]
+        id: this.props.touch.id,
+        jobId: this.props.jobNames[this.state.job] || this.props.defaultJob[1] || this.props.touch.jobId,
+        contactId: this.props.contactNames[this.state.contact] || this.props.defaultContact[1] || this.props.touch.contactId
       })
     }
   }
@@ -41,13 +59,15 @@ class TouchForm extends Component {
 
   render() {
     const { contact, job, type, date, submitted, subject, notes } = this.state
-    const { loading, lastId, match, history } = this.props
+    const { loading, lastId, history, touch } = this.props
 
-    // if (!loading && submitted) {
-    //   if (/jobs/.test(match.url) || /contacts/.test(match.url)) {
-    //     history.goBack()
-    //   }
-    // }
+    if (!loading && submitted) {
+      if (lastId) {
+        return <Redirect to={`/home/touches/${lastId}`} />
+      } else {
+        history.goBack()
+      }
+    }
     return (
       <div>
         <form onSubmit={this.handleSubmit} className='form'>
@@ -57,7 +77,7 @@ class TouchForm extends Component {
             value={contact}
             onChange={this.handleChange}
             placeholder='Contact'
-            disabled={!Object.keys(this.props.contactNames).length}
+            disabled={this.state.enableContact}
             className='form input wide'
           />
           <datalist id='contacts'>
@@ -76,7 +96,7 @@ class TouchForm extends Component {
             value={job}
             onChange={this.handleChange}
             placeholder='Job'
-            disabled={!Object.keys(this.props.jobNames).length}
+            disabled={this.state.enableJob}
             className='form input wide'
           />
           <datalist id='jobs'>
@@ -124,7 +144,7 @@ class TouchForm extends Component {
             className='form textarea wide'
           />
           <button
-            className={`button primary normal ${this.state.submitted ? 'disabled' : ''}`}
+            className={`form submit normal ${this.state.submitted ? 'disabled' : ''}`}
             disabled={this.state.submitted}
           >
             Submit
@@ -135,20 +155,20 @@ class TouchForm extends Component {
   }
 }
 
-TouchForm.defaultProps = {
-  touch: {}
-}
-
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.id
+  const touchId = ownProps.match.params.touchId
   const job = /jobs/.test(ownProps.match.url)
   const contact = /contacts/.test(ownProps.match.url)
 
   return {
-    jobNames: job ? {} : selector.mapJobNames(state),
-    contactNames: contact ? {} : selector.mapContactNames(state),
+    loading: selector.getLoading(state),
+    lastId: selector.getLastId(state),
+    jobNames: job || touchId ? {} : selector.mapJobNames(state),
+    contactNames: contact || touchId ? {} : selector.mapContactNames(state),
     defaultJob: job ? selector.getJob(state, {jobId: id}) : '',
-    defaultContact: contact ? selector.getContact(state, {contactId: id}) : ''
+    defaultContact: contact ? selector.getContact(state, {contactId: id}) : '',
+    touch: touchId ? selector.getTouchWithContactAndJob(state, { touchId }) : {}
   }
 }
 
@@ -161,7 +181,7 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
   return {
     ...ownProps,
     ...stateProps,
-    submitTouch: stateProps.touchId ? dispatchProps.updateTouchAPI : dispatchProps.newTouchAPI
+    submitTouch: ownProps.match.params.touchId ? dispatchProps.updateTouchAPI : dispatchProps.newTouchAPI
   }
 }
 

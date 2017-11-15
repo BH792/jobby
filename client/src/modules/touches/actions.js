@@ -12,6 +12,7 @@ export function fetchTouches(touches) {
 
 export function newTouchAPI(touchInfo) {
   return dispatch => {
+    dispatch(loadingTouch())
     TouchAPI.newTouch(touchInfo).then(json => {
       if (json.touch.jobId) {
         dispatch(jobs.actions.addTouch({
@@ -28,11 +29,31 @@ export function newTouchAPI(touchInfo) {
   }
 }
 
-export function updateTouchAPI() {}
+export function updateTouchAPI(touchInfo) {
+  return dispatch => {
+    dispatch(loadingTouch())
+    TouchAPI.updateTouch(touchInfo).then(json => {
+      dispatch(editTouch(json))
+    })
+  }
+}
 
 export function newTouch(touchInfo) {
   return {
     type: t.NEW,
     payload: touchInfo
+  }
+}
+
+export function editTouch(touchInfo) {
+  return {
+    type: t.UPDATE,
+    payload: touchInfo
+  }
+}
+
+export function loadingTouch() {
+  return {
+    type: t.LOADING,
   }
 }

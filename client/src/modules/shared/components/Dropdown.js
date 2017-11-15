@@ -14,8 +14,6 @@ class Dropdown extends Component {
   }
 
   hideOptions = (e) => {
-    console.log('blur');
-    console.log(e.target);
     this.setState({
       optionsVisible: false
     })
