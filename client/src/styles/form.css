@@ -7,7 +7,12 @@
 
 .form input.form:focus {
   outline: none;
-  box-shadow: 0 0 2px #885ead;
+  box-shadow: 0 0 2px #E2370F;
+}
+
+.form select.form:focus {
+  outline: none;
+  box-shadow: 0 0 2px #E2370F;
 }
 
 .form.center {
@@ -49,7 +54,7 @@
 
 .form.textarea:focus {
   outline: none;
-  box-shadow: 0 0 2px #885ead;
+  box-shadow: 0 0 2px #E2370F;
 }
 
 .form.submit {
@@ -58,12 +63,12 @@
   height: 42px;
   padding: 5px;
   font-size: 18px;
-  background-color: #885ead;
+  background-color: #E2370F;
   color: white;
 }
 
 .form.submit:hover {
-  background-color: #551a8b;
+  background-color: #a80000;
 }
 
 .form.submit:focus {

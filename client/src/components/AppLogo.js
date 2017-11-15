@@ -4,7 +4,7 @@ const AppLogo = () => {
   return (
     <div className='app-logo'>
       <div>
-        JOBBY
+        Jobby
       </div>
     </div>
   )

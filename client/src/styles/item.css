@@ -1,0 +1,109 @@
+/* SHARED STYLES */
+.item.container {
+  text-decoration: none;
+  color: black;
+  border: solid thin black;
+  border-radius: 3px;
+  width: 280px;
+  margin: 0 10px 10px 0;
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  grid-template-areas:
+  'colorstrip content';
+  height: 7em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item.container p {
+  margin: 0;
+}
+
+.item.color {
+  border: solid thin;
+  border-radius: 2px 0 0 2px;
+  grid-area: colorstrip;
+  width: 100%;
+}
+
+.item.content {
+  padding: 10px;
+}
+
+.item.header {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.item.subheader {
+  font-size: 16px;
+  font-weight: bold
+}
+
+.item.info {
+  font-size: 14px;
+}
+
+/*  CONTACT STYLES
+    COLOR: #345333 */
+.item.contact.container {
+  border-color: #345333;
+}
+
+.item.contact.color {
+  border-color: #345333;
+  background-color: #345333;
+}
+
+.item.contact.header {
+  color: #345333;
+}
+
+.item.contact.container {
+  border-color: #345333;
+}
+
+/*  JOB STYLES
+    COLOR: #0B7FA0 */
+.item.job.container {
+  border-color: #0B7FA0;
+}
+
+.item.job.color {
+  border-color: #0B7FA0;
+  background-color: #0B7FA0;
+}
+
+.item.job.header {
+  color: #0B7FA0;
+}
+
+/*  TOUCH STYLES
+    COLOR: #672040 */
+.item.touch.container {
+  border-color: #672040;
+}
+
+.item.touch.color {
+  border-color: #672040;
+  background-color: #672040;
+}
+
+.item.touch.header {
+  color: #672040;
+}
+
+/*  COMPANY STYLES
+    COLOR: #312D60 */
+.item.company.container {
+  border-color: #312D60;
+}
+
+.item.company.color {
+  border-color: #312D60;
+  background-color: #312D60;
+}
+
+.item.company.header {
+  color: #312D60;
+}

@@ -59,7 +59,7 @@ class TouchForm extends Component {
 
   render() {
     const { contact, job, type, date, submitted, subject, notes } = this.state
-    const { loading, lastId, history, touch } = this.props
+    const { loading, lastId, history } = this.props
 
     if (!loading && submitted) {
       if (lastId) {
@@ -68,7 +68,7 @@ class TouchForm extends Component {
         history.goBack()
       }
     }
-    
+
     return (
       <div>
         <form onSubmit={this.handleSubmit} className='form'>

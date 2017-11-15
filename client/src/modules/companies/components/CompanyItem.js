@@ -5,10 +5,11 @@ const CompanyItem = ({name, description}) => {
     description = description.slice(0, 97) + '...'
   }
   return (
-    <div className='CompanyItem'>
-      <div className='CompanyItemHeader'>
-        <h4>{name}</h4>
-        <p>{description}</p>
+    <div className='item company container'>
+      <div className='item company color'/>
+      <div className='item company content'>
+        <p className='item company header'>{name}</p>
+        <p className='item company info'>{description}</p>
       </div>
     </div>
   )

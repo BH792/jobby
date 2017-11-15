@@ -1,5 +1,3 @@
-import { createSelector } from 'reselect'
-
 export const getLoading = (state) => {
   return state.jobs.loading
 }

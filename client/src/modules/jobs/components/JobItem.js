@@ -7,11 +7,12 @@ const JobItem = (props) => {
   }
 
   return (
-    <div className='JobItem'>
-      <div className='JobItemHeader'>
-        <h4>{title}</h4>
-        <p>{company}</p>
-        <p>{description}</p>
+    <div className='item job container'>
+      <div className='item job color' />
+      <div className='item job content'>
+        <p className='item job header'>{title}</p>
+        <p className='item job subheader'>{company}</p>
+        <p className='item job info'>{description}</p>
       </div>
     </div>
   )

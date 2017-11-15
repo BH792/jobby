@@ -6,11 +6,12 @@ const TouchItem = ({
   job
 }) => {
   return (
-    <div className='JobItem'>
-      <div className='JobItemHeader'>
-        <h4>{subject}</h4>
-        <p>{contact}</p>
-        <p>{job}</p>
+    <div className='item touch container'>
+      <div className='item touch color' />
+      <div className='item touch content'>
+        <p className='item touch header'>{subject}</p>
+        <p className='item touch subheader'>{contact}</p>
+        <p className='item touch info'>{job || ''}</p>
       </div>
     </div>
   )

@@ -1,8 +1,6 @@
 import { createSelector } from 'reselect'
 
 const getCompanies = (state) => state.companies
-const getContacts = (state) => state.contacts
-const getJobs = (state) => state.jobs
 
 export const mapCompanyNameToId = createSelector(
   getCompanies,

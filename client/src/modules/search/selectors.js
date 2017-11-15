@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 
 function getRegexTerm(state) {
-  return new RegExp(state.search.searchTerm)
+  return new RegExp(state.search.searchTerm, 'i')
 }
 
 export const mapJobResults = createSelector(

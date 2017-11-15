@@ -53,7 +53,6 @@ class ContactForm extends Component {
     const {
       loading,
       lastId,
-      match,
       history
     } = this.props
 

@@ -39,7 +39,7 @@ class JobForm extends Component {
 
   render() {
     const { title, description, status, company, submitted } = this.state
-    const { loading, lastId, match, history } = this.props
+    const { loading, lastId, history } = this.props
 
     if (!loading && submitted) {
       if (lastId) {

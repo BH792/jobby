@@ -12,11 +12,11 @@
 }
 
 .button.primary {
-  background-color: #EF8354;
+  background-color: #E2370F;
 }
 
 .button.primary:hover {
-  background-color: #DA784D;
+  background-color: #a80000;
 }
 
 .button.secondary {
@@ -24,7 +24,7 @@
 }
 
 .button.secondary:hover {
-  background-color: #C4C5C5;
+  background-color: #8f9090;
 }
 
 .button.outline {
