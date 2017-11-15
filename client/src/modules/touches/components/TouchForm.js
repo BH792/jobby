@@ -68,6 +68,7 @@ class TouchForm extends Component {
         history.goBack()
       }
     }
+    
     return (
       <div>
         <form onSubmit={this.handleSubmit} className='form'>

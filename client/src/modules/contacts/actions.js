@@ -26,6 +26,7 @@ export function fetchContacts(contacts) {
 
 export function newContactAPI(contactInfo) {
   return dispatch => {
+    dispatch(loadingContact())
     ContactAPI.newContact(contactInfo).then(json => {
       if (json.company) {
         dispatch(companies.actions.newCompany(json))
@@ -41,6 +42,7 @@ export function newContactAPI(contactInfo) {
 
 export function updateContactAPI(contactInfo, oldCompanyId) {
   return dispatch => {
+    dispatch(loadingContact())
     ContactAPI.updateContact(contactInfo).then(json => {
       if (json.company) {
         dispatch(companies.actions.newCompany(json))
@@ -78,5 +80,11 @@ export function addTouch(touchIdAndContactId) {
   return {
     type: t.ADD_TOUCH,
     payload: touchIdAndContactId
+  }
+}
+
+export function loadingContact() {
+  return {
+    type: t.LOADING
   }
 }

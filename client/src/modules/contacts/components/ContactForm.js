@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { newContactAPI, updateContactAPI } from '../actions'
+import { sharedSelectors } from '../../shared'
+import { Redirect } from 'react-router-dom'
+import * as selector from '../selectors'
 
 class ContactForm extends Component {
   state = {
     submitted: false,
     fullname: this.props.contact.fullname || '',
     title: this.props.contact.title || '',
-    companyName: this.props.contact.companyName || '',
+    company: this.props.contact.company || '',
     cellNumber: this.props.contact.cellNumber || '',
     officeNumber: this.props.contact.officeNumber || '',
     email: this.props.contact.email || ''
@@ -23,7 +26,7 @@ class ContactForm extends Component {
     if (!this.state.submitted) {
       this.props.submitContact({
         ...this.state,
-        companyId: this.props.companyNames[this.state.companyName],
+        companyId: this.props.companyNames[this.state.company],
         id: this.props.contact.id
       }, this.props.contact.companyId)
     }
@@ -40,11 +43,28 @@ class ContactForm extends Component {
     const {
       fullname,
       title,
-      companyName,
+      company,
       cellNumber,
       officeNumber,
-      email
+      email,
+      submitted
     } = this.state
+
+    const {
+      loading,
+      lastId,
+      match,
+      history
+    } = this.props
+
+    if (!loading && submitted) {
+      if (lastId) {
+        return <Redirect to={`/home/contacts/${lastId}`} />
+      } else {
+        history.goBack()
+      }
+    }
+
     return (
       <div>
         <form onSubmit={this.handleSubmit} className='form'>
@@ -66,8 +86,8 @@ class ContactForm extends Component {
           />
           <input
             list='companies'
-            name='companyName'
-            value={companyName}
+            name='company'
+            value={company}
             onChange={this.handleChange}
             className='form input wide'
           />
@@ -118,23 +138,13 @@ class ContactForm extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const companyNames = {}
-  state.companies.allIds.forEach(id => {
-    companyNames[state.companies.byId[id].name] = state.companies.byId[id].id
-  })
-
-  let contact = {}
-  const id = ownProps.match.params.id
-  if (id && state.contacts.byId[id]) {
-    contact = {
-      ...state.contacts.byId[id],
-      companyName: state.companies.byId[state.contacts.byId[id].companyId].name
-    }
-  }
+  const contactId = ownProps.match.params.id
 
   return {
-    contact,
-    companyNames
+    lastId: selector.getLastId(state),
+    loading: selector.getLoading(state),
+    contact: selector.getContactWithCompany(state, { contactId }),
+    companyNames: sharedSelectors.mapCompanyNameToId(state)
   }
 }
 

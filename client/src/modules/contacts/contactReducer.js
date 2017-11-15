@@ -22,6 +22,11 @@ export default (
         ...state,
         ...action.payload.contact
       };
+    case t.UPDATE:
+      return {
+        ...state,
+        ...action.payload.contact
+      };
     case t.ADD_TOUCH:
       return {
         ...state,

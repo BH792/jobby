@@ -7,7 +7,7 @@ const getJobs = (state) => state.jobs
 export const getLastId = (state) => state.touches.lastId
 export const getLoading = (state) => state.touches.loading
 
-export const mapCompanyNames = createSelector(
+const mapCompanyIdToName = createSelector(
   getCompanies,
   (companies) => {
     const companyNames = {}
@@ -20,7 +20,7 @@ export const mapCompanyNames = createSelector(
 
 export const mapJobNames = createSelector(
   getJobs,
-  mapCompanyNames,
+  mapCompanyIdToName,
   (jobs, companyNames) => {
     const jobNames = {}
     jobs.allIds.forEach(id => {
@@ -33,7 +33,7 @@ export const mapJobNames = createSelector(
 
 export const mapContactNames = createSelector(
   getContacts,
-  mapCompanyNames,
+  mapCompanyIdToName,
   (contacts, companyNames) => {
     const contactNames = {}
     contacts.allIds.forEach(id => {

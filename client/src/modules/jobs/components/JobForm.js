@@ -38,13 +38,15 @@ class JobForm extends Component {
 
   render() {
     const { title, description, status, company, submitted } = this.state
-    const { loading, lastId, match } = this.props
+    const { loading, lastId, match, history } = this.props
 
     if (!loading && submitted) {
-      const path = `${match.path.split('/').slice(0, 3).join('/')}/${lastId || ''}`
-      return <Redirect to={path} />
+      if (lastId) {
+        return <Redirect to={`/home/jobs/${lastId}`} />
+      } else {
+        history.goBack()
+      }
     }
-
     return (
       <div>
         <form onSubmit={this.handleSubmit} className='form'>
@@ -92,7 +94,7 @@ class JobForm extends Component {
             })}
           </datalist>
           <button
-            className={`button primary normal ${this.state.submitted ? 'disabled' : ''}`}
+            className={`form submit normal ${this.state.submitted ? 'disabled' : ''}`}
             disabled={this.state.submitted}
           >
             Submit
