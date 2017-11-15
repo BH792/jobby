@@ -1,6 +1,7 @@
-import JobAPI from '../../adapters/jobJobbyAPI'
+import JobAPI from '../../adapters/jobJobbyAPI';
 import * as t from './actionTypes'
 import companies from '../companies'
+import dashboard from '../dashboard'
 
 export function fetchJobs(jobs) {
   return {
@@ -78,5 +79,41 @@ export function addTouch(touchIdAndJobId) {
   return {
     type: t.ADD_TOUCH,
     payload: touchIdAndJobId
+  }
+}
+
+export function addJobToDashboard(jobId) {
+  return (dispatch, getState) => {
+    const status = getState().jobs.byId[jobId].status
+    const statusArr = getState().dashboard.board[status]
+    const updatedStatusArr = [ ...statusArr, jobId]
+    dispatch(dashboard.actions.updateJobBoard({ [status]: updatedStatusArr }))
+    JobAPI.updateJob({ id: jobId, order: statusArr.length}).then(json => {
+      console.log(json);
+      if (json.status === 'SUCCESS') {
+        dispatch(updateJob(json))
+      }
+    })
+  }
+}
+
+export function removeJobFromDashboard(jobId) {
+  console.log("remove from board");
+  return (dispatch, getState) => {
+    const status = getState().jobs.byId[jobId].status
+    const statusArr = getState().dashboard.board[status]
+
+    const index = statusArr.indexOf(jobId)
+    const beforeArr = statusArr.slice(0, index)
+    const afterArr = statusArr.slice(index + 1)
+
+    const updatedStatusArr = [ ...beforeArr, ...afterArr ]
+    dispatch(dashboard.actions.updateJobBoard({ [status]: updatedStatusArr }))
+    JobAPI.updateJob({ id: jobId, order: null}).then(json => {
+      if (json.status === 'SUCCESS') {
+        console.log(json);
+        dispatch(updateJob(json))
+      }
+    })
   }
 }

@@ -1,2 +1,2 @@
 export const FETCH = 'dashboard/FETCH'
-export const CHANGE_JOB_STATUS = 'dashboard/CHANGE_JOB_STATUS'
+export const UPDATE_BOARD = 'dashboard/UPDATE_BOARD'

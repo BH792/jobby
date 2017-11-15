@@ -15,6 +15,17 @@ export function fetchBoardAPI() {
   }
 }
 
+export function fetchBoardAPICallOnly() {
+  return DashboardAPI.fetchDashboard()
+}
+
+export function fetchBoardParseJSON(dispatch, json) {
+  if (json.status === 'SUCCESS') {
+    const payload = normalizeDashboard(json.board)
+    dispatch(fetchBoard(payload))
+  }
+}
+
 export function fetchBoard(board) {
   return {
     type: t.FETCH,
@@ -30,7 +41,7 @@ export function changeJobStatusAPI(jobId, newStatus) {
 
     const oldBeforeArr = oldStatusArr.slice(0, currentOrder)
     const oldAfterArr = oldStatusArr.slice(currentOrder + 1)
-    
+
     const newStatusArr = [ ...getState().dashboard.board[newStatus], job.id ]
     const modifiedBoard = {
       [job.status]: [ ...oldBeforeArr, ...oldAfterArr],
@@ -42,7 +53,7 @@ export function changeJobStatusAPI(jobId, newStatus) {
       order: newStatusArr.length - 1
     }
 
-    dispatch(changeJobStatus(modifiedBoard))
+    dispatch(updateJobBoard(modifiedBoard))
     DashboardAPI.changeJobOrder({ decrement: oldAfterArr }).then(json => {
       if (json.status === 'SUCCESS') {
         JobAPI.updateJob(updatedJob).then(json => {
@@ -55,9 +66,9 @@ export function changeJobStatusAPI(jobId, newStatus) {
   }
 }
 
-export function changeJobStatus(updatedBoard) {
+export function updateJobBoard(updatedBoard) {
   return {
-    type: t.CHANGE_JOB_STATUS,
+    type: t.UPDATE_BOARD,
     payload: updatedBoard
   }
 }

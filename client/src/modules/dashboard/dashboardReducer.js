@@ -17,7 +17,7 @@ export default (
         ...state,
         board: action.payload
       }
-    case t.CHANGE_JOB_STATUS:
+    case t.UPDATE_BOARD:
       return {
         ...state,
         board: {

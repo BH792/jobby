@@ -9,6 +9,7 @@ router.post('/:id', async (req, res) => {
   let updatedJobInfo = {
     ...req.body,
   }
+  console.log(updatedJobInfo);
 
   const job = await Job.findOne({
     where: {
@@ -20,7 +21,7 @@ router.post('/:id', async (req, res) => {
   if (job) {
     let updatedJob;
 
-    if (updatedJobInfo.companyId) {
+    if (!updatedJobInfo.company) {
       const updatedJob = await job.update({ ...updatedJobInfo })
       res.json({
         status: 'SUCCESS',

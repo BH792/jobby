@@ -3,6 +3,7 @@ import jobs from '../jobs'
 import companies from '../companies'
 import contacts from '../contacts'
 import touches from '../touches'
+import dashboard from '../dashboard'
 import * as t from './actionTypes'
 import normalizeAllData from '../../normalizers/AllDataNormalizer';
 
@@ -56,7 +57,10 @@ function fetchAllData(dispatch) {
     dispatch(jobs.actions.fetchJobs(payload.entities.jobs))
     dispatch(touches.actions.fetchTouches(payload.entities.touches))
     dispatch(contacts.actions.fetchContacts(payload.entities.contacts))
-    dispatch(finishLoading())
+    dashboard.actions.fetchBoardAPICallOnly().then(json => {
+      dashboard.actions.fetchBoardParseJSON(dispatch, json)
+      dispatch(finishLoading())
+    })
   })
 }
 

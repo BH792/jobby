@@ -10,7 +10,8 @@ class JobForm extends Component {
     title: this.props.job.title || '',
     description: this.props.job.description || '',
     status: this.props.job.status || 'watching',
-    company: this.props.job.company || ''
+    company: this.props.job.company || '',
+    onBoard: !!this.props.job.order
   }
 
   handleChange = (e) => {
@@ -70,6 +71,7 @@ class JobForm extends Component {
             value={status}
             onChange={this.handleChange}
             className='form select wide'
+            disabled={this.state.onBoard}
           >
             <option value='watching'>Watching</option>
             <option value='applied'>Applied</option>
