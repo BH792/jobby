@@ -7,9 +7,9 @@
     "node": "8.x.x"
   },
   "scripts": {
-    "start": "node server",
+    "start": "node ./bin/www",
     "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
-    "start:dev": "DEBUG=slack-checkin-app:* nodemon --exec 'node -r dotenv/config' ./bin/www",
+    "start:dev": "DEBUG=jobby:* nodemon --exec 'node -r dotenv/config' ./bin/www",
     "db:migrate:seed": "sequelize db:migrate && sequelize db:seed:all",
     "db:reset": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
   },
