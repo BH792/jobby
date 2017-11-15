@@ -32,7 +32,7 @@ export function updateJobAPI(jobInfo, oldCompanyId) {
       if (json.company) {
         dispatch(companies.actions.newCompany(json))
       }
-      if (json.job.companyId !== oldCompanyId) {
+      if (oldCompanyId && json.job.companyId !== oldCompanyId) {
         dispatch(companies.actions.removeJob({
           jobId: json.job.id,
           companyId: oldCompanyId

@@ -4,17 +4,17 @@ const getJobStatusArray = (state, props) => {
   return state.dashboard.board[props.status]
 }
 
-const getJobById = (state) => {
+const getJobsById = (state) => {
   return state.jobs.byId
 }
 
-const getCompanyById = (state) => {
+const getCompaniesById = (state) => {
   return state.companies.byId
 }
 
 export const mapJobsOfStatus = createSelector(
-  getJobById,
-  getCompanyById,
+  getJobsById,
+  getCompaniesById,
   getJobStatusArray,
   (jobById, companyById, jobIds) => {
     return jobIds.map(jobId => {

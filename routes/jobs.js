@@ -7,10 +7,7 @@ router.use(verifyJWT)
 
 router.post('/:id', async (req, res) => {
   let updatedJobInfo = {
-    title: req.body.title || null,
-    description: req.body.description || null,
-    status: req.body.status || 'watching',
-    companyId: req.body.companyId,
+    ...req.body,
   }
 
   const job = await Job.findOne({
@@ -51,14 +48,11 @@ router.post('/:id', async (req, res) => {
 
 router.post('/', async (req, res, next) => {
   let newJob = {
-    title: req.body.title || null,
-    description: req.body.description || null,
-    status: req.body.status || 'watching',
-    companyId: req.body.companyId,
+    ...req.body,
     userId: req.userId
   }
 
-  if (newJob.companyId) {
+  if (req.body.companyId) {
     const job = await Job.create({ ...newJob })
     res.json({
       status: 'SUCCESS',

@@ -37,7 +37,7 @@ class Login extends Component {
             placeholder='Password'
             className='form input wide'
           />
-          <button className='button primary normal'>Login</button>
+          <button className='form submit normal'>Login</button>
         </form>
       </div>
     )

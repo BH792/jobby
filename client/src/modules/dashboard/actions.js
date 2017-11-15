@@ -1,12 +1,16 @@
 import DashboardAPI from '../../adapters/dashboardJobbyAPI';
+import JobAPI from '../../adapters/jobJobbyAPI';
 import normalizeDashboard from '../../normalizers/DashboardNormalizer'
 import * as t from './actionTypes'
+import jobs from '../jobs'
 
 export function fetchBoardAPI() {
   return dispatch => {
     DashboardAPI.fetchDashboard().then(json => {
-      const payload = normalizeDashboard(json)
-      dispatch(fetchBoard(payload))
+      if (json.status === 'SUCCESS') {
+        const payload = normalizeDashboard(json.board)
+        dispatch(fetchBoard(payload))
+      }
     })
   }
 }
@@ -18,11 +22,43 @@ export function fetchBoard(board) {
   }
 }
 
-export function changeJobStatus(jobId, newStatus) {
+export function changeJobStatusAPI(jobId, newStatus) {
+  return (dispatch, getState) => {
+    const job = getState().jobs.byId[jobId]
+    const oldStatusArr = getState().dashboard.board[job.status]
+    const currentOrder = oldStatusArr.indexOf(job.id)
+
+    const oldBeforeArr = oldStatusArr.slice(0, currentOrder)
+    const oldAfterArr = oldStatusArr.slice(currentOrder + 1)
+    
+    const newStatusArr = [ ...getState().dashboard.board[newStatus], job.id ]
+    const modifiedBoard = {
+      [job.status]: [ ...oldBeforeArr, ...oldAfterArr],
+      [newStatus]: newStatusArr
+    }
+    const updatedJob = {
+      ...job,
+      status: newStatus,
+      order: newStatusArr.length - 1
+    }
+
+    dispatch(changeJobStatus(modifiedBoard))
+    DashboardAPI.changeJobOrder({ decrement: oldAfterArr }).then(json => {
+      if (json.status === 'SUCCESS') {
+        JobAPI.updateJob(updatedJob).then(json => {
+          if (json.status === 'SUCCESS') {
+            dispatch(jobs.actions.updateJob(json))
+          }
+        })
+      }
+    })
+  }
+}
+
+export function changeJobStatus(updatedBoard) {
   return {
-    type: 'CHANGE_JOB_STATUS',
-    jobId,
-    newStatus
+    type: t.CHANGE_JOB_STATUS,
+    payload: updatedBoard
   }
 }
 

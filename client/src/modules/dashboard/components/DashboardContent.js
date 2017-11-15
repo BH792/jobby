@@ -2,7 +2,11 @@ import React from 'react'
 import ConnectedJobBoard from './ConnectedJobBoard'
 
 const DashboardContent = () => {
-  return <ConnectedJobBoard />
+  return (
+    <div className='content container'>
+      <ConnectedJobBoard />
+    </div>
+  )
 }
 
 

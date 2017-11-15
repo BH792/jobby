@@ -17,6 +17,14 @@ export default (
         ...state,
         board: action.payload
       }
+    case t.CHANGE_JOB_STATUS:
+      return {
+        ...state,
+        board: {
+          ...state.board,
+          ...action.payload
+        }
+      }
     default:
       return state;
   }

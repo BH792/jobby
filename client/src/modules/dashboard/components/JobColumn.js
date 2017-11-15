@@ -1,7 +1,10 @@
 import React from 'react';
-import { DropTarget } from 'react-dnd';
 import JobCard from './JobCard';
 import DragTypes from '../DragTypes';
+import { DropTarget } from 'react-dnd';
+import { changeJobStatusAPI } from '../actions';
+import { connect } from 'react-redux';
+import * as selector from '../selectors'
 
 const JobColumn = ({status, jobs, connectDropTarget}) => {
   const capitalizedStatus = status.charAt(0).toUpperCase() + status.slice(1)
@@ -18,8 +21,15 @@ const JobColumn = ({status, jobs, connectDropTarget}) => {
 
 const dropTarget = {
   drop(props, monitor, component) {
-    // let jobId = monitor.getItem().id
-    // props.changeJobStatus(jobId, props.status)
+    let dragId = monitor.getItem().id
+    let dropId
+    if (monitor.getDropResult()) {
+      dropId = monitor.getDropResult().dropId
+    }
+    const status = props.status
+    if (!props.jobs.some(job => job.id === dragId)) {
+      props.changeJobStatusAPI(dragId, status)
+    }
   }
 }
 
@@ -29,4 +39,12 @@ function dropCollect(connect, monitor) {
   }
 }
 
-export default DropTarget(DragTypes.CARD, dropTarget, dropCollect)(JobColumn);
+function mapStateToProps(state, ownProps) {
+  return {
+    jobs: selector.mapJobsOfStatus(state, ownProps),
+  };
+};
+
+export default connect(mapStateToProps, { changeJobStatusAPI })(
+  DropTarget(DragTypes.CARD, dropTarget, dropCollect)(JobColumn)
+);

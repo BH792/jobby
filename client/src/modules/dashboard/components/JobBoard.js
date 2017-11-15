@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import StatusJobColumn from './StatusJobColumn';
+import JobColumn from './JobColumn';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 
@@ -14,10 +14,10 @@ class JobBoard extends Component {
   render() {
     return (
       <div className='JobBoard'>
-        <StatusJobColumn status={'watching'}/>
-        <StatusJobColumn status={'applied'}/>
-        <StatusJobColumn status={'interviewed'}/>
-        <StatusJobColumn status={'offered'}/>
+        <JobColumn status={'watching'}/>
+        <JobColumn status={'applied'}/>
+        <JobColumn status={'interviewed'}/>
+        <JobColumn status={'offered'}/>
       </div>
     );
   }

@@ -43,10 +43,9 @@ function dragCollect(connect, monitor) {
 
 const dropTarget = {
   drop(props, monitor, component) {
-    // let curOrder = monitor.getItem().order
-    // let newOrder = props.job.order
-    // props.swapJobOrder(curOrder, newOrder)
-    // console.log('Dropped from ', curOrder, ' to ', newOrder);
+    return {
+      dropId: props.job.id
+    }
   },
   canDrop(props, monitor) {
     return monitor.getItem().id !== props.job.id
