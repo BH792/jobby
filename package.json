@@ -1,14 +1,22 @@
 {
   "name": "jobby",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "Job Search Organizer",
   "private": true,
+  "engines": {
+    "node": "8.x.x"
+  },
   "scripts": {
-    "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
-    "start": "node ./bin/www",
+    "start": "node server",
+    "heroku-postbuild": "cd react-ui/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "start:dev": "DEBUG=slack-checkin-app:* nodemon --exec 'node -r dotenv/config' ./bin/www",
     "db:migrate:seed": "sequelize db:migrate && sequelize db:seed:all",
     "db:reset": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
   },
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "~1.17.1",
@@ -24,9 +32,5 @@
     "sequelize": "^4.20.1",
     "sequelize-cli": "^3.0.0",
     "serve-favicon": "~2.4.2"
-  },
-  "cacheDirectories": [
-    "node_modules",
-    "client/node_modules"
-  ]
+  }
 }
