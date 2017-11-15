@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AppLogo from '../components/AppLogo'
 import MainApplication from '../containers/MainApplication';
 import PublicHomepage from '../containers/PublicHomepage';
 import ConnectedNavBar from '../containers/ConnectedNavBar';
@@ -32,7 +33,7 @@ class App extends Component {
 
     return (
       <div className='APP'>
-        <div className='APP-LOGO'><div>JOBBY</div></div>
+        <AppLogo />
         <ConnectedNavBar className='APP-NAV'/>
         <Switch>
           <Route path='/home' component={MainApplication} />

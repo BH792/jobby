@@ -2,7 +2,7 @@ import React from 'react';
 import JobCard from './JobCard';
 import DragTypes from '../DragTypes';
 import { DropTarget } from 'react-dnd';
-import { changeJobStatusAPI } from '../actions';
+import { changeJobStatusAPI, changeJobOrderAPI } from '../actions';
 import { connect } from 'react-redux';
 import * as selector from '../selectors'
 
@@ -22,13 +22,15 @@ const JobColumn = ({status, jobs, connectDropTarget}) => {
 const dropTarget = {
   drop(props, monitor, component) {
     let dragId = monitor.getItem().id
-    let dropId
-    if (monitor.getDropResult()) {
-      dropId = monitor.getDropResult().dropId
-    }
     const status = props.status
+
     if (!props.jobs.some(job => job.id === dragId)) {
       props.changeJobStatusAPI(dragId, status)
+    }
+
+    if (monitor.getDropResult()) {
+      const dropId = monitor.getDropResult().dropId
+      props.changeJobOrderAPI(dragId, dropId, status)
     }
   }
 }
@@ -45,6 +47,6 @@ function mapStateToProps(state, ownProps) {
   };
 };
 
-export default connect(mapStateToProps, { changeJobStatusAPI })(
+export default connect(mapStateToProps, { changeJobStatusAPI, changeJobOrderAPI })(
   DropTarget(DragTypes.CARD, dropTarget, dropCollect)(JobColumn)
 );

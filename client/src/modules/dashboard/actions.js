@@ -66,6 +66,31 @@ export function changeJobStatusAPI(jobId, newStatus) {
   }
 }
 
+export function changeJobOrderAPI(dragId, dropId, status) {
+  return (dispatch, getState) => {
+    const statusArr = [ ...getState().dashboard.board[status] ]
+    const oldIndex = statusArr.indexOf(dragId)
+    const newIndex = statusArr.indexOf(dropId)
+
+    const idsToIncrement = statusArr.slice(newIndex, oldIndex)
+    const id = statusArr.splice(oldIndex, 1)
+    const beforeArr = statusArr.slice(0, newIndex)
+    const afterArr = statusArr.slice(newIndex)
+
+    const newStatusArr = beforeArr.concat(id).concat(afterArr)
+    dispatch(updateJobBoard({ [status]: newStatusArr }))
+    DashboardAPI.changeJobOrder({ increment: idsToIncrement }).then(json => {
+      if (json.status === 'SUCCESS') {
+        JobAPI.updateJob({ id: dragId, order: newIndex }).then(json => {
+          if (json.status === 'SUCCESS') {
+            dispatch(jobs.actions.updateJob(json))
+          }
+        })
+      }
+    })
+  }
+}
+
 export function updateJobBoard(updatedBoard) {
   return {
     type: t.UPDATE_BOARD,
