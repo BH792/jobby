@@ -49,7 +49,8 @@ export const getJobTouches = (state, props) => {
   return getJobTouchIds(state, props).map(touchId => {
     return {
       ...getTouch(state, { touchId }),
-      contact: getTouchContactName(state, { touchId })
+      contact: getTouchContactName(state, { touchId }),
+      job: getTouchJobTitle(state, { touchId })
     }
   })
 }
@@ -60,4 +61,12 @@ const getTouch = (state, props) => {
 
 const getTouchContactName = (state, props) => {
   return state.contacts.byId[getTouch(state, props).contactId].fullname
+}
+
+const getTouchJobTitle = (state, props) => {
+  if (getTouch(state, props).jobId) {
+    return state.jobs.byId[getTouch(state, props).jobId].title
+  } else {
+    return null
+  }
 }

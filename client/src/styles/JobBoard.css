@@ -1,6 +1,44 @@
 .JobBoard {
   grid-area: content;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-areas: 'watching applied interviewed offer';
+  display: flex;
+}
+
+.JobColumnHeader {
+  width: 230px;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+}
+
+.JobColumnWatching {
+  border: solid thin #54aed1;
+}
+
+.JobColumnWatching.JobColumnHeader{
+  background-color: #54aed1;
+}
+
+.JobColumnApplied {
+  border: solid thin #5f805d;
+}
+
+.JobColumnApplied.JobColumnHeader{
+  background-color: #5f805d;
+}
+
+.JobColumnInterviewed {
+  border: solid thin #974c6b;
+}
+
+.JobColumnInterviewed.JobColumnHeader{
+  background-color: #974c6b;
+}
+
+.JobColumnOffered {
+  border: solid thin #5e568e;
+}
+
+.JobColumnOffered.JobColumnHeader{
+  background-color: #5e568e;
 }

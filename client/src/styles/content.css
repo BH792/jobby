@@ -1,3 +1,5 @@
 .content.container {
-  padding: 20px
+  /*height: calc(95vh - 56px);
+  overflow: auto;*/
+  padding: 20px;
 }

@@ -1,6 +1,7 @@
-import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-import ButtonLink from './ButtonLink'
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import ButtonLink from './ButtonLink';
+import BackButton from './BackButton';
 
 const ContentHeader = ({ match, type }) => {
   return (
@@ -11,12 +12,7 @@ const ContentHeader = ({ match, type }) => {
           text={`Add ${type}`} />
       }} />
       <Switch>
-        <Route path={`${match.url}/new`} render={() => {
-          return <ButtonLink
-            path={`${match.url}`}
-            text={'Back'}
-          />
-        }} />
+        <Route path={`${match.url}/new`} component={BackButton} />
         <Route exact path={`${match.url}/:id`} render={(props) => {
           return <ButtonLink
             path={`${props.match.url}/edit`}
@@ -26,19 +22,9 @@ const ContentHeader = ({ match, type }) => {
       </Switch>
       <Switch>
         <Route exact path={`${match.url}/new`} render={() => <div></div>} />
-        <Route exact path={`${match.url}/:id`} render={(props) => {
-          return <ButtonLink
-            path={`${match.url}`}
-            text={'Back'}
-          />
-        }} />
+        <Route exact path={`${match.url}/:id`} component={BackButton} />
       </Switch>
-      <Route path={`${match.url}/:id/:something`} render={(props) => {
-        return <ButtonLink
-          path={`${match.url}/${props.match.params.id}`}
-          text={'Back'}
-        />
-      }} />
+      <Route path={`${match.url}/:id/:something`} component={BackButton} />
     </div>
   )
 }

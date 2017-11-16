@@ -1,6 +1,7 @@
 import React from 'react';
 import { DragSource, DropTarget } from 'react-dnd';
 import DragTypes from '../DragTypes';
+import { Link } from 'react-router-dom';
 
 const JobCard = ({
   job,
@@ -9,19 +10,19 @@ const JobCard = ({
   isDragging,
   isOver
 }) => {
-  const color = (num) => {
-    let colors = ['#001f3f','#0074D9','#3D9970', '#2ECC40','#FF851B','#FF4136','#85144b','#B10DC9','#DDDDDD','#39CCCC']
-    return colors[num]
-  }
-
-  let opacity = isDragging ? 0 : (isOver ? 0.5 : 1)
+  let opacity = isDragging ? 0 : (isOver ? 0.3 : 1)
 
   return connectDropTarget(connectDragSource(
-    <div className='JobCard' style={{opacity}}>
-      <div className='JobCardHeader' style={{backgroundColor: color(job.id%10)}}>
-        <h4>{job.title}</h4>
-        <p>{job.company}</p>
+    <div style={{opacity}} className='item jobcard'>
+      <Link to={`/home/jobs/${job.id}`}>
+      <div className='item jobcard container'>
+        <div className='item jobcard color'/>
+        <div className='item jobcard content'>
+          <div className='item jobcard header'>{job.title}</div>
+          <div className='item jobcard subheader'>{job.company}</div>
+        </div>
       </div>
+      </Link>
     </div>
   ))
 }

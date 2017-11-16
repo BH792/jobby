@@ -1,10 +1,12 @@
 import React from 'react';
 import JobStatus from './JobStatus';
 import { connect } from 'react-redux';
-import { Touch } from '../../shared';
+import touches from '../../touches';
 import { Link } from 'react-router-dom';
 import { addJobToDashboard, removeJobFromDashboard } from '../actions'
 import * as selector from '../selectors';
+
+const TouchItem = touches.TouchItem
 
 const JobDetails = ({
   id,
@@ -17,7 +19,11 @@ const JobDetails = ({
   touches,
   match
 }) => {
-  const interactions = touches.map(touch => <Touch touch={touch} key={touch.id}/>)
+  const interactions = touches.map(touch => (
+    <Link to={`/home/touches/${touch.id}`} key={touch.id} className='router-link'>
+      <TouchItem {...touch}/>
+    </Link>
+  ))
 
   const handleBoard = () => {
     handleBoardButton(id)

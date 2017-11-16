@@ -1,7 +1,8 @@
 /* SHARED STYLES */
 .item.container {
   text-decoration: none;
-  color: black;
+  background-color: white;
+  color: #494C59;
   border: solid thin black;
   border-radius: 3px;
   width: 280px;
@@ -11,8 +12,6 @@
   grid-template-areas:
   'colorstrip content';
   height: 7em;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .item.container p {
@@ -33,11 +32,18 @@
 .item.header {
   font-size: 18px;
   font-weight: bold;
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .item.subheader {
   font-size: 16px;
-  font-weight: bold
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .item.info {
@@ -76,6 +82,34 @@
 
 .item.job.header {
   color: #0B7FA0;
+}
+
+/*  JOBCARD STYLES
+    COLOR: #0B7FA0 */
+.item.jobcard > a {
+  text-decoration: none;
+}
+
+.item.jobcard.container {
+  border-color: #0B7FA0;
+  width: 210px;
+  height: 4em;
+  margin: 10px;
+}
+
+.item.jobcard.color {
+  border-color: #0B7FA0;
+  background-color: #0B7FA0;
+}
+
+.item.jobcard.header {
+  width: 180px;
+  font-style: 16px;
+  color: #0B7FA0;
+}
+
+.item.jobcard.subheader {
+  width: 180px;
 }
 
 /*  TOUCH STYLES
