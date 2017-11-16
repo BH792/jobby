@@ -44,18 +44,18 @@ const JobDetails = ({
         <p className='detail subheader'>Touches:</p>
         <div className='detail interaction-list-container'>
           {interactions}
-          <Link to={`${match.url}/touch`}>
-            <div
-              className='detail interaction-container'
-              style={{
-                borderColor: 'orange',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
-              >
-                Add Touch Point
-              </div>
+          <Link to={`${match.url}/touch`} className='router-link'>
+          <div
+            className='detail interaction-container'
+            style={{
+              borderColor: 'orange',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+            >
+              Add Touch Point
+            </div>
           </Link>
         </div>
       </div>

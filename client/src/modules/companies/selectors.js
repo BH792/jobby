@@ -15,3 +15,11 @@ export const getCompanyContacts = createSelector(
     return company.contacts.map(id => contactsById[id])
   }
 )
+
+export const getCompanyJobs = createSelector(
+  getCompanyById,
+  state => state.jobs.byId,
+  (company, jobById) => {
+    return company.jobs.map(id => jobById[id])
+  }
+)
