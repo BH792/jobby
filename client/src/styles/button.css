@@ -63,3 +63,18 @@
 .button.narrow {
   width: 100px;
 }
+
+.button.rounded {
+  fill: #E2370F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  border-radius: 20px;
+  padding: 5px 10px;
+  margin: 10px 0 10px 10px;
+}
+
+.button.rounded:hover {
+  fill: white;
+}
