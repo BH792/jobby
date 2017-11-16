@@ -1,7 +1,11 @@
 import React from 'react';
+import TouchItem from '../../touches/components/TouchItem';
 import { connect } from 'react-redux';
-import { Touch } from '../../shared';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import * as selector from '../selectors';
+// import touch from '../../touches/index.js';
+
+// const { TouchItem } = touch.components;
 
 const ContactDetails = ({
   fullname,
@@ -13,7 +17,11 @@ const ContactDetails = ({
   email,
   touches
 }) => {
-    const interactions = touches.map(touch => <Touch touch={touch} key={touch.id}/>)
+    const interactions = touches.map(touch => (
+      <Link to={`/home/touches/${touch.id}`} key={touch.id} className='router-link'>
+        <TouchItem {...touch} />
+      </Link>
+    ))
 
   return (
     <div className='detail main'>
@@ -50,20 +58,9 @@ const ContactDetails = ({
 
 function mapStateToProps(state, ownProps) {
   const contactId = ownProps.match.params.id
-  const companyId = state.contacts.byId[contactId].companyId
   return {
-    ...state.contacts.byId[contactId],
-    company: state.companies.byId[companyId].name,
-    touches: state.contacts.byId[contactId].touches.map(touchId => {
-      let job;
-      if (state.touches.byId[touchId].jobId) {
-        job = state.jobs.byId[state.touches.byId[touchId].jobId].fullname
-      }
-      return {
-        ...state.touches.byId[touchId],
-        job
-      }
-    })
+    ...selector.getContactWithCompany(state, { contactId }),
+    touches: selector.getContactTouches(state, { contactId })
   }
 }
 

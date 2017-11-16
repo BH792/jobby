@@ -26,3 +26,33 @@ export const getContactWithCompany = createSelector(
     }
   }
 )
+
+export const getContactTouches = (state, props) => {
+  return getContactTouchIds(state, props).map(touchId => {
+    return {
+      ...getTouch(state, { touchId }),
+      contact: getTouchContactName(state, { touchId }),
+      job: getTouchJobTitle(state, { touchId })
+    }
+  })
+}
+
+const getTouch = (state, props) => {
+  return state.touches.byId[props.touchId]
+}
+
+const getTouchContactName = (state, props) => {
+  return state.contacts.byId[getTouch(state, props).contactId].fullname
+}
+
+const getTouchJobTitle = (state, props) => {
+  if (getTouch(state, props).jobId) {
+    return state.jobs.byId[getTouch(state, props).jobId].title
+  } else {
+    return null
+  }
+}
+
+export const getContactTouchIds = (state, props) => {
+  return getContact(state, props).touches
+}
