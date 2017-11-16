@@ -1,5 +1,7 @@
-import ContactContent_ from './ContactContent'
-import ContactItem_ from './ContactItem'
+import ContactContent from './ContactContent'
+import ContactItem from './ContactItem'
 
-export const ContactContent = ContactContent_
-export const ContactItem = ContactItem_
+export {
+  ContactContent,
+  ContactItem
+}

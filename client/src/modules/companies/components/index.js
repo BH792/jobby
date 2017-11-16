@@ -1,5 +1,7 @@
-import CompanyContent_ from './CompanyContent'
-import CompanyItem_ from './CompanyItem'
+import CompanyContent from './CompanyContent'
+import CompanyItem from './CompanyItem'
 
-export const CompanyContent = CompanyContent_
-export const CompanyItem = CompanyItem_
+export {
+  CompanyContent,
+  CompanyItem
+}

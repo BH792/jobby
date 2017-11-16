@@ -1,10 +1,11 @@
 import React from 'react';
-import TouchItem from '../../touches/components/TouchItem';
+import { TouchItem } from '../../touches/';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as selector from '../selectors';
-// import touch from '../../touches/index.js';
 
+// TODO: fix circular dependency breaking the below import
+// import touch from '../../touches/index.js';
 // const { TouchItem } = touch.components;
 
 const ContactDetails = ({
@@ -26,7 +27,7 @@ const ContactDetails = ({
   return (
     <div className='detail main'>
       <div className='detail item-info'>
-        <h2 className='detail header'>{fullname}</h2>
+        <p className='detail header'>{fullname}</p>
         <p className='detail subheader'>{title}</p>
         <p className='detail subheader'>{company}</p>
         <p className='detail number'>Cell:   {cellNumber}</p>

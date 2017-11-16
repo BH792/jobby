@@ -1,5 +1,7 @@
-import JobContent_ from './JobContent'
-import JobItem_ from './JobItem'
+import JobContent from './JobContent'
+import JobItem from './JobItem'
 
-export const JobContent = JobContent_
-export const JobItem = JobItem_
+export {
+  JobContent,
+  JobItem
+}

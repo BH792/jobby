@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addJobToDashboard, removeJobFromDashboard } from '../actions'
 import * as selector from '../selectors';
-import touch from '../../touches';
+import { TouchItem } from '../../touches';
 
-const TouchItem = touch.components.TouchItem
 
 const JobDetails = ({
   id,

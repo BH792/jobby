@@ -6,9 +6,9 @@ import JobForm from './JobForm'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { ContentHeader } from '../../shared'
+import { TouchForm } from '../../touches'
 import * as selector from '../selectors';
 
-import touches from '../../touches'
 
 class JobContent extends Component {
   render() {
@@ -21,7 +21,7 @@ class JobContent extends Component {
           <Route exact path={`${match.url}/new`} component={JobForm} />
           <Route exact path={`${match.url}/:id`} component={JobDetails} />
           <Route path={`${match.url}/:id/edit`} component={JobForm} />
-          <Route path={`${match.url}/:id/touch`} component={touches.components.TouchForm} />
+          <Route path={`${match.url}/:id/touch`} component={TouchForm} />
         </Switch>
         <Route exact path={`${match.url}`} component={JobList}/>
       </div>

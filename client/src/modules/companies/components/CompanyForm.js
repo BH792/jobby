@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { newCompanyAPI, updateCompanyAPI } from '../actions'
+import * as selector from '../selectors'
 
 class CompanyForm extends Component {
   state = {
     name: this.props.company.name || '',
-    website: this.props.company.website || ''
+    website: this.props.company.website || '',
+    description: this.props.company.description || ''
   }
 
   handleChange = (e) => {
@@ -23,7 +25,7 @@ class CompanyForm extends Component {
   }
 
   render() {
-    const { name, website } = this.state
+    const { name, website, description } = this.state
     return (
       <div>
         <form onSubmit={this.handleSubmit} className='form'>
@@ -43,6 +45,13 @@ class CompanyForm extends Component {
             placeholder='Website'
             className='form input wide'
           />
+          <textarea
+            name='description'
+            value={description}
+            onChange={this.handleChange}
+            placeholder='Description'
+            className='form textarea wide'
+          />
           <button className='form submit normal'>Submit</button>
         </form>
       </div>
@@ -51,16 +60,9 @@ class CompanyForm extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  let company = {}
-  const id = ownProps.match.params.id
-  if (id && state.companies.byId[id]) {
-    company = {
-      ...state.companies.byId[id]
-    }
-  }
-
+  const companyId = ownProps.match.params.id
   return {
-    company
+    company: selector.getCompanyById(state, { companyId })
   }
 }
 

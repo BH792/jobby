@@ -1,15 +1,15 @@
 import React from 'react';
 import itemLister from '../../shared/Lister';
-import jobs from '../../jobs'
-import companies from '../../companies'
-import contacts from '../../contacts'
-import touches from '../../touches'
+import { JobItem } from '../../jobs'
+import { CompanyItem } from '../../companies'
+import { ContactItem } from '../../contacts'
+import { TouchItem } from '../../touches'
 
 const item = {
-  Jobs: jobs.JobItem,
-  Contacts: contacts.ContactItem,
-  Touches: touches.TouchItem,
-  Companies: companies.CompanyItem,
+  Jobs: JobItem,
+  Contacts: ContactItem,
+  Touches: TouchItem,
+  Companies: CompanyItem,
 }
 
 const SearchResultsSection = ({data, section}) => {

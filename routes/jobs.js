@@ -9,7 +9,6 @@ router.post('/:id', async (req, res) => {
   let updatedJobInfo = {
     ...req.body,
   }
-  console.log(updatedJobInfo);
 
   const job = await Job.findOne({
     where: {
