@@ -1,7 +1,7 @@
 const constants = require('./SeedConstants')
 
-const one = ["Openlane", "Yearin", "Goodsilron", "Condax", "Opentech", "Golddex", "year-job", "Isdom", "Gogozoom", "Y-corporation", "Nam-zim", "Donquadtech", "Warephase", "Donware", "Faxquote", "Sunnamplex", "Lexiqvolax", "Sumace", "Treequote", "Iselectrics", "Zencorporation", "Plusstrip", "dambase", "Toughzap", "Codehow", "Zotware", "Statholdings", "Conecom", "Zathunicon", "Labdrill", "Ron-tech", "Green-Plus", "Groovestreet", "Zoomit", "Bioplex", "Zumgoity", "Scotfind"]
-const two = ["Dalttechnology", "Kinnamplus", "Konex", "Stanredtax", "Cancity", "Finhigh", "Kan-code", "Blackzim", "Dontechi", "Xx-zobam", "Fasehatice", "Hatfan", "Streethex", "Inity", "Konmatfix", "Bioholding", "Hottechi", "Ganjaflex", "Betatech", "Domzoom", "Ontomedia", "Newex", "Betasoloin", "Mathtouch", "Rantouch", "Silis", "Plussunin", "Plexzap", "Finjob", "Xx-holding", "Scottech", "Funholding", "Sonron", "Singletechno", "Rangreen", "J-Texon", "Rundofase"]
+const adj = ["Internal", "Maddening", "Aquatic", "Unsightly", "Worthless", "Finicky", "Oval", "Adhesive", "Puffy", "Useful", "Icky", "Gray", "Meaty", "Penitent", "Bright", "Handy", "Innate", "Momentous", "Cumbersome", "Profuse", "Changeable", "Instinctive", "Soggy", "Axiomatic", "Unarmed", "Splendid", "Neighborly", "Complex", "Ruthless", "Spiky", "Pumped", "Demonic", "Wistful", "Homely", "Nimble", "Dispensable", "Tearful", "Polite", "Nifty", "Grand"]
+const noun = ["Quill", "Van", "Bridge", "Cabbage", "Destruction", "Vacation", "Camp", "Fold", "Minister", "Tank", "Join", "Title", "Wheel", "Pleasure", "Brake", "Part", "Border", "Potato", "Glove", "Furniture", "Song", "Channel", "Train", "Jail", "Amusement", "Fang", "Shame", "Blade", "Sleet", "Show", "Boy", "Dog", "Rabbits", "Grade", "Crime", "Toad", "Plantation", "Earthquake", "Grain", "Stretch"]
 function rand(max) {
   return Math.floor(Math.random() * max)
 }
@@ -9,15 +9,16 @@ function rand(max) {
 module.exports = {
   up: (queryInterface, Sequelize) => {
     let companies = []
-
+    let date = new Date()
+    date.setDate(date.getDate() - 17)
     for (var i = 0; i < constants.COMPANIES; i++) {
       companies.push({
-        name: one[rand(37)] + ' ' + two[rand(37)],
+        name: adj[rand(40)] + ' ' + noun[rand(40)],
         website: 'https://www.google.com',
         description: 'Some company that makes widgets and sells them for more than the cost of manufacture',
         userId: 1,
-        createdAt: new Date(),
-        updatedAt: new Date()
+        createdAt: date,
+        updatedAt: date
       })
     }
 
@@ -28,3 +29,4 @@ module.exports = {
     return queryInterface.bulkDelete('companies', null);
   }
 };
+['internal', 'maddening', 'aquatic', 'unsightly', 'worthless', 'finicky', 'oval', 'adhesive', 'puffy', 'useful', 'icky', 'gray', 'meaty', 'penitent', 'bright', 'handy', 'innate', 'momentous', 'cumbersome', 'profuse', 'changeable', 'instinctive', 'soggy', 'axiomatic', 'unarmed', 'splendid', 'neighborly', 'complex', 'ruthless', 'spiky', 'pumped', 'demonic', 'wistful', 'homely', 'nimble', 'dispensable', 'tearful', 'polite', 'nifty', 'grand']

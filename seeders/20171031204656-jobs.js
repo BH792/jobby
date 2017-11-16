@@ -16,9 +16,8 @@ Web Developer Skills and Qualifications:
 
 JavaScript, JQuery, HTML, HTML5, CSS, CSS3, Web Programming Skills, E-Commerce, Teamwork, Verbal Communication, cross-browser compatibility, Web User Interface Design (UI), Security Principles, Object-Oriented Design, Web Services (REST/SOAP), Multimedia Content Development, APIs`
 
-const tech = ['React', 'Redux', 'Python', 'Java', 'NodeJS', 'Ruby', 'Dev/Ops', 'Rails', 'Security', 'NoSQL', 'Cloud', 'Firewall']
+const tech = ['React', 'Redux', 'Python', 'Java', 'NodeJS', 'Ruby', 'Dev/Ops', 'Rails', 'Security', 'NoSQL', 'Cloud', 'Firewall', 'AWS', 'Elixir', 'JavaScript', 'Angular', 'C++', 'Swift', 'Mobile', 'PHP', 'C#', '.NET', 'C', 'Elm', 'Golang', 'COBOL', 'Rust', 'Scala', 'Android', 'Perl']
 const role = ['Developer', 'Engineer', 'Jr Developer', 'Sr Engineer', 'Lead Engineer', 'Lead Developer']
-const title = ['HR Manager', 'CEO', 'CTO', 'Senior Engineer', 'Lead Developer', 'Product Manager']
 const status = ['watching', 'applied', 'interviewed', 'offered']
 function rand(max) {
   return Math.floor(Math.random() * max)
@@ -41,19 +40,20 @@ const orderMaker = {
 module.exports = {
   up: (queryInterface, Sequelize) => {
     let jobs = []
-
+    let date = new Date()
+    date.setDate(date.getDate() - 17)
     for (var i = 0; i < constants.JOBS; i++) {
       const jobStatus = status[rand(4)]
       const jobOrder = rand(2) > 0 ? orderMaker[jobStatus].next().value : null
       jobs.push({
-        title: tech[rand(12)] + ' ' + role[rand(6)],
+        title: tech[rand(30)] + ' ' + role[rand(6)],
         order: jobOrder,
         status: jobStatus,
         userId: 1,
         companyId: rand(constants.COMPANIES) + 1,
         description,
-        createdAt: new Date(),
-        updatedAt: new Date()
+        createdAt: date,
+        updatedAt: date
       })
     }
 
