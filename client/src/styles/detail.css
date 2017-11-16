@@ -3,6 +3,10 @@
   flex-wrap: wrap;
 }
 
+.detail.related-list {
+  width: 282px;
+}
+
 .detail.item-info {
   width: 600px;
   margin-right: 5%;
@@ -54,12 +58,8 @@
   color: white;
 }
 
-.detail.interaction-container {
-  margin: 10px 0 0 10px;
-  width: 250px;
-  height: 94px;
-  border: solid thin black;
-  border-radius: 3px;
+.detail.interaction-list-container {
+  padding: 10px 0 0 10px; 
 }
 
 .detail.interaction.type, .detail.interaction.contact, .detail.interaction.date, .detail.interaction.subject  {

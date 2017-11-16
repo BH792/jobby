@@ -67,11 +67,43 @@ export const getAllTouchesWithContactAndJob = (state) => {
   })
 }
 
+const getTouch = (state, props) => {
+  return state.touches.byId[props.touchId]
+}
+
 export const getTouchWithContactAndJob = (state, props) => {
   const touch = state.touches.byId[props.touchId]
   return {
-    ...touch,
+    ...getTouch(state, props),
     contact: state.contacts.byId[touch.contactId].fullname,
     job: touch.jobId ? state.jobs.byId[touch.jobId].title : null,
   }
 }
+
+export const getRelatedContact = createSelector(
+  getTouch,
+  state => state.contacts.byId,
+  state => state.companies.byId,
+  (touch, contactsById, companiesById) => {
+    return {
+      ...contactsById[touch.contactId],
+      company: companiesById[contactsById[touch.contactId].companyId].name
+    }
+  }
+)
+
+export const getRelatedJob = createSelector(
+  getTouch,
+  state => state.jobs.byId,
+  state => state.companies.byId,
+  (touch, jobsById, companiesById) => {
+    if (touch.jobId) {
+      return {
+        ...jobsById[touch.jobId],
+        company: companiesById[jobsById[touch.jobId].companyId].name
+      }
+    } else {
+      return {}
+    }
+  }
+)
