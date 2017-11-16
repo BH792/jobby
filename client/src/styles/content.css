@@ -3,3 +3,8 @@
   overflow: auto;*/
   padding: 20px;
 }
+
+.content.container.dashboard {
+  display: flex;
+  flex-wrap: wrap;
+}

@@ -1,6 +1,7 @@
 .JobBoard {
   grid-area: content;
-  display: flex;
+  display: inline-flex;
+  height: auto;
 }
 
 .JobColumnHeader {
