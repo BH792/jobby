@@ -2,11 +2,8 @@ import React from 'react';
 import { TouchItem } from '../../touches/';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { ButtonLink } from '../../shared'
 import * as selector from '../selectors';
-
-// TODO: fix circular dependency breaking the below import
-// import touch from '../../touches/index.js';
-// const { TouchItem } = touch.components;
 
 const ContactDetails = ({
   fullname,
@@ -37,21 +34,9 @@ const ContactDetails = ({
       <div className='detail related-list'>
         <p className='detail subheader'>Touches:</p>
         <div className='detail interaction-list-container'>
+          <ButtonLink path={`${match.url}/touch`} text='Add Touch'/>
           {interactions}
         </div>
-        <Link to={`${match.url}/touch`}>
-          <div
-            className='detail interaction-container'
-            style={{
-              borderColor: 'orange',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-            >
-              Add Touch Point
-            </div>
-        </Link>
       </div>
     </div>
   )

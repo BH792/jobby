@@ -27,6 +27,17 @@
   background-color: #8f9090;
 }
 
+.button.inverted {
+  background-color: white;
+  border-color: #E2370F;
+  color: #E2370F;
+}
+
+.button.inverted:hover {
+  background-color: #E2370F;
+  color: white;
+}
+
 .button.outline {
   text-align: center;
   padding: 5px;

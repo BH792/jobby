@@ -9,7 +9,7 @@ const ContentHeader = ({ match, type }) => {
       <Route exact path={match.url} render={() => {
         return <ButtonLink
           path={`${match.url}/new`}
-          text={`Add ${type}`} />
+          text={`New ${type}`} />
       }} />
       <Switch>
         <Route path={`${match.url}/new`} component={BackButton} />

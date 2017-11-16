@@ -15,13 +15,13 @@ const CompanyDetails = ({
 }) => {
   const contactList = contacts.map(contact => (
     <Link to={`/home/contacts/${contact.id}`} key={contact.id} className='router-link'>
-      <ContactItem {...contact} />
+      <ContactItem {...contact} company={name} />
     </Link>
   ))
 
   const jobList = jobs.map(job => (
     <Link to={`/home/jobs/${job.id}`} key={job.id} className='router-link'>
-      <JobItem {...job} />
+      <JobItem {...job} company={name} />
     </Link>
   ))
 

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { addJobToDashboard, removeJobFromDashboard } from '../actions'
 import * as selector from '../selectors';
 import { TouchItem } from '../../touches';
+import { ButtonLink } from '../../shared';
 
 
 const JobDetails = ({
@@ -18,7 +19,6 @@ const JobDetails = ({
   touches,
   match
 }) => {
-  console.log(touches);
   const interactions = touches.map(touch => (
     <Link to={`/home/touches/${touch.id}`} key={touch.id} className='router-link'>
       <TouchItem {...touch}/>
@@ -43,20 +43,8 @@ const JobDetails = ({
       <div className='detail related-list'>
         <p className='detail subheader'>Touches:</p>
         <div className='detail interaction-list-container'>
+          <ButtonLink path={`${match.url}/touch`} text='Add Touch'/>
           {interactions}
-          <Link to={`${match.url}/touch`} className='router-link'>
-          <div
-            className='detail interaction-container'
-            style={{
-              borderColor: 'orange',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-            >
-              Add Touch Point
-            </div>
-          </Link>
         </div>
       </div>
     </div>
