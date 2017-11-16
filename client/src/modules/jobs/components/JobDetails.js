@@ -1,5 +1,6 @@
 import React from 'react';
 import JobStatus from './JobStatus';
+import PinButton from './JobPinButton'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addJobToDashboard, removeJobFromDashboard } from '../actions'
@@ -35,9 +36,7 @@ const JobDetails = ({
         <p className='detail header'>{title}</p>
         <p className='detail subheader'>{company}</p>
         <JobStatus status={status} />
-        <button onClick={handleBoard} className='form submit normal'>
-          {order ? 'Unpin' : 'Pin to Board'}
-        </button>
+        <PinButton isPinned={typeof order === 'number'} togglePin={handleBoard} />
         <p className='detail freetext'>{description}</p>
       </div>
       <div className='detail related-list'>
@@ -66,10 +65,11 @@ const mapDispatchToProps = {
 }
 
 function mergeProps(stateProps, dispatchProps, ownProps) {
+  const isPinned = typeof stateProps.order === 'number'
   return {
     ...ownProps,
     ...stateProps,
-    handleBoardButton: stateProps.order ? dispatchProps.removeJobFromDashboard : dispatchProps.addJobToDashboard
+    handleBoardButton: isPinned ? dispatchProps.removeJobFromDashboard : dispatchProps.addJobToDashboard
   }
 }
 

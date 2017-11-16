@@ -31,7 +31,7 @@ class SearchContent extends Component {
       !contacts.length &&
       !companies.length &&
       !touches.length) {
-      message = <h4>No Results Found</h4>
+      message = <h4 style={{paddingLeft: '10px'}}>No Results Found</h4>
     }
 
     return (

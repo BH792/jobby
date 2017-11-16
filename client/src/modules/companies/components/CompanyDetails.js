@@ -32,7 +32,7 @@ const CompanyDetails = ({
         <a href={website} target='_blank' className='detail subheader'>Website</a>
         <p className='detail freetext'>{description}</p>
       </div>
-      <div className='detail related-list'>
+      <div className='detail related-list' style={{marginRight: '10px'}}>
         <p className='detail subheader'>Contacts:</p>
         <div className='detail interaction-list-container'>
           {contactList}
