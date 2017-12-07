@@ -20,6 +20,11 @@ export default (
         ...state,
         ...action.payload.company
       }
+    case t.UPDATE:
+      return {
+        ...state,
+        ...action.payload.company
+      }
     case t.REMOVE_JOB:
       return {
         ...state,

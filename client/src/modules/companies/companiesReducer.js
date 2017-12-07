@@ -3,6 +3,7 @@ import companyReducer from './companyReducer';
 
 export default (
   state = {
+    lastId: null,
     loading: false,
     byId: {},
     allIds: []
@@ -33,15 +34,19 @@ export default (
           ...state.byId,
           [action.payload.company.id]: companyReducer(undefined, action),
         },
-        allIds: [ ...state.allIds, action.payload.company.id]
+        allIds: [ ...state.allIds, action.payload.company.id],
+        loading: false,
+        lastId: action.payload.company.id
       }
     case t.UPDATE:
       return {
         ...state,
         byId: {
           ...state.byId,
-          [action.payload.company.id]: action.payload.company,
-        }
+          [action.payload.company.id]: companyReducer(state.byId[action.payload.company.id], action),
+        },
+        loading: false,
+        lastId: action.payload.company.id
       }
     case t.REMOVE_JOB:
       return {
@@ -74,6 +79,11 @@ export default (
           ...state.byId,
           [action.payload.companyId]: companyReducer(state.byId[action.payload.companyId], action)
         }
+      }
+    case t.LOADING:
+      return {
+        ...state,
+        loading: true
       }
     default:
       return state
