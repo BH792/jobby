@@ -6,16 +6,22 @@ const SortBy = ({
   options
 }) => {
   return (
-    <select
-      name='status'
-      value={selectedOption}
-      onChange={handleChange}
-      className='form select wide'
-    >
-      {options.map(o => (
-        <option value={o} key={o}>{o}</option>
-      ))}
-    </select>
+    <div>
+      <label style={{display: 'inline'}}>
+        Sort By:
+      </label>
+      <select
+        style={{display: 'inline'}}
+        name='status'
+        value={selectedOption}
+        onChange={handleChange}
+        className='form select normal'
+        >
+          {options.map(o => (
+            <option value={o} key={o}>{o}</option>
+          ))}
+        </select>
+    </div>
   )
 };
 

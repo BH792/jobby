@@ -17,8 +17,9 @@ class JobContent extends Component {
     let JobList = itemLister(JobItem, jobs, match)
     return (
       <div className='content container'>
-        <ContentHeader match={match} type={'Job'}/>
-        <SortBy handleChange={() => {console.log('change')}}/>
+        <ContentHeader match={match} type={'Job'}>
+          <SortBy handleChange={() => {console.log('change')}}/>
+        </ContentHeader>
         <Switch>
           <Route exact path={`${match.url}/new`} component={JobForm} />
           <Route exact path={`${match.url}/:id`} component={JobDetails} />
