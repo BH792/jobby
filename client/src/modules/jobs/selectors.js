@@ -1,6 +1,8 @@
-export const getLoading = (state) => {
-  return state.jobs.loading
-}
+import { createSelector } from 'reselect'
+
+export const getLoading = state => state.jobs.loading
+
+export const getSortBy = state => state.jobs.sortBy
 
 export const getJob = (state, props) => {
   return state.jobs.byId[props.jobId]
@@ -68,5 +70,42 @@ const getTouchJobTitle = (state, props) => {
     return state.jobs.byId[getTouch(state, props).jobId].title
   } else {
     return null
+  }
+}
+
+export const getSortedJobsWithCompany = createSelector(
+  getAllJobsWithCompany,
+  getSortBy,
+  (companies, sortBy) => {
+    return companies.sort((a, b) => {
+      switch (sortBy) {
+        case 'Latest':
+          return sortByLatest(a,b);
+        case 'Alphabetical':
+          return sortByAlpha(a, b)
+        default:
+          return 0;
+      }
+    })
+  }
+)
+
+function sortByLatest(a, b) {
+  if (a.createdAt < b.createdAt) {
+    return -1
+  } else if (a.createdAt > b.createdAt) {
+    return 1
+  } else {
+    return 0
+  }
+}
+
+function sortByAlpha(a, b) {
+  if (a.title.toUpperCase() < b.title.toUpperCase()) {
+    return -1
+  } else if (a.title.toUpperCase() > b.title.toUpperCase()) {
+    return 1
+  } else {
+    return 0
   }
 }

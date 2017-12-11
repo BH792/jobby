@@ -3,6 +3,7 @@ import jobReducer from './jobReducer';
 
 export default (
   state = {
+    sortBy: 'Latest',
     lastId: null,
     loading: false,
     byId: {},
@@ -51,33 +52,11 @@ export default (
           [action.payload.jobId]: jobReducer(state.byId[action.payload.jobId], action),
         }
       }
-    // case 'CHANGE_JOB_STATUS':
-    //   return {
-    //     ...state,
-    //     byId: {
-    //       ...state.byId,
-    //       [action.jobId]: {
-    //         ...state.byId[action.jobId],
-    //         status: action.newStatus
-    //       }
-    //     }
-    //   }
-    // case 'SWAP_JOB_ORDER':
-    //   let { curOrder, newOrder } = action
-    //
-    //   let swappedAllIds = [...state.allIds]
-    //   swappedAllIds.splice(newOrder, 0, swappedAllIds.splice(curOrder, 1)[0])
-    //
-    //   let newById = { ...state.byId }
-    //   newById[state.allIds[curOrder]].status = newById[state.allIds[newOrder]].status
-    //   swappedAllIds.forEach((id, index) => {
-    //     newById[id].order = index
-    //   })
-    //   return {
-    //     ...state,
-    //     byId: newById,
-    //     allIds: swappedAllIds
-    //   };
+    case t.CHANGE_SORT:
+      return {
+        ...state,
+        sortBy: action.sortBy
+      }
     default:
       return state;
   }

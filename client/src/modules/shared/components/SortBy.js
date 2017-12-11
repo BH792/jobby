@@ -2,9 +2,13 @@ import React from 'react';
 
 const SortBy = ({
   selectedOption,
-  handleChange,
+  changeSort,
   options
 }) => {
+  const handleChange = (e) => {
+    changeSort(e.target.value)
+  }
+
   return (
     <div>
       <label style={{display: 'inline'}}>
