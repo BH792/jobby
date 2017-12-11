@@ -9,6 +9,7 @@ import { ContentHeader } from '../../shared'
 import { TouchForm } from '../../touches'
 import * as selector from '../selectors';
 
+import { SortBy } from '../../shared'
 
 class JobContent extends Component {
   render() {
@@ -17,6 +18,7 @@ class JobContent extends Component {
     return (
       <div className='content container'>
         <ContentHeader match={match} type={'Job'}/>
+        <SortBy handleChange={() => {console.log('change')}}/>
         <Switch>
           <Route exact path={`${match.url}/new`} component={JobForm} />
           <Route exact path={`${match.url}/:id`} component={JobDetails} />
