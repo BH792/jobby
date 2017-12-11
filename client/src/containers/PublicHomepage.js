@@ -1,9 +1,9 @@
-import React from 'react'
-import users from '../modules/users'
-import { Route, withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
+import React from 'react';
+import users from '../modules/users';
+import { Route, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import { RedirectBack } from '../modules/shared';
+import { RedirectBack, DemoButton } from '../modules/shared';
 
 const { submitLogin, submitSignup } = users.actions
 const { Signup, Login } = users.components
@@ -11,6 +11,7 @@ const { Signup, Login } = users.components
 const Body = () => {
   return (
     <div className='PublicHomepageBody PublicHomepageBodyImage'>
+      <DemoButton />
     </div>
   )
 }

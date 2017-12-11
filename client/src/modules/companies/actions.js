@@ -26,6 +26,7 @@ export function fetchCompanies(companies) {
 
 export function newCompanyAPI(companyInfo) {
   return dispatch => {
+    dispatch(loadingCompany())
     CompanyAPI.newCompany(companyInfo).then(json => {
       dispatch(newCompany(json))
     })
@@ -34,6 +35,7 @@ export function newCompanyAPI(companyInfo) {
 
 export function updateCompanyAPI(companyInfo) {
   return dispatch => {
+    dispatch(loadingCompany())
     CompanyAPI.updateCompany(companyInfo).then(json => {
       dispatch(updateCompany(json))
     })
@@ -86,5 +88,11 @@ export function addContact(contactIdAndCompanyId) {
   return {
     type: t.ADD_CONTACT,
     payload: contactIdAndCompanyId
+  }
+}
+
+export function loadingCompany() {
+  return {
+    type: t.LOADING
   }
 }

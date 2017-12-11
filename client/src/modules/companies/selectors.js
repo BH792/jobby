@@ -1,5 +1,8 @@
 import { createSelector } from 'reselect'
 
+export const getLoading = state => state.companies.loading
+export const getLastId = state => state.companies.lastId
+
 export const getCompanyById = createSelector(
   state => state.companies.byId,
   (state, props) => props.companyId,

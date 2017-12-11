@@ -5,18 +5,24 @@ import JobDetails from './JobDetails'
 import JobForm from './JobForm'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { ContentHeader } from '../../shared'
+import { ContentHeader, SortBy } from '../../shared'
 import { TouchForm } from '../../touches'
+import { changeSort } from '../actions'
 import * as selector from '../selectors';
-
 
 class JobContent extends Component {
   render() {
-    const { jobs, match } = this.props
+    const { jobs, match, changeSort, sortBy } = this.props
+    console.log(jobs);
     let JobList = itemLister(JobItem, jobs, match)
     return (
       <div className='content container'>
-        <ContentHeader match={match} type={'Job'}/>
+        <ContentHeader match={match} type={'Job'}>
+          <SortBy
+            changeSort={changeSort}
+            selectedOption={sortBy}
+          />
+        </ContentHeader>
         <Switch>
           <Route exact path={`${match.url}/new`} component={JobForm} />
           <Route exact path={`${match.url}/:id`} component={JobDetails} />
@@ -31,8 +37,9 @@ class JobContent extends Component {
 
 function mapStateToProps(state) {
   return {
-    jobs: selector.getAllJobsWithCompany(state)
+    jobs: selector.getSortedJobsWithCompany(state),
+    sortBy: selector.getSortBy(state)
   }
 }
 
-export default connect(mapStateToProps, {})(JobContent);
+export default connect(mapStateToProps, { changeSort })(JobContent);

@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# Google Cloud Config file
+app.yaml

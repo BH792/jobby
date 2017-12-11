@@ -117,3 +117,10 @@ export function removeJobFromDashboard(jobId) {
     })
   }
 }
+
+export function changeSort(option) {
+  return {
+    type: t.CHANGE_SORT,
+    sortBy: option
+  }
+}

@@ -50,7 +50,7 @@ export function loginFromLocalStorage() {
   }
 }
 
-function fetchAllData(dispatch) {
+export function fetchAllData(dispatch) {
   UserAPI.fetchAllData().then(json => {
     let payload = normalizeAllData(json)
     dispatch(companies.actions.fetchCompanies(payload.entities.companies))
@@ -64,7 +64,7 @@ function fetchAllData(dispatch) {
   })
 }
 
-function login(user) {
+export function login(user) {
   return {
     type: t.LOGIN,
     payload: {
@@ -80,7 +80,7 @@ export function logoutUser() {
   }
 }
 
-function loading() {
+export function loading() {
   return {
     type: t.LOADING
   }

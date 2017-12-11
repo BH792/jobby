@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { newCompanyAPI, updateCompanyAPI } from '../actions'
+import { Redirect } from 'react-router-dom'
 import * as selector from '../selectors'
 
 class CompanyForm extends Component {
   state = {
+    submitted: false,
     name: this.props.company.name || '',
     website: this.props.company.website || '',
     description: this.props.company.description || ''
@@ -16,16 +18,34 @@ class CompanyForm extends Component {
     })
   }
 
+  submit = () => {
+    if (!this.state.submitted) {
+      this.props.submitCompany({
+        ...this.state,
+        id: this.props.company.id
+      })
+    }
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.submitCompany({
-      ...this.state,
-      id: this.props.company.id
-    })
+    this.setState({
+      submitted: true
+    }, this.submit())
   }
 
   render() {
-    const { name, website, description } = this.state
+    const { name, website, description, submitted } = this.state
+    const { loading, lastId, history } = this.props
+
+    if (!loading && submitted) {
+      if (lastId) {
+        return <Redirect to={`/home/companies/${lastId}`} />
+      } else {
+        history.goBack()
+      }
+    }
+
     return (
       <div>
         <form onSubmit={this.handleSubmit} className='form'>
@@ -62,7 +82,9 @@ class CompanyForm extends Component {
 function mapStateToProps(state, ownProps) {
   const companyId = ownProps.match.params.id
   return {
-    company: selector.getCompanyById(state, { companyId })
+    company: selector.getCompanyById(state, { companyId }),
+    loading: selector.getLoading(state),
+    lastId: selector.getLastId(state)
   }
 }
 
