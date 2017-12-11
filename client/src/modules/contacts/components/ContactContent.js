@@ -5,17 +5,23 @@ import ContactDetails from './ContactDetails';
 import ContactForm from './ContactForm';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import { ContentHeader } from '../../shared'
-
+import { ContentHeader, SortBy } from '../../shared'
+import { changeSort } from '../actions'
 import { TouchForm } from '../../touches'
+import * as selector from '../selectors'
 
 class ContactContent extends Component {
   render() {
-    const { contacts, match } = this.props
+    const { contacts, match, changeSort, sortBy } = this.props
     let ContactList = itemLister(ContactItem, contacts, match)
     return (
       <div className='content container'>
-        <ContentHeader match={match} type={'Contact'}/>
+        <ContentHeader match={match} type={'Contact'}>
+          <SortBy
+            changeSort={changeSort}
+            selectedOption={sortBy}
+          />
+        </ContentHeader>
         <Switch>
           <Route exact path={`${match.url}/new`} component={ContactForm} />
           <Route exact path={`${match.url}/:id`} component={ContactDetails} />
@@ -29,15 +35,10 @@ class ContactContent extends Component {
 }
 
 function mapStateToProps(state) {
-  const contacts = state.contacts.allIds.map(contactId => {
-    return {
-      ...state.contacts.byId[contactId],
-      company: state.companies.byId[state.contacts.byId[contactId].companyId].name
-    }
-  })
   return {
-    contacts
+    contacts: selector.getSortedContactsWithCompany(state),
+    sortBy: selector.getSortBy(state)
   }
 }
 
-export default connect(mapStateToProps, {})(ContactContent);
+export default connect(mapStateToProps, { changeSort })(ContactContent);

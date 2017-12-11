@@ -3,6 +3,7 @@ import contactReducer from './contactReducer';
 
 export default (
   state = {
+    sortBy: 'Latest',
     lastId: null,
     loading: false,
     byId: {},
@@ -50,6 +51,11 @@ export default (
       return {
         ...state,
         loading: true
+      }
+    case t.CHANGE_SORT:
+      return {
+        ...state,
+        sortBy: action.sortBy
       }
     default:
       return state;

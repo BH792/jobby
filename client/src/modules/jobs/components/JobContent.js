@@ -13,7 +13,6 @@ import * as selector from '../selectors';
 class JobContent extends Component {
   render() {
     const { jobs, match, changeSort, sortBy } = this.props
-    console.log(jobs);
     let JobList = itemLister(JobItem, jobs, match)
     return (
       <div className='content container'>
