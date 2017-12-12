@@ -17,10 +17,13 @@ class JobContent extends Component {
     return (
       <div className='content container'>
         <ContentHeader match={match} type={'Job'}>
-          <SortBy
-            changeSort={changeSort}
-            selectedOption={sortBy}
-          />
+          <Route exact path={`${match.url}`} render={(props) => (
+            <SortBy
+              {...props}
+              changeSort={changeSort}
+              selectedOption={sortBy}
+            />
+          )}/>
         </ContentHeader>
         <Switch>
           <Route exact path={`${match.url}/new`} component={JobForm} />
