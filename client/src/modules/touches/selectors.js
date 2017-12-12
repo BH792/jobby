@@ -4,6 +4,7 @@ const getCompanies = (state) => state.companies
 const getContacts = (state) => state.contacts
 const getJobs = (state) => state.jobs
 
+export const getSortBy = (state) => state.touches.sortBy
 export const getLastId = (state) => state.touches.lastId
 export const getLoading = (state) => state.touches.loading
 
@@ -107,3 +108,40 @@ export const getRelatedJob = createSelector(
     }
   }
 )
+
+export const getSortedTouchesWithContactAndJob = createSelector(
+  getAllTouchesWithContactAndJob,
+  getSortBy,
+  (touches, sortBy) => {
+    return touches.sort((a, b) => {
+      switch (sortBy) {
+        case 'Date':
+          return sortByLatest(a, b);
+        case 'Subject':
+          return sortByAlpha(a, b);
+        default:
+          return 0;
+      }
+    })
+  }
+)
+
+function sortByLatest(a, b) {
+  if (a.date < b.date) {
+    return -1
+  } else if (a.date > b.date) {
+    return 1
+  } else {
+    return 0
+  }
+}
+
+function sortByAlpha(a, b) {
+  if (a.subject.toUpperCase() < b.subject.toUpperCase()) {
+    return -1
+  } else if (a.subject.toUpperCase() > b.subject.toUpperCase()) {
+    return 1
+  } else {
+    return 0
+  }
+}

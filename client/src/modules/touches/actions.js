@@ -57,3 +57,10 @@ export function loadingTouch() {
     type: t.LOADING,
   }
 }
+
+export function changeSort(option) {
+  return {
+    type: t.CHANGE_SORT,
+    sortBy: option
+  }
+}

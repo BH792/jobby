@@ -2,6 +2,7 @@ import * as t from './actionTypes'
 
 export default (
   state = {
+    sortBy: 'Date',
     lastId: null,
     loading: false,
     byId: {},
@@ -41,6 +42,11 @@ export default (
         },
         loading: false,
         lastId: action.payload.touch.id
+      }
+    case t.CHANGE_SORT:
+      return {
+        ...state,
+        sortBy: action.sortBy
       }
     default:
       return state;
