@@ -1,8 +1,8 @@
 module.exports = {
   "development": {
-    "username": process.env.SQL_USER,
-    "password": process.env.SQL_PASSWORD,
-    "database": process.env.SQL_DATABASE,
+    "username": "bobbyh",
+    "password": null,
+    "database": "jobby_dev",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
