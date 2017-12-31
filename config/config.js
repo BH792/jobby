@@ -4,7 +4,6 @@ module.exports = {
     "password": process.env.SQL_PASSWORD,
     "database": process.env.SQL_DATABASE,
     "host": "127.0.0.1",
-    "port": "3306",
     "dialect": "postgres"
   },
   "test": {
@@ -19,7 +18,6 @@ module.exports = {
     "password": process.env.SQL_PASSWORD,
     "database": process.env.SQL_DATABASE,
     "host": "127.0.0.1",
-    "port": "3306",
     "dialect": "postgres"
   }
 }
