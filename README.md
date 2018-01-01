@@ -1,9 +1,9 @@
 # Jobby
-A job search organization tool inspired by Customer Relation Management (CRM) Systems.  [A demo is available](https://jobby-job-search.appspot.com)
+A job search organization tool inspired by Customer Relation Management (CRM) Systems.  [A demo is available](http://35.227.123.192/)
 
 ## Installation
 
-Clone the repo.  The application comprises of a an Express.js & Postgres backend with a React client (from create-react-app).  The package.json in the root directory contains the backend dependencies/scripts; the package.json in the client directory contains the client dependencies/scripts.  The application requires an environment variable JWT_SECRET
+Clone the repo.  The application comprises of a an Express.js & Postgres backend with a React client (from create-react-app).  The package.json in the root directory contains the backend dependencies/scripts; the package.json in the client directory contains the client dependencies/scripts.  The application requires an environment variable JWT_SECRET and postgres credentials in /config/config.js.
 
 To run locally with hot loading:
 ```
